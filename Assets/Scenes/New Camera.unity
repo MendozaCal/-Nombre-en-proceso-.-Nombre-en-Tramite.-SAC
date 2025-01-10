@@ -718,7 +718,7 @@ MonoBehaviour:
   jumpForce: 12
   gravity: -30
   turnSmoothTime: 0.1
-  cameraTransform: {fileID: 560582984}
+  cameraTransform: {fileID: 1667924068}
 --- !u!143 &1898354164
 CharacterController:
   m_ObjectHideFlags: 0
@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a841009f01bc1547b9ba4c411a4ec59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 560582984}
   pickupSpeed: 10
   followSpeed: 20
 --- !u!114 &1898354166
