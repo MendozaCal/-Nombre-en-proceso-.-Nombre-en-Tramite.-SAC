@@ -3,11 +3,11 @@ using UnityEngine;
 public class Grab : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private Vector3 offset = new Vector3(1f, 0f, 0f);
     [SerializeField] private float pickupSpeed = 3f;
     [SerializeField] private float followSpeed = 20f;
-    [SerializeField] private Vector3 holdRotation = new Vector3(0f, 0f, 0f);
 
+    private Vector3 offset = new Vector3(0f, 0f, 0f);
+    private Vector3 holdRotation = new Vector3(0f, 0f, 0f);
     private bool isActive;
     private Transform grabbedObject;
     private bool isPickingUp;
