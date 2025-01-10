@@ -606,6 +606,7 @@ GameObject:
   - component: {fileID: 1898354159}
   - component: {fileID: 1898354163}
   - component: {fileID: 1898354165}
+  - component: {fileID: 1898354166}
   - component: {fileID: 1898354164}
   m_Layer: 0
   m_Name: Player
@@ -759,6 +760,18 @@ MonoBehaviour:
   target: {fileID: 0}
   pickupSpeed: 10
   followSpeed: 20
+--- !u!114 &1898354166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898354156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ab81c6d064f9541b9301570b53a865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2112772629
 GameObject:
   m_ObjectHideFlags: 0
