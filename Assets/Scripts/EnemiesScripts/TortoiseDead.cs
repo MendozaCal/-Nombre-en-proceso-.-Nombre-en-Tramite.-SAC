@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class TortoiseDead : MonoBehaviour
 {
-    void Start()
+    private bool isTap;
+    public int timeDestroy;
+    [SerializeField] GameObject Body;
+    private void Update()
     {
-        
+        if (isTap)
+        {
+            StartCoroutine(TimeToDead());
+        }
     }
-
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("feet"))
+        {
+            isTap = true;
+            Body.SetActive(false);
+        }
+    }
+    IEnumerator TimeToDead()
+    {
+        yield return new WaitForSeconds(timeDestroy);
+        Destroy(gameObject);
     }
 }
