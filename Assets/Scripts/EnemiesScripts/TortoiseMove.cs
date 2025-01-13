@@ -5,7 +5,7 @@ using UnityEngine;
 public class TortoiseMove : MonoBehaviour
 {
     [Header("-----Move-----")]
-    [SerializeField] Transform[] waypoints;
+    [SerializeField] GameObject[] waypoints;
     [SerializeField] float maxSpeed = 5f;
     [SerializeField] float rotationSpeed = 5f;
     
@@ -20,12 +20,14 @@ public class TortoiseMove : MonoBehaviour
     private GameObject targetDetectorRute;
     private DetectorPatrollToAttack detectorPatrollToAttack;
     private GameObject targetDetectorEyes;
-    private EyesDetectorTortoise eyesDetectorTortoise;
+    private EyesDetectorTortoise eyesDetectorTurtle;
+    private GameObject targetDetectorArea;
+    private AreaPersecution areaDetectorTurtle;
     private GameObject player;
 
     private void Start()
     {
-        targetDetectorRute = GameObject.Find("TortoiseRutePoints");
+        targetDetectorRute = GameObject.Find("TurtleRutePoints");
         if (targetDetectorRute != null)
         {
             detectorPatrollToAttack = targetDetectorRute.GetComponent<DetectorPatrollToAttack>();
@@ -33,7 +35,12 @@ public class TortoiseMove : MonoBehaviour
         targetDetectorEyes = GameObject.Find("Eyes");
         if (targetDetectorEyes != null)
         {
-            eyesDetectorTortoise = targetDetectorEyes.GetComponent<EyesDetectorTortoise>();
+            eyesDetectorTurtle = targetDetectorEyes.GetComponent<EyesDetectorTortoise>();
+        }
+        targetDetectorArea = GameObject.Find("TurtleController");
+        if (targetDetectorEyes != null)
+        {
+            areaDetectorTurtle = targetDetectorArea.GetComponent<AreaPersecution>();
         }
         player = GameObject.Find("Player");
         initialSpeed = maxSpeed;
@@ -42,11 +49,11 @@ public class TortoiseMove : MonoBehaviour
 
     private void Update()
     {
+        DetectPlayer();
         if (!isDetected)
         {
             MoveToWaypoint();
             CalculateDistance();
-            DetectPlayer();
         }
         else
         {
@@ -59,7 +66,7 @@ public class TortoiseMove : MonoBehaviour
         maxSpeed = initialSpeed;
         if (waypoints != null && waypoints.Length > 0)
         {
-            Vector3 direction = (waypoints[currentWaypoint].position - transform.position).normalized;
+            Vector3 direction = (waypoints[currentWaypoint].transform.position - transform.position).normalized;
             transform.Translate(direction * maxSpeed * Time.deltaTime, Space.World);
             RotateRute(direction);
         }
@@ -67,7 +74,7 @@ public class TortoiseMove : MonoBehaviour
 
     private void CalculateDistance()
     {
-        if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < 1f)
+        if (Vector3.Distance(transform.position, waypoints[currentWaypoint].transform.position) < 1f)
         {
             currentWaypoint++;
             if (currentWaypoint >= waypoints.Length)
@@ -79,11 +86,16 @@ public class TortoiseMove : MonoBehaviour
 
     private void DetectPlayer()
     {
-        if (detectorPatrollToAttack != null && eyesDetectorTortoise != null)
+        if (detectorPatrollToAttack != null && eyesDetectorTurtle != null)
         {
-            if (detectorPatrollToAttack.detectedPlayerRute && eyesDetectorTortoise.detectedPlayerEyes)
+            if (detectorPatrollToAttack.detectedPlayerRute && eyesDetectorTurtle.detectedPlayerEyes && areaDetectorTurtle.detectedPlayerArea)
             {
                 isDetected = true;
+            }
+            else
+            {
+                isDetected = false;
+                
             }
         }
     }
@@ -121,7 +133,6 @@ public class TortoiseMove : MonoBehaviour
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
@@ -133,11 +144,11 @@ public class TortoiseMove : MonoBehaviour
             ReturnPatroll();
         }
     }
-    void ReturnPatroll()
+    public void ReturnPatroll()
     {
         isDetected = false;
         durationAttack = initialDurationAttack;
         detectorPatrollToAttack.detectedPlayerRute = false;
-        eyesDetectorTortoise.detectedPlayerEyes = false;
+        eyesDetectorTurtle.detectedPlayerEyes = false;
     }
 }
