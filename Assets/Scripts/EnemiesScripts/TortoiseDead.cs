@@ -14,6 +14,13 @@ public class TortoiseDead : MonoBehaviour
             StartCoroutine(TimeToDead());
         }
     }
+
+    public void PlayerDestroy()
+    {
+        isTap = true;
+        Body.SetActive(false);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("feet"))

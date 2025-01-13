@@ -8,6 +8,14 @@ public class Movement : MonoBehaviour
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private Transform cameraTransform;
 
+    [Header("Jump Damage")]
+    [SerializeField] private float groundPoundDamage = 20f;
+    [SerializeField] private float bounceForce = 5f; 
+    [SerializeField] private float raycastDistance = 1f; 
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private Vector3 boxSize = new Vector3(0.5f, 0.1f, 0.5f);
+    [SerializeField] private float groundCheckDistance;
+
     private CharacterController controller;
     private Vector3 velocity;
     private float turnSmoothVelocity;
@@ -23,6 +31,7 @@ public class Movement : MonoBehaviour
         CheckGroundState();
         HandleMovement();
         HandleJump();
+        CheckEnemyBelow();
         ApplyGravity();
     }
 
@@ -37,6 +46,20 @@ public class Movement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
+        }
+    }
+
+    private void CheckEnemyBelow()
+    {
+        if (velocity.y < 0)
+        {
+
+            if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, Quaternion.identity, raycastDistance, enemyLayer))
+            {
+                hit.collider.gameObject.GetComponent<TortoiseDead>()?.PlayerDestroy();
+                //Metodo en caso del enemigo tener vida y manera de matarlo
+                velocity.y = bounceForce;
+            }
         }
     }
 
@@ -83,5 +106,11 @@ public class Movement : MonoBehaviour
     {
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(transform.position + Vector3.down * groundCheckDistance, boxSize);
     }
 }

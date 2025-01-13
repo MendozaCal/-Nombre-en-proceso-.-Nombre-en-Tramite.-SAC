@@ -12,7 +12,7 @@ public class Grab : MonoBehaviour
     private Transform grabbedObject;
     private bool isPickingUp;
     private float initialDistance;
-    private Quaternion originalRotation; 
+    private Quaternion originalRotation;
 
     private void Update()
     {

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1048887242881201190}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7154792, z: -0, w: 0.6986341}
-  m_LocalPosition: {x: -3.83, y: 0.81, z: 0}
+  m_LocalPosition: {x: -7.13, y: 0.81, z: 0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201,8 +201,7 @@ GameObject:
   - component: {fileID: 1543091509580285133}
   - component: {fileID: 4153177917724449642}
   - component: {fileID: 1050506361374264011}
-  - component: {fileID: 7595602184549287101}
-  - component: {fileID: 4515290218923154315}
+  - component: {fileID: 1513444816262032509}
   - component: {fileID: 6524631308439329371}
   m_Layer: 0
   m_Name: Player
@@ -311,11 +310,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  jumpForce: 12
+  jumpForce: 4
   gravity: -30
   turnSmoothTime: 0.1
   cameraTransform: {fileID: 94874360717655630}
---- !u!114 &7595602184549287101
+  groundPoundDamage: 20
+  bounceForce: 18
+  raycastDistance: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  boxSize: {x: 0.75, y: 0.1, z: 0.75}
+  groundCheckDistance: 0.5
+--- !u!114 &1513444816262032509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -328,20 +335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3917287224224780971}
-  pickupSpeed: 10
+  pickupSpeed: 3
   followSpeed: 20
---- !u!114 &4515290218923154315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5356174307607862439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19ab81c6d064f9541b9301570b53a865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &6524631308439329371
 CharacterController:
   m_ObjectHideFlags: 0
