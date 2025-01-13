@@ -5,7 +5,7 @@ using UnityEngine;
 public class TortoiseMove : MonoBehaviour
 {
     [Header("-----Move-----")]
-    [SerializeField] GameObject[] waypoints;
+    [SerializeField] Transform[] waypoints;
     [SerializeField] float maxSpeed = 5f;
     [SerializeField] float rotationSpeed = 5f;
     
@@ -59,7 +59,7 @@ public class TortoiseMove : MonoBehaviour
         maxSpeed = initialSpeed;
         if (waypoints != null && waypoints.Length > 0)
         {
-            Vector3 direction = (waypoints[currentWaypoint].transform.position - transform.position).normalized;
+            Vector3 direction = (waypoints[currentWaypoint].position - transform.position).normalized;
             transform.Translate(direction * maxSpeed * Time.deltaTime, Space.World);
             RotateRute(direction);
         }
@@ -67,7 +67,7 @@ public class TortoiseMove : MonoBehaviour
 
     private void CalculateDistance()
     {
-        if (Vector3.Distance(transform.position, waypoints[currentWaypoint].transform.position) < 1f)
+        if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < 1f)
         {
             currentWaypoint++;
             if (currentWaypoint >= waypoints.Length)
@@ -118,13 +118,10 @@ public class TortoiseMove : MonoBehaviour
     {
         direction = player.transform.position - transform.position;
 
-        // Asegurarse de que la dirección no sea Vector3.zero
         if (direction != Vector3.zero)
         {
-            // Calcular la rotación objetivo
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-            // Aplicar la rotación suavemente con Slerp
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
