@@ -1,20 +1,27 @@
+using System.Collections;
 using UnityEngine;
 
 public class Grab : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private float pickupSpeed = 3f;
-    [SerializeField] private float followSpeed = 20f;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform target; 
+    [SerializeField] private Transform attackPoint; 
+    [SerializeField] private float attackSpeed = 10f; 
+    [SerializeField] private float returnSpeed = 10f; 
+    [SerializeField] private Vector3 offset = new Vector3(1f, 0f, 0.5f); 
 
-    private Vector3 offset = new Vector3(0f, 0f, 0f);
-    private Vector3 holdRotation = new Vector3(0f, 0f, 0f);
     private bool isActive;
+    private bool isAttacking;
     private Transform grabbedObject;
-    private bool isPickingUp;
-    private float initialDistance;
-    private Quaternion originalRotation;
 
     private void Update()
+    {
+        HandleGrab();
+        UpdateTargetPosition();
+        HandleAttack();
+    }
+
+    private void HandleGrab()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -27,29 +34,70 @@ public class Grab : MonoBehaviour
                 StartGrab();
             }
         }
+    }
+
+    private void UpdateTargetPosition()
+    {
+        if (!isAttacking)
+        {
+            target.position = player.position + player.right * offset.x + player.up * offset.y + player.forward * offset.z;
+            target.rotation = Quaternion.Euler(0f, player.eulerAngles.y + 90f, 0f);
+        }
 
         if (isActive && grabbedObject != null)
         {
-            Vector3 desiredPosition = target.position + target.right * offset.x + target.up * offset.y + target.forward * offset.z;
+            grabbedObject.position = target.position;
+            grabbedObject.rotation = target.rotation;
+        }
+    }
 
-            if (isPickingUp)
+    private void HandleAttack()
+    {
+        if (isActive && grabbedObject != null && !isAttacking)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                grabbedObject.position = Vector3.Lerp(grabbedObject.position, desiredPosition, pickupSpeed * Time.deltaTime);
-
-                Quaternion desiredRotation = Quaternion.Euler(holdRotation);
-                grabbedObject.rotation = Quaternion.Lerp(grabbedObject.rotation, desiredRotation, pickupSpeed * Time.deltaTime);
-
-                if (Vector3.Distance(grabbedObject.position, desiredPosition) < 0.1f)
-                {
-                    isPickingUp = false;
-                }
-            }
-            else
-            {
-                grabbedObject.position = Vector3.Lerp(grabbedObject.position, desiredPosition, followSpeed * Time.deltaTime);
-                grabbedObject.rotation = Quaternion.Euler(holdRotation);
+                StartCoroutine(MoveTargetForAttack());
             }
         }
+    }
+
+    private IEnumerator MoveTargetForAttack()
+    {
+        isAttacking = true;
+
+        BoxCollider boxCollider = grabbedObject.GetComponent<BoxCollider>();
+        if (boxCollider != null)
+        {
+            LayerMask originalExcludeLayers = boxCollider.excludeLayers;
+
+            boxCollider.excludeLayers = LayerMask.GetMask("Nothing");
+        }
+
+        while (Vector3.Distance(target.position, attackPoint.position) > 0.1f)
+        {
+            target.position = Vector3.MoveTowards(target.position, attackPoint.position, attackSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.2f); 
+
+        while (Vector3.Distance(target.position, player.position + player.right * offset.x + player.up * offset.y + player.forward * offset.z) > 0.1f)
+        {
+            target.position = Vector3.MoveTowards(target.position, player.position + player.right * offset.x + player.up * offset.y + player.forward * offset.z, returnSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        target.position = player.position + player.right * offset.x + player.up * offset.y + player.forward * offset.z;
+        target.rotation = player.rotation;
+
+        if (boxCollider != null)
+        {
+            LayerMask originalExcludeLayers = boxCollider.excludeLayers;
+
+            boxCollider.excludeLayers = LayerMask.GetMask("Enemy");
+        }
+        isAttacking = false;
     }
 
     private void OnTriggerStay(Collider other)
@@ -71,20 +119,11 @@ public class Grab : MonoBehaviour
     private void StartGrab()
     {
         isActive = true;
-        isPickingUp = true;
-        initialDistance = Vector3.Distance(grabbedObject.position, target.position);
-        originalRotation = grabbedObject.rotation;
     }
 
     private void DropObject()
     {
-        if (grabbedObject != null)
-        {
-            grabbedObject.rotation = originalRotation;
-        }
-
         isActive = false;
-        isPickingUp = false;
         grabbedObject = null;
     }
 }

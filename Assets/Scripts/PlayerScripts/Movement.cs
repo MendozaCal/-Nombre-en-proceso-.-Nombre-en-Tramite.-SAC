@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
 
     [Header("Jump Damage")]
-    [SerializeField] private float groundPoundDamage = 20f;
+    //[SerializeField] private float groundPoundDamage = 20f;
     [SerializeField] private float bounceForce = 5f; 
     [SerializeField] private float raycastDistance = 1f; 
     [SerializeField] private LayerMask enemyLayer;
@@ -20,6 +21,7 @@ public class Movement : MonoBehaviour
     private Vector3 velocity;
     private float turnSmoothVelocity;
     private bool isGrounded;
+    private WallJump walljump;
 
     private void Start()
     {
@@ -29,15 +31,19 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         CheckGroundState();
+        walljump.CheckWallState();
         HandleMovement();
+        HandleRun();
         HandleJump();
         CheckEnemyBelow();
+        walljump.PerformWallJump(ref velocity, gravity);
         ApplyGravity();
     }
 
     private void InitializeComponents()
     {
         controller = GetComponent<CharacterController>();
+        walljump = GetComponent<WallJump>();
     }
 
     private void CheckGroundState()
@@ -65,16 +71,37 @@ public class Movement : MonoBehaviour
 
     private void HandleMovement()
     {
+        //float horizontal = Input.GetAxisRaw("Horizontal");
+        //float vertical = Input.GetAxisRaw("Vertical");
+        //Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+        //if (direction.magnitude >= 0.1f)
+        //{
+        //    float targetAngle = CalculateTargetAngle(direction);
+        //    RotateCharacter(targetAngle);
+        //    MoveCharacter(targetAngle);
+        //}
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
         if (direction.magnitude >= 0.1f)
         {
-            float targetAngle = CalculateTargetAngle(direction);
-            RotateCharacter(targetAngle);
-            MoveCharacter(targetAngle);
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+
+            controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
         }
+    }
+
+    private void HandleRun()
+    {
+        if(Input.GetKey(KeyCode.LeftShift)) { moveSpeed = 14f; }
+        else { moveSpeed = 8f; }
     }
 
     private float CalculateTargetAngle(Vector3 direction)

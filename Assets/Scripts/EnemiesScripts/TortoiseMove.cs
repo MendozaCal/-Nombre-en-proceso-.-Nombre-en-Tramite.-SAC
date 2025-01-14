@@ -107,6 +107,7 @@ public class TortoiseMove : MonoBehaviour
             maxSpeed = maxSpeedAttack;
             durationAttack -= Time.deltaTime;
             Vector3 direction = (player.transform.position - transform.position).normalized;
+            direction.y = 0;
             transform.Translate(direction * maxSpeed * Time.deltaTime, Space.World);
             LookPlayer(direction);
             if (durationAttack <= 0)
