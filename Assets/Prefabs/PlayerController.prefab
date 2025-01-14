@@ -188,6 +188,37 @@ Transform:
   - {fileID: 4785429583969675501}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3117906848596946531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4634815101793916293}
+  m_Layer: 6
+  m_Name: HandPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4634815101793916293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3117906848596946531}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4785429583969675501}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5356174307607862439
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +235,7 @@ GameObject:
   - component: {fileID: 1513444816262032509}
   - component: {fileID: 6575181005776562407}
   - component: {fileID: 6524631308439329371}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -225,6 +256,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3917287224224780971}
+  - {fileID: 4634815101793916293}
   m_Father: {fileID: 9197469461304188809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6895106977423021942
@@ -334,9 +366,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a841009f01bc1547b9ba4c411a4ec59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 4785429583969675501}
   target: {fileID: 3917287224224780971}
-  pickupSpeed: 3
-  followSpeed: 20
+  attackPoint: {fileID: 4634815101793916293}
+  attackSpeed: 10
+  returnSpeed: 10
+  offset: {x: 0.85, y: 0, z: 0}
 --- !u!114 &6575181005776562407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +423,7 @@ GameObject:
   - component: {fileID: 4505617033880791214}
   - component: {fileID: 6889238238387351999}
   - component: {fileID: 6002119990049144331}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
