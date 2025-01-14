@@ -66,6 +66,14 @@ public class Grab : MonoBehaviour
     {
         isAttacking = true;
 
+        BoxCollider boxCollider = grabbedObject.GetComponent<BoxCollider>();
+        if (boxCollider != null)
+        {
+            LayerMask originalExcludeLayers = boxCollider.excludeLayers;
+
+            boxCollider.excludeLayers = LayerMask.GetMask("Nothing");
+        }
+
         while (Vector3.Distance(target.position, attackPoint.position) > 0.1f)
         {
             target.position = Vector3.MoveTowards(target.position, attackPoint.position, attackSpeed * Time.deltaTime);
@@ -83,6 +91,12 @@ public class Grab : MonoBehaviour
         target.position = player.position + player.right * offset.x + player.up * offset.y + player.forward * offset.z;
         target.rotation = player.rotation;
 
+        if (boxCollider != null)
+        {
+            LayerMask originalExcludeLayers = boxCollider.excludeLayers;
+
+            boxCollider.excludeLayers = LayerMask.GetMask("Enemy");
+        }
         isAttacking = false;
     }
 
