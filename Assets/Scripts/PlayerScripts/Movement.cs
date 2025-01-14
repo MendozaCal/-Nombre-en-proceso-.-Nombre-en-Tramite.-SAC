@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class Movement : MonoBehaviour
     {
         CheckGroundState();
         HandleMovement();
+        HandleRun();
         HandleJump();
         CheckEnemyBelow();
         ApplyGravity();
@@ -75,6 +77,12 @@ public class Movement : MonoBehaviour
             RotateCharacter(targetAngle);
             MoveCharacter(targetAngle);
         }
+    }
+
+    private void HandleRun()
+    {
+        if(Input.GetKey(KeyCode.LeftShift)) { moveSpeed = 14f; }
+        else { moveSpeed = 8f; }
     }
 
     private float CalculateTargetAngle(Vector3 direction)
