@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
 
     [Header("Jump Damage")]
-    [SerializeField] private float groundPoundDamage = 20f;
+    //[SerializeField] private float groundPoundDamage = 20f;
     [SerializeField] private float bounceForce = 5f; 
     [SerializeField] private float raycastDistance = 1f; 
     [SerializeField] private LayerMask enemyLayer;
