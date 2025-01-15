@@ -1,0 +1,258 @@
+fileFormatVersion: 2
+guid: 67a54a0ef22b0bf468dfb8cf6677e5da
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      internalID: 1827226128182048838
+      firstFrame: 0
+      lastFrame: 27
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: "Pira\xF1aAnimation(Clone)"
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: "Pira\xF1a_Poly"
+      parentName: "Pira\xF1aAnimation(Clone)"
+      position: {x: -3.3139448, y: -0.09638735, z: -0.17053647}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.009791173, y: 0.009791173, z: 0.009791173}
+    - name: Cola
+      parentName: "Pira\xF1a_Poly"
+      position: {x: 100, y: 96.24, z: 92.33356}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.90215963, y: 0.90215963, z: 0.90215963}
+    - name: Boca
+      parentName: "Pira\xF1a_Poly"
+      position: {x: 100, y: 50.597897, z: -79.66108}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.90215963, y: 0.90215963, z: 0.90215963}
+    - name: Arriba
+      parentName: "Pira\xF1a_Poly"
+      position: {x: 100, y: 190.49898, z: -65.62632}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.90215963, y: 0.90215963, z: 0.90215963}
+    - name: Pez
+      parentName: "Pira\xF1a_Poly"
+      position: {x: 100, y: 96.24, z: -43.171696}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.90215963, y: 0.90215963, z: 0.90215963}
+    - name: pCube1
+      parentName: "Pira\xF1a_Poly"
+      position: {x: 40.61486, y: 102.76818, z: -28.255957}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.90215963, y: 0.90215963, z: 0.90215963}
+    - name: "Pira\xF1a_High"
+      parentName: "Pira\xF1aAnimation(Clone)"
+      position: {x: -0, y: 1.0307853, z: -1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Cola_High
+      parentName: "Pira\xF1a_High"
+      position: {x: -0.32910416, y: 1.4542767, z: 76.004715}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Boca_High
+      parentName: "Pira\xF1a_High"
+      position: {x: -0, y: -103.07854, z: 100}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aletas_High
+      parentName: "Pira\xF1a_High"
+      position: {x: -0.31322524, y: -9.886169, z: 60.866768}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pez_High
+      parentName: "Pira\xF1a_High"
+      position: {x: -0, y: 4.9318666, z: 39.181206}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: "Pira\xF1a_Low"
+      parentName: "Pira\xF1aAnimation(Clone)"
+      position: {x: 0.00028949737, y: 0.92623556, z: -0.53136677}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Cola_Low
+      parentName: "Pira\xF1a_Low"
+      position: {x: -0.028949738, y: -92.62355, z: 53.136677}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Boca_Low
+      parentName: "Pira\xF1a_Low"
+      position: {x: -0.028949738, y: -92.62355, z: 53.136677}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aletas_Low
+      parentName: "Pira\xF1a_Low"
+      position: {x: -0.028949738, y: -92.62355, z: 53.136677}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pez_Low
+      parentName: "Pira\xF1a_Low"
+      position: {x: -0.028949738, y: -92.62355, z: 53.136677}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: group1
+      parentName: "Pira\xF1aAnimation(Clone)"
+      position: {x: -0, y: 0.89315337, z: -0.470908}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: nurbsCircle1
+      parentName: group1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -1.256074e-15, y: 0.7071068, z: 0.7071068, w: -1.3426697e-15}
+      scale: {x: 1.1815522, y: 1.1815522, z: 1.1815522}
+    - name: Mandibula_Ctrl_Grp
+      parentName: nurbsCircle1
+      position: {x: -0, y: 48.79829, z: -8.958922}
+      rotation: {x: 0.35024247, y: -0.6142721, z: -0.35024247, w: 0.6142721}
+      scale: {x: 0.84634435, y: 0.84634435, z: 0.84634435}
+    - name: Mandibula_Ctrl
+      parentName: Mandibula_Ctrl_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint1
+      parentName: "Pira\xF1aAnimation(Clone)"
+      position: {x: 1.0281441e-32, y: 0.89315337, z: -0.470908}
+      rotation: {x: 6.123234e-17, y: 1, z: 1.6155446e-15, w: -6.123234e-17}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Mandibula
+      parentName: joint1
+      position: {x: -0, y: -10.585434, z: -57.657726}
+      rotation: {x: -0.44895217, y: -0.5337002, z: 0.44024765, w: 0.5654981}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Boca
+      parentName: Mandibula
+      position: {x: -88.82688, y: -1.4792646e-14, z: -1.972353e-14}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
