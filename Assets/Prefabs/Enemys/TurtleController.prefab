@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f2949329b43e04b91aa2dd76d39cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeDestroy: 3
   detectedPlayerArea: 0
 --- !u!1 &1484650908887799570
 GameObject:
@@ -155,7 +156,7 @@ GameObject:
   - component: {fileID: 8790931718222118577}
   - component: {fileID: 6108183984819384311}
   - component: {fileID: 4167571972211794781}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f28349f969914a429bd17df23fd2823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeDestroy: 3
+  isTap: 0
   Body: {fileID: 7600094558247756364}
 --- !u!1 &2882865059909624641
 GameObject:
@@ -500,7 +501,8 @@ GameObject:
   - component: {fileID: 1105897184535377823}
   - component: {fileID: 8578687602419384580}
   - component: {fileID: 7290350238536068319}
-  m_Layer: 0
+  - component: {fileID: 5277034571882630021}
+  m_Layer: 3
   m_Name: Turtle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +620,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
@@ -642,6 +644,19 @@ MonoBehaviour:
   isDetected: 0
   durationAttack: 10
   maxSpeedAttack: 8
+--- !u!114 &5277034571882630021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7600094558247756364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1defe924dfd4b1b40921c1dd9ab94c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTapGrab: 0
 --- !u!1 &8555430463249765935
 GameObject:
   m_ObjectHideFlags: 0

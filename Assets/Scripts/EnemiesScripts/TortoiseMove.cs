@@ -130,6 +130,7 @@ public class TortoiseMove : MonoBehaviour
     void LookPlayer(Vector3 direction)
     {
         direction = player.transform.position - transform.position;
+        direction.y = 0;
 
         if (direction != Vector3.zero)
         {
