@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -10,40 +10,43 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
 
     [Header("Jump Damage")]
-    //[SerializeField] private float groundPoundDamage = 20f;
-    [SerializeField] private float bounceForce = 5f; 
-    [SerializeField] private float raycastDistance = 1f; 
+    [SerializeField] private float bounceForce = 5f;
+    [SerializeField] private float raycastDistance = 1f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Vector3 boxSize = new Vector3(0.5f, 0.1f, 0.5f);
     [SerializeField] private float groundCheckDistance;
+
+    [Header("Wall Climbing")]
+    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private float wallCheckDistance = 0.5f;
+    [SerializeField] private float wallJumpForce = 10f;
+    [SerializeField] private Vector3 wallJumpDirection = new Vector3(1f, 1f, 0f);
+    [SerializeField] private float wallSlideSpeed = 2f;
+    private bool isWallClimbing;
 
     private CharacterController controller;
     private Vector3 velocity;
     private float turnSmoothVelocity;
     private bool isGrounded;
-    private WallJump walljump;
+    private bool isTouchingWall;
+    private int wallDirX;
+    private GameObject currentWall;
 
     private void Start()
     {
-        InitializeComponents();
+        controller = GetComponent<CharacterController>();
     }
 
     private void Update()
     {
         CheckGroundState();
-        walljump.CheckWallState();
+        CheckWallState();
         HandleMovement();
         HandleRun();
         HandleJump();
+        HandleWallMovement();
         CheckEnemyBelow();
-        walljump.PerformWallJump(ref velocity, gravity);
         ApplyGravity();
-    }
-
-    private void InitializeComponents()
-    {
-        controller = GetComponent<CharacterController>();
-        walljump = GetComponent<WallJump>();
     }
 
     private void CheckGroundState()
@@ -55,33 +58,25 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void CheckEnemyBelow()
+    private void CheckWallState()
     {
-        if (velocity.y < 0)
-        {
+        Vector3 boxCenter = transform.position + Vector3.up * (controller.height / 2); 
+        isTouchingWall = Physics.BoxCast(boxCenter, new Vector3(0.5f, 1f, 0.5f), transform.forward, out RaycastHit hit, Quaternion.identity, wallCheckDistance, wallLayer);
 
-            if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, Quaternion.identity, raycastDistance, enemyLayer))
-            {
-                hit.collider.gameObject.GetComponent<TortoiseDead>()?.PlayerDestroy();
-                //Metodo en caso del enemigo tener vida y manera de matarlo
-                velocity.y = bounceForce;
-            }
+        if (isTouchingWall)
+        {
+            currentWall = hit.collider.gameObject;
+            wallDirX = hit.normal.x < 0 ? -1 : 1; 
+        }
+        else
+        {
+            wallDirX = 0;
+            currentWall = null;
         }
     }
 
     private void HandleMovement()
     {
-        //float horizontal = Input.GetAxisRaw("Horizontal");
-        //float vertical = Input.GetAxisRaw("Vertical");
-        //Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
-        //if (direction.magnitude >= 0.1f)
-        //{
-        //    float targetAngle = CalculateTargetAngle(direction);
-        //    RotateCharacter(targetAngle);
-        //    MoveCharacter(targetAngle);
-        //}
-
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
@@ -90,35 +85,16 @@ public class Movement : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
         }
     }
 
     private void HandleRun()
     {
-        if(Input.GetKey(KeyCode.LeftShift)) { moveSpeed = 14f; }
-        else { moveSpeed = 8f; }
-    }
-
-    private float CalculateTargetAngle(Vector3 direction)
-    {
-        return Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
-    }
-
-    private void RotateCharacter(float targetAngle)
-    {
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
-    }
-
-    private void MoveCharacter(float targetAngle)
-    {
-        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+        moveSpeed = Input.GetKey(KeyCode.LeftShift) ? 14f : 8f;
     }
 
     private void HandleJump()
@@ -126,6 +102,78 @@ public class Movement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        }
+    }
+
+    private void HandleWallMovement()
+    {
+        if (isTouchingWall && !isGrounded)
+        {
+            if (!isWallClimbing)
+            {
+                if (Input.GetButtonDown("Jump"))
+                {
+                    isWallClimbing = true;
+                    velocity.y = 0;
+
+                    RaycastHit hit;
+                    if (Physics.Raycast(transform.position, transform.forward, out hit, wallCheckDistance, wallLayer))
+                    {
+                        currentWall = hit.collider?.gameObject;
+                    }
+                }
+            }
+            else
+            {
+                if (Input.GetButtonDown("Jump"))
+                {
+                    Vector3 jumpDirection = wallJumpDirection;
+                    jumpDirection.x *= wallDirX;
+                    velocity = jumpDirection * wallJumpForce;
+                    velocity.y = Mathf.Sqrt(wallJumpForce * -2f * gravity);
+                    StartCoroutine(RestoreWallLayer());
+                    isWallClimbing = false;
+                }
+                else if (Input.GetKeyDown(KeyCode.E))
+                {
+                    velocity.y = -wallSlideSpeed * 2;
+                    isWallClimbing = false;
+                    StartCoroutine(RestoreWallLayer());
+                }
+                else
+                {
+                    velocity.y = -wallSlideSpeed;
+                }
+            }
+        }
+        else
+        {
+            isWallClimbing = false;
+        }
+    }
+
+    private IEnumerator RestoreWallLayer()
+    {
+        if (currentWall != null)
+        {
+            GameObject wallMoment = currentWall.gameObject;
+            currentWall.layer = LayerMask.NameToLayer("Default");
+            yield return new WaitForSeconds(0.75f);
+            wallMoment.layer = LayerMask.NameToLayer("Climbable");
+            yield return new WaitForSeconds(1f);
+            currentWall = null; 
+        }
+    }
+
+    private void CheckEnemyBelow()
+    {
+        if (velocity.y < 0)
+        {
+            if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, Quaternion.identity, raycastDistance, enemyLayer))
+            {
+                hit.collider.gameObject.GetComponent<TortoiseDead>()?.PlayerDestroy();
+                velocity.y = bounceForce;
+            }
         }
     }
 
@@ -139,5 +187,9 @@ public class Movement : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position + Vector3.down * groundCheckDistance, boxSize);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + transform.right * wallCheckDistance);
+        Gizmos.DrawLine(transform.position, transform.position - transform.right * wallCheckDistance);
     }
 }
