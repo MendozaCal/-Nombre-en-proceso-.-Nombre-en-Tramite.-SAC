@@ -102,7 +102,11 @@ public class Grab : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Interactuable") && !isActive)
+        if (other.CompareTag("Stick") && !isActive)
+        {
+            grabbedObject = other.transform;
+        }
+        if (other.CompareTag("Honda") && !isActive)
         {
             grabbedObject = other.transform;
         }
@@ -110,7 +114,11 @@ public class Grab : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Interactuable") && !isActive)
+        if (other.CompareTag("Stick") && !isActive)
+        {
+            grabbedObject = null;
+        }
+        if (other.CompareTag("Honda") && !isActive)
         {
             grabbedObject = null;
         }
