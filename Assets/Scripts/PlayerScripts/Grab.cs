@@ -6,7 +6,8 @@ public class Grab : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset;
-
+    private bool useStick;
+    private bool useHonda;
     private bool isActive;
     private Transform grabbedObject;
 
@@ -17,7 +18,7 @@ public class Grab : MonoBehaviour
     private void Update()
     {
         HandleGrab();
-        if (!Combat.IsAttacking)
+        if (!Combat.IsAttacking && useStick)
         {
             UpdateTargetPosition();
         }
@@ -59,10 +60,12 @@ public class Grab : MonoBehaviour
         if (other.CompareTag("Stick") && !isActive)
         {
             grabbedObject = other.transform;
+            useStick = true;
         }
         if (other.CompareTag("Honda") && !isActive)
         {
             grabbedObject = other.transform;
+            useHonda = true;
         }
     }
 
@@ -71,10 +74,12 @@ public class Grab : MonoBehaviour
         if (other.CompareTag("Stick") && !isActive)
         {
             grabbedObject = null;
+            useStick = false;
         }
         if (other.CompareTag("Honda") && !isActive)
         {
             grabbedObject = null;
+            useHonda = false;
         }
     }
 

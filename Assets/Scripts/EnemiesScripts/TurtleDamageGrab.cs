@@ -18,7 +18,7 @@ public class TurtleDamageGrab : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Interactuable"))
+        if (other.gameObject.CompareTag("Stick") || other.gameObject.CompareTag("Honda"))
         {
             isTapGrab = true;
         }

@@ -57,19 +57,4 @@ public class HondaAttack : MonoBehaviour
         yield return new WaitForSeconds(cooldownTime);
         isCooldown = false;
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Honda"))
-        {
-            grabbedObject = other.transform;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Honda"))
-        {
-            grabbedObject = null;
-        }
-    }
 }
