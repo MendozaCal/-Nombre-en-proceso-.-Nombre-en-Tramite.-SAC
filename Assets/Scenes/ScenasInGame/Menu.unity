@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &18323617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 20017127}
   - component: {fileID: 20017126}
+  - component: {fileID: 20017128}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -288,6 +289,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &20017128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20017125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1001 &37194916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -873,7 +897,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1520177034}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TransicionCamara, Assembly-CSharp
         m_MethodName: UpdateCamera
         m_Mode: 2
@@ -1775,7 +1799,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1520177034}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TransicionCamara, Assembly-CSharp
         m_MethodName: UpdateCamera
         m_Mode: 2
@@ -2044,7 +2068,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 463851441}
-  - component: {fileID: 463851440}
   m_Layer: 0
   m_Name: Creditos Roll
   m_TagString: Untagged
@@ -2052,20 +2075,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &463851440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463851439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c99f45fc49ec914ea98c98a8ee0f813, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  creditsRun: {fileID: 645839974}
-  Camara: {fileID: 1799661273}
 --- !u!4 &463851441
 Transform:
   m_ObjectHideFlags: 0
@@ -2470,7 +2479,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1520177034}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TransicionCamara, Assembly-CSharp
         m_MethodName: UpdateCamera
         m_Mode: 2
@@ -3520,7 +3529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &723488707
 Transform:
   m_ObjectHideFlags: 0
@@ -4838,8 +4847,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112120168}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0005934665, y: 0.7996006, z: -0.0007901937, w: 0.60053146}
-  m_LocalPosition: {x: 29.072346, y: -1.180639, z: -49.699665}
+  m_LocalRotation: {x: 0.08957846, y: 0.66474247, z: -0.08403595, w: 0.73690647}
+  m_LocalPosition: {x: -10.397655, y: -0.20063877, z: -4.859666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6016,6 +6025,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 98470c9f1e7955243ba4f6137c34a929, type: 2}
+    - target: {fileID: 8629044550399447307, guid: ddcb1076bdb807a408abec0872332a8c, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6038,8 +6051,6 @@ GameObject:
   - component: {fileID: 1520177037}
   - component: {fileID: 1520177036}
   - component: {fileID: 1520177035}
-  - component: {fileID: 1520177034}
-  - component: {fileID: 1520177039}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6047,19 +6058,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1520177034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520177033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef3be3ad8af5223429e00a604b264bed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCamera: {fileID: 18323617}
 --- !u!114 &1520177035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6146,18 +6144,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.59, y: -0.09}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1520177039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520177033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16e52e1d4cb21b3458116e8b9c0c0933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1535494038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6990,7 +6976,6 @@ GameObject:
   - component: {fileID: 1730290391}
   - component: {fileID: 1730290390}
   - component: {fileID: 1730290389}
-  - component: {fileID: 1730290392}
   m_Layer: 5
   m_Name: Jugar-Boton
   m_TagString: Untagged
@@ -7066,7 +7051,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1730290392}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: changeScene
         m_Mode: 1
@@ -7116,20 +7101,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730290387}
   m_CullTransparentMesh: 1
---- !u!114 &1730290392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730290387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eff689e98b7f654a8b02c4086a013f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Nivel1 Decoracion
-  gameManager: {fileID: 0}
 --- !u!1001 &1741391449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7304,7 +7275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1799661274
 Transform:
   m_ObjectHideFlags: 0
@@ -7707,7 +7678,6 @@ GameObject:
   - component: {fileID: 1850571960}
   - component: {fileID: 1850571959}
   - component: {fileID: 1850571958}
-  - component: {fileID: 1850571961}
   m_Layer: 5
   m_Name: Salir-Boton
   m_TagString: Untagged
@@ -7779,7 +7749,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1850571961}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: exitGame
         m_Mode: 1
@@ -7829,20 +7799,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850571956}
   m_CullTransparentMesh: 1
---- !u!114 &1850571961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850571956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eff689e98b7f654a8b02c4086a013f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: 
-  gameManager: {fileID: 0}
 --- !u!1001 &1855117234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8061,7 +8017,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1914317896}
   - component: {fileID: 1914317897}
-  - component: {fileID: 1914317898}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -8142,19 +8097,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1914317898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914317895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a57c69f1a79b1549b8e090caa567b2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 1914317897}
 --- !u!4 &1920415562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1340944607838775029, guid: 0e42f5bcc78d34f41a0f6cdece8ffd69, type: 3}
@@ -8730,7 +8672,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1520177034}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TransicionCamara, Assembly-CSharp
         m_MethodName: UpdateCamera
         m_Mode: 2
