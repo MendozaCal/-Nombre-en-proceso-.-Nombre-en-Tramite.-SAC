@@ -1,4 +1,3 @@
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class EnemyLife : Life
@@ -26,7 +25,7 @@ public class EnemyLife : Life
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Interactuable"))
+        if (other.gameObject.CompareTag("Stick"))
         {
             TakeDamage(1);
         }

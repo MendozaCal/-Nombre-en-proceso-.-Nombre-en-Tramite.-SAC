@@ -10,11 +10,15 @@ public class Life : MonoBehaviour
     {
         if (!receiveDamage) 
         {
-            StartCoroutine(InvulnerabilityPeriod());
             pointsLife -= damage;
             if (pointsLife <= 0)
             {
+                pointsLife = 0;
                 Die();
+            }
+            else
+            {
+                StartCoroutine(InvulnerabilityPeriod());
             }
         }
     }

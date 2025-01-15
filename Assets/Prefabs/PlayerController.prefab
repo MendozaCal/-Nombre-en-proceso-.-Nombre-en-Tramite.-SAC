@@ -197,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4634815101793916293}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HandPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,9 +233,10 @@ GameObject:
   - component: {fileID: 4153177917724449642}
   - component: {fileID: 1050506361374264011}
   - component: {fileID: 1513444816262032509}
+  - component: {fileID: 3079938152066590050}
   - component: {fileID: 6575181005776562407}
   - component: {fileID: 6524631308439329371}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -375,10 +376,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 4785429583969675501}
   target: {fileID: 3917287224224780971}
+  offset: {x: 0.85, y: 0, z: 0}
+--- !u!114 &3079938152066590050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5356174307607862439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ab81c6d064f9541b9301570b53a865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   attackPoint: {fileID: 4634815101793916293}
   attackSpeed: 10
   returnSpeed: 10
-  offset: {x: 0.85, y: 0, z: 0}
 --- !u!114 &6575181005776562407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,7 +443,7 @@ GameObject:
   - component: {fileID: 4505617033880791214}
   - component: {fileID: 6889238238387351999}
   - component: {fileID: 6002119990049144331}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
