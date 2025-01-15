@@ -28,7 +28,8 @@ public class PlayerLife : Life
             {
                 pointsShield = 3; 
                 base.TakeDamage(1);
-                healthText.text = Mathf.RoundToInt(pointsLife).ToString(); 
+                healthText.text = Mathf.RoundToInt(pointsLife).ToString();
+                StartCoroutine(InvulnerabilityPeriodShield());
             }
             else
             {

@@ -1,18 +1,31 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Combat : MonoBehaviour
 {
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackSpeed = 10f;
-    [SerializeField] private float returnSpeed = 10f;
+    [SerializeField] private float stickAttackSpeed = 10f;
+    [SerializeField] private float stickReturnSpeed = 10f;
+    [SerializeField] private float hondaLaunchForce = 20f;
 
     private Grab grabSystem;
+    private Dictionary<GrabType, ICombatBehavior> combatBehaviors;
     public static bool IsAttacking { get; private set; }
 
     private void Awake()
     {
         grabSystem = GetComponent<Grab>();
+        InitializeCombatBehaviors();
+    }
+
+    private void InitializeCombatBehaviors()
+    {
+        combatBehaviors = new Dictionary<GrabType, ICombatBehavior>
+        {
+            { GrabType.Stick, new StickCombat(stickAttackSpeed, stickReturnSpeed) },
+            { GrabType.Honda, new HondaCombat(hondaLaunchForce) }
+        };
     }
 
     private void Update()
@@ -26,44 +39,29 @@ public class Combat : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                StartCoroutine(MoveTargetForAttack());
+                GrabType currentType = grabSystem.CurrentGrabType;
+                if (combatBehaviors.ContainsKey(currentType))
+                {
+                    StartCoroutine(ExecuteAttackRoutine(currentType));
+                }
             }
         }
     }
 
-    private IEnumerator MoveTargetForAttack()
+    private IEnumerator ExecuteAttackRoutine(GrabType type)
     {
         IsAttacking = true;
-        Transform target = grabSystem.Target;
-        BoxCollider boxCollider = grabSystem.GrabbedObject.GetComponent<BoxCollider>();
 
-        if (boxCollider != null)
+        Transform launchTarget = grabSystem.GrabbedObject;
+        if (launchTarget != null)
         {
-            LayerMask originalExcludeLayers = boxCollider.excludeLayers;
-            boxCollider.excludeLayers = LayerMask.GetMask("Nothing");
+            yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(launchTarget, attackPoint));
+
+            grabSystem.DropObject();
         }
-
-        Vector3 startPosition = target.position;
-        while (Vector3.Distance(target.position, attackPoint.position) > 0.1f)
+        else
         {
-            target.position = Vector3.MoveTowards(target.position, attackPoint.position, attackSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(0.2f);
-
-        Vector3 returnPosition = target.parent.position + target.parent.right * target.localPosition.x + target.parent.up * target.localPosition.y + target.parent.forward * target.localPosition.z;
-
-        while (Vector3.Distance(target.position, returnPosition) > 0.1f)
-        {
-            target.position = Vector3.MoveTowards(target.position, returnPosition, returnSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        if (boxCollider != null)
-        {
-            LayerMask originalExcludeLayers = boxCollider.excludeLayers;
-            boxCollider.excludeLayers = LayerMask.GetMask("Enemy");
+            Debug.LogWarning("No hay objeto agarrado para lanzar.");
         }
 
         IsAttacking = false;
