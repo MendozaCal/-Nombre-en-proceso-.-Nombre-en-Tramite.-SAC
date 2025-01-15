@@ -1747,7 +1747,6 @@ GameObject:
   - component: {fileID: 1290115551}
   - component: {fileID: 1290115550}
   - component: {fileID: 1290115549}
-  - component: {fileID: 1290115548}
   m_Layer: 5
   m_Name: TablaDePuntaje
   m_TagString: Untagged
@@ -1775,20 +1774,6 @@ RectTransform:
   m_AnchoredPosition: {x: -166, y: -175.2}
   m_SizeDelta: {x: 175.4, y: 43}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1290115548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290115546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eff689e98b7f654a8b02c4086a013f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: TablaDePuntaje
-  gameManager: {fileID: 0}
 --- !u!114 &1290115549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1833,7 +1818,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1290115548}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: changeScene
         m_Mode: 1
@@ -1895,7 +1880,6 @@ GameObject:
   - component: {fileID: 1318234842}
   - component: {fileID: 1318234841}
   - component: {fileID: 1318234840}
-  - component: {fileID: 1318234839}
   m_Layer: 5
   m_Name: Restart (1)
   m_TagString: Untagged
@@ -1923,20 +1907,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 200.3, y: 43}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1318234839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318234837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eff689e98b7f654a8b02c4086a013f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Nivel1 Decoracion
-  gameManager: {fileID: 0}
 --- !u!114 &1318234840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,7 +1951,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1318234839}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: gameManagerChange
         m_Mode: 1
@@ -2043,11 +2013,6 @@ GameObject:
   - component: {fileID: 1396620259}
   - component: {fileID: 1396620258}
   - component: {fileID: 1396620257}
-  - component: {fileID: 1396620256}
-  - component: {fileID: 1396620255}
-  - component: {fileID: 1396620254}
-  - component: {fileID: 1396620253}
-  - component: {fileID: 1396620252}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2055,68 +2020,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1396620252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396620251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1cc45c11368b8447970adbd847e5246, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usernameText: {fileID: 69617889}
-  newScoreText: {fileID: 105494340}
---- !u!114 &1396620253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396620251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b00f7757f597c244a88c9ec12fb96f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1396620254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396620251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b4874eae6199040b62210c851905b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1396620255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396620251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1b6a1bb85872d9468451fdb820d415d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1396620256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396620251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16e52e1d4cb21b3458116e8b9c0c0933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1396620257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2218,7 +2121,6 @@ GameObject:
   - component: {fileID: 1589334534}
   - component: {fileID: 1589334533}
   - component: {fileID: 1589334532}
-  - component: {fileID: 1589334531}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -2246,20 +2148,6 @@ RectTransform:
   m_AnchoredPosition: {x: 166, y: 50.5}
   m_SizeDelta: {x: 140.72382, y: 43}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1589334531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589334529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eff689e98b7f654a8b02c4086a013f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Menu
-  gameManager: {fileID: 0}
 --- !u!114 &1589334532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2304,7 +2192,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1589334531}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FinalLevel, Assembly-CSharp
         m_MethodName: changeScene
         m_Mode: 1
