@@ -1699,6 +1699,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 5870387807017090776}
+    - target: {fileID: 6575181005776562407, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 1085101045}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1768,7 +1772,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarImage: {fileID: 1037765581}
-  healthText: {fileID: 1085101045}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
