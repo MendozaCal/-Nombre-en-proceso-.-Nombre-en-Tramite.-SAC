@@ -127,10 +127,12 @@ public class Movement : MonoBehaviour
             {
                 if (Input.GetButtonDown("Jump"))
                 {
-                    Vector3 jumpDirection = wallJumpDirection;
+                    Vector3 jumpDirection = wallJumpDirection.normalized;
                     jumpDirection.x *= wallDirX;
+                    jumpDirection = jumpDirection.normalized;
                     velocity = jumpDirection * wallJumpForce;
                     velocity.y = Mathf.Sqrt(wallJumpForce * -2f * gravity);
+                    StartCoroutine(RestoreHorizontalVelocity());
                     StartCoroutine(RestoreWallLayer());
                     isWallClimbing = false;
                 }
@@ -163,6 +165,13 @@ public class Movement : MonoBehaviour
             yield return new WaitForSeconds(1f);
             currentWall = null; 
         }
+    }
+
+    private IEnumerator RestoreHorizontalVelocity()
+    {
+        yield return new WaitForSeconds(0.1f);
+        velocity.x = 0;
+        velocity.z = 0;
     }
 
     private void CheckEnemyBelow()
