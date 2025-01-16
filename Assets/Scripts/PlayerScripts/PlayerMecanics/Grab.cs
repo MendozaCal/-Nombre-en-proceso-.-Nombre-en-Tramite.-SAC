@@ -3,7 +3,8 @@ public enum GrabType
 {
     None,
     Stick,
-    Honda
+    Honda,
+    Key
 }
 
 public class Grab : MonoBehaviour
@@ -13,6 +14,7 @@ public class Grab : MonoBehaviour
     [SerializeField] private Vector3 normalOffset;
     [SerializeField] private Vector3 stickOffset;
     [SerializeField] private Vector3 hondaOffset;
+    [SerializeField] private Vector3 keyOffset;
 
     private bool isActive;
     private Transform grabbedObject;
@@ -62,6 +64,9 @@ public class Grab : MonoBehaviour
             case GrabType.Honda:
                 target.localRotation = Quaternion.identity;
                 break;
+            case GrabType.Key:
+                target.localRotation = Quaternion.Euler(0f, 90f, 0f);
+                break ;
             default:
                 target.localRotation = Quaternion.identity;
                 break;
@@ -83,6 +88,8 @@ public class Grab : MonoBehaviour
                 return stickOffset;
             case GrabType.Honda:
                 return hondaOffset;
+            case GrabType.Key:
+                return keyOffset;
             default:
                 return Vector3.zero;
         }
@@ -111,13 +118,17 @@ public class Grab : MonoBehaviour
                     grabbedObject = other.transform;
                     currentGrabType = GrabType.Honda;
                     break;
+                case "Key":
+                    grabbedObject = other.transform;
+                    currentGrabType = GrabType.Key;
+                    break;
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!isActive && (other.CompareTag("Stick") || other.CompareTag("Honda")))
+        if (!isActive && (other.CompareTag("Stick") || other.CompareTag("Honda") || other.CompareTag("Key")))
         {
             if (other.transform == grabbedObject)
             {
