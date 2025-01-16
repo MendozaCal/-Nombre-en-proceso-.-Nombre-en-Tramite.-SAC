@@ -2,40 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HondaAttack : MonoBehaviour
+public class HondaAttack : ICombatBehavior
 {
-    public float growthSpeed = 5f;
-    public float maxSize = 10f;
-    public float cooldownTime = 2f;
-    public Transform player;
-    private SphereCollider sphereCollider;
-    private bool isCooldown = false;
-    private Vector3 initialPosition;
-    private float initialRadius;
-    private Transform grabbedObject;
+    private float growthSpeed;
+    private float maxSize;
+    private float cooldownTime;
 
-    private void Start()
+    public HondaAttack(float growthSpeed, float maxSize, float cooldownTime)
     {
-        sphereCollider = gameObject.AddComponent<SphereCollider>();
-        sphereCollider.isTrigger = true;
-        sphereCollider.center = Vector3.zero;
-
-        initialPosition = player.position;
-        initialRadius = sphereCollider.radius;
+        this.growthSpeed = growthSpeed;
+        this.maxSize = maxSize;
+        this.cooldownTime = cooldownTime;
     }
 
-    private void Update()
+    public IEnumerator ExecuteAttack(Transform target, Transform attackPoint)
     {
-        if (!isCooldown && Input.GetKeyDown(KeyCode.Mouse0))
+        SphereCollider sphereCollider = attackPoint.GetComponent<SphereCollider>();
+        if (sphereCollider == null)
         {
-            StartCoroutine(GrowAndReturn());
+            sphereCollider = attackPoint.gameObject.AddComponent<SphereCollider>();
+            sphereCollider.isTrigger = true;
         }
-    }
 
-    private IEnumerator GrowAndReturn()
-    {
-        isCooldown = true;
+        float initialRadius = sphereCollider.radius;
 
+        // Fase de crecimiento
         while (sphereCollider.radius < maxSize)
         {
             sphereCollider.radius += growthSpeed * Time.deltaTime;
@@ -44,6 +35,7 @@ public class HondaAttack : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
+        // Fase de regreso
         while (sphereCollider.radius > initialRadius)
         {
             sphereCollider.radius -= growthSpeed * Time.deltaTime;
@@ -52,9 +44,8 @@ public class HondaAttack : MonoBehaviour
 
         sphereCollider.radius = initialRadius;
 
-        sphereCollider.center = Vector3.zero;
-
+        // Enfriamiento
         yield return new WaitForSeconds(cooldownTime);
-        isCooldown = false;
     }
 }
+
