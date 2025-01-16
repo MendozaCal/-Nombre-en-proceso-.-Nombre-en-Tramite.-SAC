@@ -26,7 +26,6 @@ public class HondaAttack : ICombatBehavior
 
         float initialRadius = sphereCollider.radius;
 
-        // Fase de crecimiento
         while (sphereCollider.radius < maxSize)
         {
             sphereCollider.radius += growthSpeed * Time.deltaTime;
@@ -35,7 +34,6 @@ public class HondaAttack : ICombatBehavior
 
         yield return new WaitForSeconds(0.5f);
 
-        // Fase de regreso
         while (sphereCollider.radius > initialRadius)
         {
             sphereCollider.radius -= growthSpeed * Time.deltaTime;
@@ -44,7 +42,6 @@ public class HondaAttack : ICombatBehavior
 
         sphereCollider.radius = initialRadius;
 
-        // Enfriamiento
         yield return new WaitForSeconds(cooldownTime);
     }
 }
