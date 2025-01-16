@@ -690,8 +690,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5237a99099213f84c9d68969d074399a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  jumpForce: 4
+  moveSpeedBase: 4
+  moveSpeedMax: 8
+  jumpForce: 3
   gravity: -30
   turnSmoothTime: 0.1
   cameraTransform: {fileID: 94874360717655630}

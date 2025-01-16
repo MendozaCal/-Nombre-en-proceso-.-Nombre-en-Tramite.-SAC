@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 8f;
+    [SerializeField] private float moveSpeedBase = 4f;
+    [SerializeField] private float moveSpeedMax = 8f;
+    private float moveSpeed;
     [SerializeField] private float jumpForce = 12f;
     [SerializeField] private float gravity = -30f;
     [SerializeField] private float turnSmoothTime = 0.1f;
@@ -35,6 +37,7 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        moveSpeed = moveSpeedBase;
     }
 
     private void Update()
@@ -94,7 +97,7 @@ public class Movement : MonoBehaviour
 
     private void HandleRun()
     {
-        moveSpeed = Input.GetKey(KeyCode.LeftShift) ? 14f : 8f;
+        moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase;
     }
 
     private void HandleJump()
