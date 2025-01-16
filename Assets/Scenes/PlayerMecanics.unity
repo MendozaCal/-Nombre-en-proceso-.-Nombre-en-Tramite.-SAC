@@ -716,28 +716,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1470858115 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5356174307607862439, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
-  m_PrefabInstance: {fileID: 5870387807017090773}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1470858117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470858115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 673e044fc20d2994f996363cfd1ae454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  climbLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  climbSpeed: 3
-  maxClimbTime: 5
 --- !u!1 &1893489607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,10 +1383,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1050506361374264011, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
-      propertyPath: wallLayer.m_Bits
-      value: 1024
-      objectReference: {fileID: 0}
     - target: {fileID: 1767650308425510442, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_Name
       value: PlayerController
@@ -1456,10 +1430,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5356174307607862439, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1470858117}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
 --- !u!65 &6047473234519767635
 BoxCollider:
