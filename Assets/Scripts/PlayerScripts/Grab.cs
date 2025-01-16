@@ -50,18 +50,29 @@ public class Grab : MonoBehaviour
     private void UpdateTargetPosition()
     {
         Vector3 offset = GetOffsetForCurrentType();
+
         target.localPosition = offset;
 
         switch (currentGrabType)
         {
             case GrabType.Stick:
-                target.localRotation = Quaternion.Euler(0f, 90f, 0f);
+                target.localRotation = Quaternion.Euler(0f, 90f, 0f); 
                 break;
             case GrabType.Honda:
                 target.localRotation = Quaternion.identity;
                 break;
+            default:
+                target.localRotation = Quaternion.identity;
+                break;
+        }
+
+        if (grabbedObject != null)
+        {
+            grabbedObject.position = target.position;
+            grabbedObject.rotation = target.rotation;
         }
     }
+
 
     private Vector3 GetOffsetForCurrentType()
     {

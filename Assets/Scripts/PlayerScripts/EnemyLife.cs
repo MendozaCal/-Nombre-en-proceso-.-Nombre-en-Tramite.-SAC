@@ -29,5 +29,9 @@ public class EnemyLife : Life
         {
             TakeDamage(1);
         }
+        if (other.gameObject.CompareTag("Honda"))
+        {
+            TakeDamage(1);
+        }
     }
 }

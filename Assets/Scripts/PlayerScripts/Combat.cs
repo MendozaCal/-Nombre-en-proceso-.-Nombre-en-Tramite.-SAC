@@ -4,10 +4,20 @@ using System.Collections.Generic;
 
 public class Combat : MonoBehaviour
 {
-    [SerializeField] private Transform attackPoint;
+    [Header("Stick")]
     [SerializeField] private float stickAttackSpeed = 10f;
     [SerializeField] private float stickReturnSpeed = 10f;
-    [SerializeField] private float hondaLaunchForce = 20f;
+
+    [Header("Honda")]
+    [SerializeField] private float growthSpeed = 10f;
+    [SerializeField] private float maxSize = 10f;
+    [SerializeField] private float cooldownTime = 2f;
+
+    [SerializeField] private Transform attackFoward;
+    [SerializeField] private Transform attackUp;
+    [SerializeField] private Transform target;
+
+
 
     private Grab grabSystem;
     private Dictionary<GrabType, ICombatBehavior> combatBehaviors;
@@ -24,7 +34,7 @@ public class Combat : MonoBehaviour
         combatBehaviors = new Dictionary<GrabType, ICombatBehavior>
         {
             { GrabType.Stick, new StickCombat(stickAttackSpeed, stickReturnSpeed) },
-            { GrabType.Honda, new HondaCombat(hondaLaunchForce) }
+            { GrabType.Honda, new HondaAttack(growthSpeed, maxSize , cooldownTime) }
         };
     }
 
@@ -57,14 +67,12 @@ public class Combat : MonoBehaviour
         {
             if (type == GrabType.Honda) // esto me parece que deberia ser otro switch
             {
-                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(launchTarget, null));
+                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(launchTarget, attackUp));
             }
             else
             {
-                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(launchTarget, attackPoint));
+                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(target, attackFoward));
             }
-
-            grabSystem.DropObject();
         }
         else
         {
