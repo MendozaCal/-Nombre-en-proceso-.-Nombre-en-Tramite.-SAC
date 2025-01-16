@@ -3,5 +3,5 @@ using System.Collections;
 
 public interface ICombatBehavior
 {
-    IEnumerator ExecuteAttack(Transform target, Transform attackPoint);
+    IEnumerator ExecuteAttack(Transform target, Transform attackPoint, Transform grab);
 }

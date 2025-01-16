@@ -12,23 +12,23 @@ public class HondaCombat : ICombatBehavior
         this.launchForce = launchForce;
     }
 
-    public IEnumerator ExecuteAttack(Transform grabbedObject, Transform attackPoint)
+    public IEnumerator ExecuteAttack(Transform targert, Transform attackPoint, Transform honda)
     {
-        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+        Rigidbody rb = honda.GetComponent<Rigidbody>();
 
         if (rb != null)
         {
-            grabbedObject.SetParent(null);
+            honda.SetParent(null);
 
             Vector3 direction;
 
             if (attackPoint != null)
             {
-                direction = (attackPoint.position - grabbedObject.position).normalized;
+                direction = (attackPoint.position - honda.position).normalized;
             }
             else
             {
-                direction = grabbedObject.forward;
+                direction = honda.forward;
             }
 
             rb.isKinematic = false;

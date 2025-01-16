@@ -15,7 +15,7 @@ public class HondaAttack : ICombatBehavior
         this.cooldownTime = cooldownTime;
     }
 
-    public IEnumerator ExecuteAttack(Transform target, Transform attackPoint)
+    public IEnumerator ExecuteAttack(Transform target, Transform attackPoint, Transform honda)
     {
         SphereCollider sphereCollider = attackPoint.GetComponent<SphereCollider>();
         if (sphereCollider == null)

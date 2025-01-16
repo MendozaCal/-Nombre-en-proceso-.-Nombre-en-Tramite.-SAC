@@ -12,9 +12,9 @@ public class StickCombat : ICombatBehavior
         this.returnSpeed = returnSpeed;
     }
 
-    public IEnumerator ExecuteAttack(Transform target, Transform attackPoint)
+    public IEnumerator ExecuteAttack(Transform target, Transform attackPoint, Transform stick)
     {
-        BoxCollider boxCollider = target.GetComponent<BoxCollider>();
+        BoxCollider boxCollider = stick.GetComponent<BoxCollider>();
         if (boxCollider != null)
         {
             boxCollider.excludeLayers = LayerMask.GetMask("Nothing");

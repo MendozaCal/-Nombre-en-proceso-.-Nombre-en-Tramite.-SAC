@@ -10,6 +10,7 @@ public class Grab : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private Transform target;
+    [SerializeField] private Vector3 normalOffset;
     [SerializeField] private Vector3 stickOffset;
     [SerializeField] private Vector3 hondaOffset;
 
@@ -138,6 +139,7 @@ public class Grab : MonoBehaviour
             grabbedObject.SetParent(null);
             grabbedObject = null;
         }
+        target.localPosition = normalOffset;
         isActive = false;
         currentGrabType = GrabType.None;
     }

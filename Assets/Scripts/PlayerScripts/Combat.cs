@@ -67,11 +67,11 @@ public class Combat : MonoBehaviour
         {
             if (type == GrabType.Honda) // esto me parece que deberia ser otro switch
             {
-                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(launchTarget, attackUp));
+                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(target, attackUp, launchTarget));
             }
             else
             {
-                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(target, attackFoward));
+                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(target, attackFoward, launchTarget));
             }
         }
         else
