@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour
     private CharacterController controller;
     private Vector3 velocity;
     private float turnSmoothVelocity;
-    private bool isGrounded;
+    public bool isGrounded;
     private bool isTouchingWall;
     private int wallDirX;
     private GameObject currentWall;
