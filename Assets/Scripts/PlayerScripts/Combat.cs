@@ -55,7 +55,14 @@ public class Combat : MonoBehaviour
         Transform launchTarget = grabSystem.GrabbedObject;
         if (launchTarget != null)
         {
-            yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(launchTarget, attackPoint));
+            if (type == GrabType.Honda) // esto me parece que deberia ser otro switch
+            {
+                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(launchTarget, null));
+            }
+            else
+            {
+                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(launchTarget, attackPoint));
+            }
 
             grabSystem.DropObject();
         }

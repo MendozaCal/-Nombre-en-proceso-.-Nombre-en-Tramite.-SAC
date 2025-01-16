@@ -1383,6 +1383,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1513444816262032509, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: hondaOffset.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1767650308425510442, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_Name
       value: PlayerController

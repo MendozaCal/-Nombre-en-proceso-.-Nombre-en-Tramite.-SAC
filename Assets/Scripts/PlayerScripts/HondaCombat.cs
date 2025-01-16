@@ -4,6 +4,7 @@ using System.Collections;
 public class HondaCombat : ICombatBehavior
 {
     // codigo provicional para ver el funcionamiento separado de los grabs
+
     private float launchForce;
 
     public HondaCombat(float launchForce)
@@ -19,7 +20,16 @@ public class HondaCombat : ICombatBehavior
         {
             grabbedObject.SetParent(null);
 
-            Vector3 direction = (attackPoint.position - grabbedObject.position).normalized;
+            Vector3 direction;
+
+            if (attackPoint != null)
+            {
+                direction = (attackPoint.position - grabbedObject.position).normalized;
+            }
+            else
+            {
+                direction = grabbedObject.forward;
+            }
 
             rb.isKinematic = false;
             rb.AddForce(direction * launchForce, ForceMode.Impulse);
