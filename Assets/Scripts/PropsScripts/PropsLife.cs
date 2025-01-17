@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PropLife : Life
+public class PropsLife : Life
 {
     [SerializeField] private float maxLife = 10f; 
 
@@ -36,7 +36,7 @@ public class PropLife : Life
     }
 
 
-    private void DestroyProp()
+    public virtual void DestroyProp()
     {
         Debug.Log($"{gameObject.name} fue destruido.");
         
