@@ -20,8 +20,6 @@ public class SimplifiedHangJoint : MonoBehaviour
     private GameObject currentLiana;
     private Transform anchorPoint;
     private float lastDetachTime;
-    private Vector3 detachVelocity;
-    private bool isDetaching;
 
     private void Update()
     {
@@ -31,11 +29,6 @@ public class SimplifiedHangJoint : MonoBehaviour
         {
             HandleSwingMovement();
             SyncPlayerWithLiana();
-        }
-
-        if (isDetaching)
-        {
-            ApplyDetachMovement();
         }
     }
 
@@ -75,29 +68,13 @@ public class SimplifiedHangJoint : MonoBehaviour
         if (Time.time - lastDetachTime < detachCooldown) return;
 
         isStuck = false;
-
         characterController.enabled = true;
-        detachVelocity.y = Mathf.Sqrt(detachForce * -2f * Physics.gravity.y);
 
-        isDetaching = true;
         lastDetachTime = Time.time;
         movemetScript.enabled = true;
+        movemetScript.Jump(detachForce);
     }
 
-    private void ApplyDetachMovement()
-    {
-        if (!isDetaching || !characterController.enabled) return;
-
-        if (characterController.isGrounded)
-        {
-            detachVelocity = Vector3.zero;
-            isDetaching = false;
-            return;
-        }
-
-        detachVelocity.y += Physics.gravity.y * Time.deltaTime;
-        characterController.Move(detachVelocity * Time.deltaTime);
-    }
 
     private void HandleSwingMovement()
     {

@@ -204,4 +204,9 @@ public class Movement : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + transform.right * wallCheckDistance);
         Gizmos.DrawLine(transform.position, transform.position - transform.right * wallCheckDistance);
     }
+
+    public void Jump(float jumpForceDetach)
+    {
+        velocity.y = Mathf.Sqrt(jumpForceDetach * -2f * gravity);
+    }
 }
