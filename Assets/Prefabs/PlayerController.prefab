@@ -579,6 +579,7 @@ GameObject:
   - component: {fileID: 3079938152066590050}
   - component: {fileID: 6575181005776562407}
   - component: {fileID: 8254752401578140906}
+  - component: {fileID: 2511883530395069280}
   - component: {fileID: 6524631308439329371}
   - component: {fileID: 4614831288024681059}
   m_Layer: 9
@@ -597,7 +598,7 @@ Transform:
   m_GameObject: {fileID: 5356174307607862439}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -690,8 +691,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5237a99099213f84c9d68969d074399a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  jumpForce: 4
+  moveSpeedBase: 4
+  moveSpeedMax: 8
+  jumpForce: 3
   gravity: -30
   turnSmoothTime: 0.1
   cameraTransform: {fileID: 94874360717655630}
@@ -727,6 +729,7 @@ MonoBehaviour:
   normalOffset: {x: 1, y: 0, z: 0}
   stickOffset: {x: 1, y: 1, z: 0}
   hondaOffset: {x: 1, y: 0, z: 0}
+  keyOffset: {x: 1, y: 0, z: 0}
 --- !u!114 &3079938152066590050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,6 +779,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarImage: {fileID: 5847591285802073822}
+--- !u!114 &2511883530395069280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5356174307607862439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e116e753b85ad3d4383508329936e331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 94874360717655630}
+  characterController: {fileID: 6524631308439329371}
+  lianaRigidbody: {fileID: 0}
+  movemetScript: {fileID: 1050506361374264011}
+  swingForce: 3
+  detachForce: 3
+  detachCooldown: 0.5
 --- !u!143 &6524631308439329371
 CharacterController:
   m_ObjectHideFlags: 0
@@ -819,6 +841,9 @@ MonoBehaviour:
     m_Bits: 2048
   climbSpeed: 3
   maxClimbTime: 5
+  exitJumpForce: 15
+  exitCooldown: 1
+  backwardExitForce: 5
 --- !u!1 &6337765142923031335
 GameObject:
   m_ObjectHideFlags: 0
