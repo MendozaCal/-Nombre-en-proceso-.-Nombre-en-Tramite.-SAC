@@ -1,0 +1,148 @@
+using UnityEngine;
+
+public class SimplifiedHangJoint : MonoBehaviour
+{
+    [Header("Referencias")]
+    [SerializeField] private Transform playerCamera;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private Rigidbody lianaRigidbody;
+    [SerializeField] private Movement movemetScript;
+
+    [Header("Configuración de Movimiento")]
+    [SerializeField] private float swingForce = 15f; 
+    [SerializeField] private float detachForce = 10f;
+
+    [Header("Configuración de Colgar/Descolgar")]
+    [SerializeField] private float detachCooldown = 0.5f;
+
+    private bool isStuck = false;
+    private bool isNearLiana = false;
+    private GameObject currentLiana;
+    private Transform anchorPoint;
+    private float lastDetachTime;
+    private Vector3 detachVelocity;
+    private bool isDetaching;
+
+    private void Update()
+    {
+        HandleInput();
+
+        if (isStuck)
+        {
+            HandleSwingMovement();
+            SyncPlayerWithLiana();
+        }
+
+        if (isDetaching)
+        {
+            ApplyDetachMovement();
+        }
+    }
+
+    private void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (isStuck)
+            {
+                Detach();
+            }
+            else if (isNearLiana)
+            {
+                Attach();
+            }
+        }
+    }
+
+    private void Attach()
+    {
+        if (currentLiana == null) return;
+
+        movemetScript.enabled = false;
+        isStuck = true;
+        lianaRigidbody = currentLiana.GetComponent<Rigidbody>();
+        anchorPoint = currentLiana.transform;
+
+        if (anchorPoint != null)
+        {
+            characterController.enabled = false;
+            transform.position = anchorPoint.position;
+        }
+    }
+
+    private void Detach()
+    {
+        if (Time.time - lastDetachTime < detachCooldown) return;
+
+        isStuck = false;
+
+        characterController.enabled = true;
+        detachVelocity.y = Mathf.Sqrt(detachForce * -2f * Physics.gravity.y);
+
+        isDetaching = true;
+        lastDetachTime = Time.time;
+        movemetScript.enabled = true;
+    }
+
+    private void ApplyDetachMovement()
+    {
+        if (!isDetaching || !characterController.enabled) return;
+
+        if (characterController.isGrounded)
+        {
+            detachVelocity = Vector3.zero;
+            isDetaching = false;
+            return;
+        }
+
+        detachVelocity.y += Physics.gravity.y * Time.deltaTime;
+        characterController.Move(detachVelocity * Time.deltaTime);
+    }
+
+    private void HandleSwingMovement()
+    {
+        if (lianaRigidbody == null || anchorPoint == null) return;
+
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+
+        Vector3 inputDirection = (playerCamera.forward * verticalInput + playerCamera.right * horizontalInput).normalized;
+        inputDirection.y = 0;
+
+        Vector3 swingForceDirection = inputDirection * swingForce;
+        lianaRigidbody.AddForce(swingForceDirection, ForceMode.Acceleration);
+
+
+        float maxSwingSpeed = 10f; 
+        if (lianaRigidbody.velocity.magnitude > maxSwingSpeed)
+        {
+            lianaRigidbody.velocity = lianaRigidbody.velocity.normalized * maxSwingSpeed;
+        }
+    }
+
+
+    private void SyncPlayerWithLiana()
+    {
+        if (anchorPoint == null) return;
+
+        transform.position = anchorPoint.position;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Liana"))
+        {
+            isNearLiana = true;
+            currentLiana = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == currentLiana)
+        {
+            isNearLiana = false;
+            currentLiana = null;
+        }
+    }
+}
