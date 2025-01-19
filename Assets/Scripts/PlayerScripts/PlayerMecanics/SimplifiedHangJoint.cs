@@ -19,6 +19,7 @@ public class SimplifiedHangJoint : MonoBehaviour
     private bool isNearLiana = false;
     private GameObject currentLiana;
     private Transform anchorPoint;
+    private LianaDesignor designor;
     private float lastDetachTime;
 
     private void Update()
@@ -59,6 +60,8 @@ public class SimplifiedHangJoint : MonoBehaviour
         if (anchorPoint != null)
         {
             characterController.enabled = false;
+            designor = currentLiana.GetComponent<LianaDesignor>();
+            anchorPoint = designor.ObjectPosition.transform; 
             transform.position = anchorPoint.position;
         }
     }

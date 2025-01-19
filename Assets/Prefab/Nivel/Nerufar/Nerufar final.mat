@@ -14,18 +14,14 @@ Material:
   m_ValidKeywords:
   - _NORMALMAP
   - _PARALLAXMAP
-  m_InvalidKeywords:
-  - _BLENDMAINNORMAL_ON
-  - _SOURCE_SPECULARALPHA
-  - _USEBASECOLORALPHA_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 1999
   stringTagMap:
     RenderType: Opaque
-  disabledShaderPasses:
-  - SHADOWCASTER
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -130,11 +126,11 @@ Material:
     - _Metallic: 0
     - _Mode: 1
     - _OcclusionStrength: 1
-    - _Parallax: -0.1
-    - _QueueOffset: 0
+    - _Parallax: 0.005
+    - _QueueOffset: -1
     - _ReceiveShadows: 1
     - _Saturation: 0
-    - _Smoothness: 0
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _Source: 0
     - _SourceMask: 0
@@ -153,15 +149,15 @@ Material:
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
-    - _BaseColor: {r: 0.49571508, g: 0.68301874, b: 0.1945959, a: 1}
-    - _Color: {r: 0.49571508, g: 0.68301874, b: 0.19459587, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlobalXYTilingXYZWOffsetXY: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &6098832220407895160
+--- !u!114 &5347387378781785005
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

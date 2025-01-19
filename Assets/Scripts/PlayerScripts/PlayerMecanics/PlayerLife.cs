@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -74,5 +75,19 @@ public class PlayerLife : Life
         {
             TakeDamage(1);
         }
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Crocodile"))
+        {
+            StartCoroutine(ExecuteAnimationHazard(0.25f));
+        }
+    }
+    private IEnumerator ExecuteAnimationHazard(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        base.TakeDamage(1);
+        healthText.text = Mathf.RoundToInt(pointsLife).ToString();
     }
 }

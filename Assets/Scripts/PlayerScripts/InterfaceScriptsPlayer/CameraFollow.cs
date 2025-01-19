@@ -6,12 +6,14 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 offset = new Vector3(0, 2, -5);
     [SerializeField] private float sensitivity = 5f;
     [SerializeField] private float smoothSpeed = 10f;
-
-    [SerializeField] private float maxVerticalAngle = 60f;  
+    [SerializeField] private float maxVerticalAngle = 60f;
+    [SerializeField] private float positionSmoothTime = 0.1f; 
 
     private float rotationX;
     private float rotationY;
-    private float initialRotationY;
+    private Vector3 currentVelocity; 
+    private Vector3 targetPosition;
+    private Quaternion targetRotation;
 
     private void Start()
     {
@@ -21,7 +23,9 @@ public class CameraFollow : MonoBehaviour
         Vector3 angles = transform.eulerAngles;
         rotationY = angles.y;
         rotationX = angles.x;
-        initialRotationY = rotationY;
+
+        targetPosition = transform.position;
+        targetRotation = transform.rotation;
     }
 
     private void LateUpdate()
@@ -30,12 +34,16 @@ public class CameraFollow : MonoBehaviour
 
         rotationY += Input.GetAxis("Mouse X") * sensitivity;
         rotationX -= Input.GetAxis("Mouse Y") * sensitivity;
-
         rotationX = Mathf.Clamp(rotationX, -maxVerticalAngle, maxVerticalAngle);
 
-        Quaternion rotation = Quaternion.Euler(rotationX, rotationY, 0f);
-        Vector3 desiredPosition = targetPlayer.position + rotation * offset;
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
-        transform.LookAt(targetPlayer.position);
+        targetRotation = Quaternion.Euler(rotationX, rotationY, 0f);
+        targetPosition = targetPlayer.position + targetRotation * offset;
+
+        transform.position = Vector3.SmoothDamp( transform.position, targetPosition, ref currentVelocity, positionSmoothTime);
+
+        Vector3 directionToTarget = (targetPlayer.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
+
+        transform.rotation = Quaternion.Slerp( transform.rotation, lookRotation, smoothSpeed * Time.deltaTime);
     }
 }

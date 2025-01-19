@@ -168,8 +168,9 @@ MonoBehaviour:
   targetPlayer: {fileID: 4785429583969675501}
   offset: {x: 0, y: 2, z: -5}
   sensitivity: 2
-  smoothSpeed: 100
+  smoothSpeed: 200
   maxVerticalAngle: 60
+  positionSmoothTime: 0.1
 --- !u!114 &836320711293160441
 MonoBehaviour:
   m_ObjectHideFlags: 0
