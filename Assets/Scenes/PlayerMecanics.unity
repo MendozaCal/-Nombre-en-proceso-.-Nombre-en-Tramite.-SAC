@@ -122,32 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &13883620 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3543613786053717548, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-  m_PrefabInstance: {fileID: 1370974275}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &13883627
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13883620}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.6232213, y: 0.17012632, z: 5.0095882}
-  m_Center: {x: -0.024391353, y: 0.6879391, z: 2.0047941}
 --- !u!1 &204018229
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,66 +716,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1370974275
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 863444662165978237, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 863444662165978237, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.40484476
-      objectReference: {fileID: 0}
-    - target: {fileID: 863444662165978237, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -15.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 863444662165978237, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 863444662165978237, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 863444662165978237, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 863444662165978237, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 863444662165978237, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 863444662165978237, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 863444662165978237, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3543613786053717548, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      propertyPath: m_Name
-      value: Crocodile
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3543613786053717548, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 13883627}
-  m_SourcePrefab: {fileID: 100100000, guid: 5e550578c36e9cd4a8454d552c3ce6cc, type: 3}
 --- !u!1 &1893489607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,10 +1387,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
-    - target: {fileID: 3286692997612129663, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
-      propertyPath: smoothSpeed
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1601,4 +1511,3 @@ SceneRoots:
   - {fileID: 204018233}
   - {fileID: 791906861}
   - {fileID: 1252827166}
-  - {fileID: 1370974275}
