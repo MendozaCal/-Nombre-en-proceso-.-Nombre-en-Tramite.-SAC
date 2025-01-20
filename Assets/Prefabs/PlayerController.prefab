@@ -767,6 +767,7 @@ MonoBehaviour:
   pointsShield: 3
   healthBar: {fileID: 8254752401578140906}
   healthText: {fileID: 3795542290190324673}
+  bananas: 0
 --- !u!114 &8254752401578140906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,10 +842,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   climbSpeed: 3
-  maxClimbTime: 5
+  maxClimbTime: 15
   exitJumpForce: 15
   exitCooldown: 1
-  backwardExitForce: 5
+  surfaceDetectionDistance: 0.75
+  cornerCheckRadius: 0.4
+  cornerRayCount: 8
 --- !u!1 &6337765142923031335
 GameObject:
   m_ObjectHideFlags: 0

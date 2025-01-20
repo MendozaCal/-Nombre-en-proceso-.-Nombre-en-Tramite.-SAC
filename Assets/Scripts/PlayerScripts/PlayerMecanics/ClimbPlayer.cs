@@ -8,7 +8,11 @@ public class WallClimbing : MonoBehaviour
     [SerializeField] private float maxClimbTime = 5f;
     [SerializeField] private float exitJumpForce = 8f;
     [SerializeField] private float exitCooldown = 0.5f;
-    [SerializeField] private float backwardExitForce = 5f; 
+
+    [Header("Surface Detection")]
+    [SerializeField] private float surfaceDetectionDistance = 0.5f;
+    [SerializeField] private float cornerCheckRadius = 0.4f; 
+    [SerializeField] private int cornerRayCount = 8;
 
     private CharacterController controller;
     private Movement movementScript;
@@ -16,6 +20,8 @@ public class WallClimbing : MonoBehaviour
     private float climbTimer;
     private float cooldownTimer;
     private bool canClimbAgain = true;
+    private Vector3 currentSurfaceNormal;
+    private Vector3 lastValidPosition;
 
     private void Start()
     {
@@ -25,105 +31,135 @@ public class WallClimbing : MonoBehaviour
 
     private void Update()
     {
-        if (!canClimbAgain)
-        {
-            cooldownTimer -= Time.deltaTime;
-            if (cooldownTimer <= 0)
-            {
-                canClimbAgain = true;
-            }
-        }
+        HandleCooldown();
 
-        if (!isClimbing && canClimbAgain && CanClimb())
+        if (!isClimbing && canClimbAgain)
         {
-            StartClimbing();
+            CheckForClimbableSurface();
         }
-        if (isClimbing)
+        else if (isClimbing)
         {
             HandleClimbing();
         }
     }
 
-    private bool CanClimb()
+    private void HandleCooldown()
     {
-        if (!canClimbAgain) return false;
-
-        RaycastHit hit;
-        Vector3 origin = transform.position + Vector3.up * (controller.height / 2);
-        bool canClimb = Physics.Raycast(origin, transform.forward, out hit, 1f, climbLayer);
-        return canClimb;
+        if (!canClimbAgain)
+        {
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer <= 0) canClimbAgain = true;
+        }
     }
 
-    private void StartClimbing()
+    private void CheckForClimbableSurface()
+    {
+        Vector3[] checkDirections = {transform.forward, -transform.forward, transform.right, -transform.right};
+
+        foreach (Vector3 direction in checkDirections)
+        {
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, surfaceDetectionDistance, climbLayer))
+            {
+                StartClimbing(hit.normal);
+                break;
+            }
+        }
+    }
+
+    private void StartClimbing(Vector3 surfaceNormal)
     {
         isClimbing = true;
         climbTimer = maxClimbTime;
         movementScript.enabled = false;
+        currentSurfaceNormal = surfaceNormal;
+        lastValidPosition = transform.position;
     }
 
     private void HandleClimbing()
     {
         climbTimer -= Time.deltaTime;
+        if (climbTimer <= 0 || Input.GetKeyDown(KeyCode.Space))
+        {
+            StopClimbing();
+            return;
+        }
 
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
-        Vector3 climbDirection = new Vector3(horizontal, vertical, 0f);
 
-        if (vertical > 0.5f && IsNearTopEdge())
+        Vector3 moveDirection = CalculateClimbingMoveDirection(horizontal, vertical);
+
+        Vector3 newPosition = transform.position;
+        if (CheckAndUpdateSurface(ref newPosition, moveDirection))
         {
-            ExitClimbingUpward();
-            return;
+            Vector3 movement = newPosition - transform.position;
+            controller.Move(movement);
+            lastValidPosition = newPosition;
         }
-
-        if (climbTimer <= 0 || Input.GetKeyDown(KeyCode.Space))
+        else
         {
-            ExitClimbingBackward();
-            return;
+            controller.Move(lastValidPosition - transform.position);
         }
-
-        if (!CanClimb())
-        {
-            ExitClimbingBackward();
-            return;
-        }
-
-        controller.Move(climbDirection * climbSpeed * Time.deltaTime);
     }
 
-    private bool IsNearTopEdge()
+    private bool CheckAndUpdateSurface(ref Vector3 position, Vector3 moveDirection)
     {
-        RaycastHit hit;
-        Vector3 origin = transform.position + Vector3.up * (controller.height - 0.2f);
-        return !Physics.Raycast(origin, transform.forward, out hit, 1f, climbLayer);
+        bool foundSurface = false;
+        float closestDistance = float.MaxValue;
+        Vector3 newNormal = currentSurfaceNormal;
+        Vector3 targetPosition = position + moveDirection * climbSpeed * Time.deltaTime;
+
+        for (int i = 0; i < cornerRayCount; i++)
+        {
+            float angle = i * (360f / cornerRayCount);
+            Vector3 direction = Quaternion.Euler(0, angle, 0) * -currentSurfaceNormal;
+
+            RaycastHit hit;
+            if (Physics.SphereCast(targetPosition, cornerCheckRadius * 0.5f, direction, out hit, surfaceDetectionDistance * 2f, climbLayer))
+            {
+                float distance = hit.distance;
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    newNormal = hit.normal;
+                    position = hit.point + hit.normal * surfaceDetectionDistance;
+                    foundSurface = true;
+                }
+            }
+        }
+
+        if (foundSurface)
+        {
+            currentSurfaceNormal = newNormal;
+            return true;
+        }
+
+        return false;
     }
 
-    private void ExitClimbingUpward()
+    private Vector3 CalculateClimbingMoveDirection(float horizontal, float vertical)
+    {
+        Plane surfacePlane = new Plane(currentSurfaceNormal, transform.position);
+
+        Vector3 worldUp = Vector3.up;
+        Vector3 surfaceUp = Vector3.ProjectOnPlane(worldUp, currentSurfaceNormal).normalized;
+        Vector3 surfaceRight = Vector3.Cross(currentSurfaceNormal, surfaceUp).normalized;
+
+        return (surfaceUp * vertical + surfaceRight * horizontal).normalized;
+    }
+
+    private void StopClimbing()
     {
         isClimbing = false;
         movementScript.enabled = true;
-
-        Vector3 jumpDirection = (Vector3.up * 2f + transform.forward).normalized;
-        StartCoroutine(ApplyExitForce(jumpDirection, exitJumpForce));
-
-        canClimbAgain = false;
-        cooldownTimer = exitCooldown;
-    }
-
-    private void ExitClimbingBackward()
-    {
-        isClimbing = false;
-        movementScript.enabled = true;
-
-        Vector3 jumpDirection = (-transform.forward + Vector3.up * 0.5f).normalized;
-        StartCoroutine(ApplyExitForce(jumpDirection, backwardExitForce));
-
+        StartCoroutine(ApplyExitForce(-currentSurfaceNormal, exitJumpForce));
         canClimbAgain = false;
         cooldownTimer = exitCooldown;
     }
 
     private IEnumerator ApplyExitForce(Vector3 direction, float force)
     {
-        float exitDuration = 0.2f; 
+        float exitDuration = 0.2f;
         float elapsedTime = 0f;
 
         while (elapsedTime < exitDuration)
@@ -136,13 +172,23 @@ public class WallClimbing : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (controller == null) return;
-        Gizmos.color = Color.red;
-        Vector3 origin = transform.position + Vector3.up * (controller.height / 2);
-        Gizmos.DrawLine(origin, origin + transform.forward * 1f);
+        if (!Application.isPlaying) return;
 
         Gizmos.color = Color.yellow;
-        Vector3 topOrigin = transform.position + Vector3.up * (controller.height - 0.2f);
-        Gizmos.DrawLine(topOrigin, topOrigin + transform.forward * 1f);
+        Gizmos.DrawWireSphere(transform.position, cornerCheckRadius);
+
+        if (isClimbing)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(transform.position, currentSurfaceNormal * surfaceDetectionDistance);
+
+            Gizmos.color = Color.blue;
+            for (int i = 0; i < cornerRayCount; i++)
+            {
+                float angle = i * (360f / cornerRayCount);
+                Vector3 direction = Quaternion.Euler(0, angle, 0) * -currentSurfaceNormal;
+                Gizmos.DrawRay(transform.position, direction * surfaceDetectionDistance);
+            }
+        }
     }
 }
