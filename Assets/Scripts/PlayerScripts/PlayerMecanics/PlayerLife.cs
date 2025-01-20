@@ -1,6 +1,5 @@
 using System.Collections;
 using TMPro;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +9,7 @@ public class PlayerLife : Life
     [SerializeField] private float pointsShield = 3f;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private float bananas;
 
     private bool reduceShield;
 
@@ -42,12 +42,18 @@ public class PlayerLife : Life
 
     public override void Heal(float amount)
     {
-        base.Heal(amount);
-        if (pointsLife > maxLife)
+        pointsShield += amount;
+        if (pointsShield >= 3 && pointsLife <= 2)
         {
+            pointsShield = 1;
+            base.Heal(amount);
+        }
+        if (pointsShield >= 3 && pointsLife >= maxLife)
+        {
+            pointsShield = 3;
             pointsLife = maxLife;
         }
-        healthBar.UpdateHealthBar(pointsLife); 
+        healthBar.UpdateHealthBar(pointsShield);
         healthText.text = Mathf.RoundToInt(pointsLife).ToString(); 
     }
 
@@ -82,6 +88,12 @@ public class PlayerLife : Life
         if (other.CompareTag("Crocodile"))
         {
             StartCoroutine(ExecuteAnimationHazard(0.25f));
+        }
+        if (other.CompareTag("Banana"))
+        {
+            Heal(1);
+            bananas++;
+            Destroy(other.gameObject);
         }
     }
     private IEnumerator ExecuteAnimationHazard(float seconds)
