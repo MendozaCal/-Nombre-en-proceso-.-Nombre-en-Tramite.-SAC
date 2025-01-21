@@ -87,6 +87,12 @@ public class WallClimbing : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
+        if (Vector3.Dot(currentSurfaceNormal, Vector3.up) > 0.9f)
+        {
+            StopClimbing();
+            return;
+        }
+
         Vector3 moveDirection = CalculateClimbingMoveDirection(horizontal, vertical);
 
         Vector3 newPosition = transform.position;
