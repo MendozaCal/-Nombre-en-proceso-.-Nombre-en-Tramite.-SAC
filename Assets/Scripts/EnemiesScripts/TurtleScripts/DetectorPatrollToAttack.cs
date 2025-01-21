@@ -6,7 +6,7 @@ public class DetectorPatrollToAttack : MonoBehaviour
 {
     public Transform objectA;
     public Transform objectB;
-    public BoxCollider boxCollider;
+    private BoxCollider boxCollider;
     public float distance;
     public bool detectedPlayerRute;
     void Start()

@@ -156,7 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectA: {fileID: 3824637946871977502}
   objectB: {fileID: 3617770237074829540}
-  boxCollider: {fileID: 0}
   distance: 0
   detectedPlayerRute: 0
 --- !u!1 &1963983718203741124
@@ -488,8 +487,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 60.000004}
-  m_Center: {x: 0, y: 0, z: 26.56}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2310084835112787823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,6 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21635be6ef1f7de47a35035e77fdeb00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RutePoints: {fileID: 1484650908887799570}
   detectedPlayerEyes: 0
 --- !u!1 &7600094558247756364
 GameObject:
@@ -706,7 +706,7 @@ Transform:
   m_GameObject: {fileID: 8555430463249765935}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.13, y: 0, z: 0}
+  m_LocalPosition: {x: -20.73, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
