@@ -17,27 +17,24 @@ public class TortoiseMove : MonoBehaviour
     private int currentWaypoint = 0;
     private float initialSpeed;
     private float initialDurationAttack;
-    private GameObject targetDetectorRute;
+    [SerializeField] GameObject targetDetectorRute;
     private DetectorPatrollToAttack detectorPatrollToAttack;
-    private GameObject targetDetectorEyes;
+    [SerializeField] GameObject targetDetectorEyes;
     private EyesDetectorTortoise eyesDetectorTurtle;
-    private GameObject targetDetectorArea;
+    [SerializeField] GameObject targetDetectorArea;
     private AreaPersecution areaDetectorTurtle;
     private GameObject player;
 
     private void Start()
     {
-        targetDetectorRute = GameObject.Find("TurtleRutePoints");
         if (targetDetectorRute != null)
         {
             detectorPatrollToAttack = targetDetectorRute.GetComponent<DetectorPatrollToAttack>();
         }
-        targetDetectorEyes = GameObject.Find("Eyes");
         if (targetDetectorEyes != null)
         {
             eyesDetectorTurtle = targetDetectorEyes.GetComponent<EyesDetectorTortoise>();
         }
-        targetDetectorArea = GameObject.Find("TurtleController");
         if (targetDetectorEyes != null)
         {
             areaDetectorTurtle = targetDetectorArea.GetComponent<AreaPersecution>();

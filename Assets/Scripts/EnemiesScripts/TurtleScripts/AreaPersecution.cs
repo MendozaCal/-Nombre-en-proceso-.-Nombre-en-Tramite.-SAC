@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class AreaPersecution : MonoBehaviour
 {
-    GameObject Turtle;
-    GameObject Head;
-    TortoiseMove TortoiseMove;
-    TortoiseDead TortoiseDead;
-    [SerializeField] int timeDestroy;
+    [SerializeField]GameObject Turtle;
+    TortoiseMove TurtleMove;
+    [SerializeField] GameObject RutePoints;
     public bool detectedPlayerArea;
     private void Start()
     {
-        Turtle = GameObject.Find("Turtle");
-        TortoiseMove = Turtle.GetComponent<TortoiseMove>();
-        Head = GameObject.Find("Head");
-        TortoiseDead = Head.GetComponent<TortoiseDead>();
+        TurtleMove = Turtle.GetComponent<TortoiseMove>();
+        SphereCollider sphereCollider = GetComponent<SphereCollider>();
+        DetectorPatrollToAttack detectorPatrollToAttack = RutePoints.GetComponent<DetectorPatrollToAttack>();
+        sphereCollider.radius = detectorPatrollToAttack.distance;
     }
-    private void Update()
-    {
-        if (TortoiseDead.isTap)
-        {
-            StartCoroutine(TimeToDead());
-        }
-    }
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -36,12 +28,7 @@ public class AreaPersecution : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             detectedPlayerArea = false;
-            TortoiseMove.ReturnPatroll();
+            TurtleMove.ReturnPatroll();
         }
-    }
-    IEnumerator TimeToDead()
-    {
-        yield return new WaitForSeconds(timeDestroy);
-        Destroy(gameObject);
     }
 }

@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class EyesDetectorTortoise : MonoBehaviour
 {
-    private BoxCollider targetCollider;
-    private BoxCollider currentCollider;
+    [SerializeField] GameObject RutePoints;
     public bool detectedPlayerEyes;
-    /*private void Start()
+
+    private void Start()
     {
-        GameObject targetDetectorRute = GameObject.Find("TortoiseRutePoints");
-        targetCollider = targetDetectorRute.GetComponent<BoxCollider>();
-        currentCollider = GetComponent<BoxCollider>();
-        currentCollider.size = targetCollider.size;
-        currentCollider.center = targetCollider.center;
-    }*/
+        BoxCollider boxCollider = GetComponent<BoxCollider>();
+        DetectorPatrollToAttack detectorPatrollToAttack = RutePoints.GetComponent<DetectorPatrollToAttack>();
+
+        float sizeZ = detectorPatrollToAttack.distance * 4;
+        boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, sizeZ);
+
+        float centerZ = sizeZ / 2;
+        boxCollider.center = new Vector3(0, 0, centerZ);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

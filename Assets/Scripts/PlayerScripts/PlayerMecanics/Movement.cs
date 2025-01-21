@@ -183,7 +183,7 @@ public class Movement : MonoBehaviour
         {
             if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, Quaternion.identity, raycastDistance, enemyLayer))
             {
-                hit.collider.gameObject.GetComponent<TortoiseDead>()?.PlayerDestroy();
+                hit.collider.gameObject.GetComponent<BodyDestroy>()?.PlayerDestroy();
                 velocity.y = bounceForce;
             }
         }

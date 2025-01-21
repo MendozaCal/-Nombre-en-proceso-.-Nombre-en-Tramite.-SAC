@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TortoiseDead : MonoBehaviour
+public class BodyDestroy : MonoBehaviour
 {
     public bool isTap;
     [SerializeField] GameObject Body;

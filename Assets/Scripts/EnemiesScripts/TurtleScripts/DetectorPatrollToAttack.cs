@@ -12,10 +12,6 @@ public class DetectorPatrollToAttack : MonoBehaviour
     void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
-    }
-
-    void Update()
-    {
         if (objectA != null && objectB != null && boxCollider != null)
         {
             distance = Vector3.Distance(objectA.position, objectB.position);
@@ -26,6 +22,7 @@ public class DetectorPatrollToAttack : MonoBehaviour
             boxCollider.center = transform.InverseTransformPoint(midPoint);
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
