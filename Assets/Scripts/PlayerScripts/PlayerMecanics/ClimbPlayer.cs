@@ -78,7 +78,7 @@ public class WallClimbing : MonoBehaviour
     private void HandleClimbing()
     {
         climbTimer -= Time.deltaTime;
-        if (climbTimer <= 0 || Input.GetKeyDown(KeyCode.Space))
+        if (climbTimer <= 0 || Input.GetKeyDown(KeyCode.E))
         {
             StopClimbing();
             return;
