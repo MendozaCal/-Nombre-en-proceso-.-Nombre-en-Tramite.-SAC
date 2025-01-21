@@ -183,8 +183,17 @@ public class Movement : MonoBehaviour
         {
             if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, Quaternion.identity, raycastDistance, enemyLayer))
             {
-                hit.collider.gameObject.GetComponent<BodyDestroy>()?.PlayerDestroy();
-                velocity.y = bounceForce;
+                if (hit.collider.gameObject.CompareTag("Sapo"))
+                {
+                    sapo sapoScript = hit.collider.gameObject.GetComponent<sapo>();
+                    if (sapoScript.damage) { PlayerLife playerlife = GetComponent<PlayerLife>(); playerlife.TakeDamage(1); }
+                    if(sapoScript.isInflating == true) velocity.y = bounceForce;
+                }
+                if(hit.collider.gameObject.CompareTag("Enemy"))
+                {
+                    hit.collider.gameObject.GetComponent<BodyDestroy>()?.PlayerDestroy();
+                    velocity.y = bounceForce;
+                }
             }
         }
     }

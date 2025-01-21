@@ -10,6 +10,7 @@ public class sapo : MonoBehaviour
     [SerializeField] public float damagePercentage = 40f;
 
     [SerializeField] private float iniciodeSapo;
+    [SerializeField] public bool damage;
 
     private Vector3 originalScale;
     private Vector3 originalColliderSize;
@@ -53,31 +54,33 @@ public class sapo : MonoBehaviour
     {
         StartCoroutine(Inflation());
     }
+
     private IEnumerator Inflation()
     {
-        yield return new WaitForSeconds(1f);
-
-        isInflating = true;
-        animator.SetBool("Inflando", true);
-        if (audioSource != null && !audioSource.isPlaying)
+        while (true)
         {
-            audioSource.Play();
+            animator.SetBool("Inflando", true);
+
+            if (audioSource != null && !audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+            yield return new WaitForSeconds(0.25f);
+
+            isInflating = true;
+            yield return StartCoroutine(ChangeColliderSize(originalColliderSize, originalColliderSize * inflatedScale, inflationDuration));
+
+            yield return new WaitForSeconds(inflationDuration);
+
+            yield return StartCoroutine(ChangeColliderSize(originalColliderSize * inflatedScale, originalColliderSize, deflationDuration));
+
+            isInflating = false;
+            animator.SetBool("Inflando", false);
+
+            yield return new WaitForSeconds(deflationDuration);
+
+            yield return new WaitForSeconds(2f); 
         }
-
-        yield return StartCoroutine(ChangeColliderSize(originalColliderSize, originalColliderSize * inflatedScale, inflationDuration));
-
-        yield return new WaitForSeconds(inflationDuration);
-
-        yield return StartCoroutine(ChangeColliderSize(originalColliderSize * inflatedScale, originalColliderSize, deflationDuration));
-
-        isInflating = false;
-        animator.SetBool("Inflando", false);
-
-        yield return new WaitForSeconds(deflationDuration);
-
-        yield return new WaitForSeconds(2f);
-
-        StartCoroutine(Inflation());
     }
 
     private IEnumerator ChangeColliderSize(Vector3 startSize, Vector3 endSize, float duration)
@@ -119,32 +122,4 @@ public class sapo : MonoBehaviour
             finalCapsuleCollider.height = endSize.y;
         }
     }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && isInflating)
-        {
-            Rigidbody autoRigidbody = collision.gameObject.GetComponent<Rigidbody>();
-
-            if (autoRigidbody != null)
-            {
-                Vector3 pushDirection = new Vector3(transform.position.x - collision.transform.position.x, 0, 0).normalized;
-
-                autoRigidbody.AddForce(-pushDirection * fuerzaDeEmpuje, ForceMode.Impulse);
-
-                //StartCoroutine(DisablePlayerMovement(collision.gameObject));
-            }
-        }
-    }
-
-    //private IEnumerator DisablePlayerMovement(GameObject player)
-    //{
-    //    MovementPlayer movementPlayer = player.GetComponent<MovementPlayer>();
-    //    if (movementPlayer != null)
-    //    {
-    //        movementPlayer.enabled = false;
-    //        yield return new WaitForSeconds(0.5f);
-    //        movementPlayer.enabled = true;
-    //    }
-    //}
 }
