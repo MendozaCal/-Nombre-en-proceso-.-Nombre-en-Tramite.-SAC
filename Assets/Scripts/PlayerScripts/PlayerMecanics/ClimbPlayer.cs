@@ -54,7 +54,7 @@ public class WallClimbing : MonoBehaviour
 
     private void CheckForClimbableSurface()
     {
-        Vector3[] checkDirections = {transform.forward, -transform.forward, transform.right, -transform.right};
+        Vector3[] checkDirections = {transform.forward, -transform.forward, transform.right, -transform.right, transform.up, -transform.up };
 
         foreach (Vector3 direction in checkDirections)
         {
@@ -151,8 +151,15 @@ public class WallClimbing : MonoBehaviour
         Vector3 surfaceUp = Vector3.ProjectOnPlane(worldUp, currentSurfaceNormal).normalized;
         Vector3 surfaceRight = Vector3.Cross(currentSurfaceNormal, surfaceUp).normalized;
 
+        if (Vector3.Dot(currentSurfaceNormal, Vector3.up) < -0.9f)
+        {
+            surfaceUp = Vector3.Cross(currentSurfaceNormal, Vector3.right).normalized;
+            surfaceRight = Vector3.Cross(currentSurfaceNormal, surfaceUp).normalized;
+        }
+
         return (surfaceUp * vertical + surfaceRight * horizontal).normalized;
     }
+
 
     private void StopClimbing()
     {

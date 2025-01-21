@@ -1614,8 +1614,8 @@ Transform:
   m_GameObject: {fileID: 1237917855}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.4869, y: 12.2651, z: -4.5236}
-  m_LocalScale: {x: 8.412226, y: 0.359186, z: 1.9025475}
+  m_LocalPosition: {x: -15.4869, y: 3.55, z: -0.5498}
+  m_LocalScale: {x: 8.412226, y: 0.359186, z: 9.850059}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4184,8 +4184,20 @@ PrefabInstance:
       value: PlayerController
       objectReference: {fileID: 0}
     - target: {fileID: 4614831288024681059, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614831288024681059, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: cornerRayCount
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614831288024681059, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: climbableLayer.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614831288024681059, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: ceilingTransitionAngle
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.x
