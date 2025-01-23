@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 public class WallClimbing : MonoBehaviour
 {
@@ -11,11 +12,12 @@ public class WallClimbing : MonoBehaviour
 
     [Header("Surface Detection")]
     [SerializeField] private float surfaceDetectionDistance = 0.5f;
-    [SerializeField] private float cornerCheckRadius = 0.4f; 
+    [SerializeField] private float cornerCheckRadius = 0.4f;
     [SerializeField] private int cornerRayCount = 8;
 
     private CharacterController controller;
     private Movement movementScript;
+    private Hang hangScritp;
     private bool isClimbing;
     private float climbTimer;
     private float cooldownTimer;
@@ -27,6 +29,7 @@ public class WallClimbing : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         movementScript = GetComponent<Movement>();
+        hangScritp = GetComponent<Hang>();
     }
 
     private void Update()
@@ -54,7 +57,7 @@ public class WallClimbing : MonoBehaviour
 
     private void CheckForClimbableSurface()
     {
-        Vector3[] checkDirections = {transform.forward, -transform.forward, transform.right, -transform.right, transform.up, -transform.up };
+        Vector3[] checkDirections = { transform.forward, -transform.forward, transform.right, -transform.right, transform.up, -transform.up };
 
         foreach (Vector3 direction in checkDirections)
         {
@@ -71,6 +74,7 @@ public class WallClimbing : MonoBehaviour
         isClimbing = true;
         climbTimer = maxClimbTime;
         movementScript.enabled = false;
+        hangScritp.enabled = false;
         currentSurfaceNormal = surfaceNormal;
         lastValidPosition = transform.position;
     }
@@ -108,6 +112,8 @@ public class WallClimbing : MonoBehaviour
         }
     }
 
+    List<Vector3> surfaceHistory = new List<Vector3>();
+
     private bool CheckAndUpdateSurface(ref Vector3 position, Vector3 moveDirection)
     {
         bool foundSurface = false;
@@ -115,15 +121,22 @@ public class WallClimbing : MonoBehaviour
         Vector3 newNormal = currentSurfaceNormal;
         Vector3 targetPosition = position + moveDirection * climbSpeed * Time.deltaTime;
 
-        for (int i = 0; i < cornerRayCount; i++)
-        {
-            float angle = i * (360f / cornerRayCount);
-            Vector3 direction = Quaternion.Euler(0, angle, 0) * -currentSurfaceNormal;
+        Vector3[] directions = {
+        -currentSurfaceNormal,
+        currentSurfaceNormal,
+        Vector3.Cross(currentSurfaceNormal, Vector3.up),
+        Vector3.Cross(currentSurfaceNormal, Vector3.forward),
+        Vector3.Cross(Vector3.up, currentSurfaceNormal),
+        Vector3.Cross(Vector3.forward, currentSurfaceNormal)
+    };
 
+        for (int i = 0; i < directions.Length; i++)
+        {
             RaycastHit hit;
-            if (Physics.SphereCast(targetPosition, cornerCheckRadius * 0.5f, direction, out hit, surfaceDetectionDistance * 2f, climbLayer))
+            if (Physics.SphereCast(targetPosition, cornerCheckRadius * 0.5f, directions[i], out hit, surfaceDetectionDistance * 2f, climbLayer))
             {
                 float distance = hit.distance;
+
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
@@ -136,35 +149,48 @@ public class WallClimbing : MonoBehaviour
 
         if (foundSurface)
         {
+            if (!surfaceHistory.Contains(newNormal))
+            {
+                surfaceHistory.Add(newNormal);
+            }
             currentSurfaceNormal = newNormal;
             return true;
+        }
+        else if (surfaceHistory.Count > 0)
+        {
+            currentSurfaceNormal = surfaceHistory[surfaceHistory.Count - 1];
+            surfaceHistory.RemoveAt(surfaceHistory.Count - 1);
+            return false;
         }
 
         return false;
     }
 
+
     private Vector3 CalculateClimbingMoveDirection(float horizontal, float vertical)
     {
-        Plane surfacePlane = new Plane(currentSurfaceNormal, transform.position);
-
-        Vector3 worldUp = Vector3.up;
-        Vector3 surfaceUp = Vector3.ProjectOnPlane(worldUp, currentSurfaceNormal).normalized;
-        Vector3 surfaceRight = Vector3.Cross(currentSurfaceNormal, surfaceUp).normalized;
+        Vector3 surfaceUp;
+        Vector3 surfaceRight;
 
         if (Vector3.Dot(currentSurfaceNormal, Vector3.up) < -0.9f)
         {
-            surfaceUp = Vector3.Cross(currentSurfaceNormal, Vector3.right).normalized;
-            surfaceRight = Vector3.Cross(currentSurfaceNormal, surfaceUp).normalized;
+            surfaceRight = Vector3.ProjectOnPlane(Vector3.right, currentSurfaceNormal).normalized;
+            surfaceUp = Vector3.Cross(currentSurfaceNormal, surfaceRight).normalized;
+            return (surfaceUp * horizontal + surfaceRight * vertical).normalized;
         }
-
-        return (surfaceUp * vertical + surfaceRight * horizontal).normalized;
+        else
+        {
+            surfaceUp = Vector3.ProjectOnPlane(Vector3.up, currentSurfaceNormal).normalized;
+            surfaceRight = Vector3.Cross(currentSurfaceNormal, surfaceUp).normalized;
+            return (surfaceUp * vertical + surfaceRight * horizontal).normalized;
+        }
     }
-
 
     private void StopClimbing()
     {
         isClimbing = false;
         movementScript.enabled = true;
+        hangScritp.enabled = true;
         StartCoroutine(ApplyExitForce(-currentSurfaceNormal, exitJumpForce));
         canClimbAgain = false;
         cooldownTimer = exitCooldown;
@@ -196,12 +222,31 @@ public class WallClimbing : MonoBehaviour
             Gizmos.DrawRay(transform.position, currentSurfaceNormal * surfaceDetectionDistance);
 
             Gizmos.color = Color.blue;
+            Vector3[] predefinedDirections = {
+                -currentSurfaceNormal,
+                currentSurfaceNormal,
+                Vector3.Cross(currentSurfaceNormal, Vector3.up),
+                Vector3.Cross(currentSurfaceNormal, Vector3.forward),
+                Vector3.Cross(Vector3.up, currentSurfaceNormal),
+                Vector3.Cross(Vector3.forward, currentSurfaceNormal)
+            };
+
             for (int i = 0; i < cornerRayCount; i++)
             {
-                float angle = i * (360f / cornerRayCount);
-                Vector3 direction = Quaternion.Euler(0, angle, 0) * -currentSurfaceNormal;
+                Vector3 direction;
+                if (i < predefinedDirections.Length)
+                {
+                    direction = predefinedDirections[i];
+                }
+                else
+                {
+                    float angle = (i - predefinedDirections.Length) * (360f / (cornerRayCount - predefinedDirections.Length));
+                    direction = Quaternion.AngleAxis(angle, currentSurfaceNormal) * Vector3.up;
+                }
+
                 Gizmos.DrawRay(transform.position, direction * surfaceDetectionDistance);
             }
+
         }
     }
 }
