@@ -39,11 +39,19 @@ public class CameraFollow : MonoBehaviour
         targetRotation = Quaternion.Euler(rotationX, rotationY, 0f);
         targetPosition = targetPlayer.position + targetRotation * offset;
 
-        transform.position = Vector3.SmoothDamp( transform.position, targetPosition, ref currentVelocity, positionSmoothTime);
+        transform.position = Vector3.SmoothDamp(
+            transform.position,
+            targetPosition,
+            ref currentVelocity,
+            positionSmoothTime * Time.deltaTime
+        );
 
         Vector3 directionToTarget = (targetPlayer.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
 
-        transform.rotation = Quaternion.Slerp( transform.rotation, lookRotation, smoothSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp( 
+            transform.rotation, 
+            lookRotation, 
+            smoothSpeed * Time.deltaTime);
     }
 }

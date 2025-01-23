@@ -166,8 +166,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPlayer: {fileID: 4785429583969675501}
-  offset: {x: 0, y: 2, z: -5}
-  sensitivity: 2
+  offset: {x: 0, y: 0, z: -5}
+  sensitivity: 5
   smoothSpeed: 200
   maxVerticalAngle: 60
   positionSmoothTime: 0.1
@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 3079938152066590050}
   - component: {fileID: 6575181005776562407}
   - component: {fileID: 8254752401578140906}
-  - component: {fileID: 2511883530395069280}
+  - component: {fileID: 268035664082138238}
   - component: {fileID: 6524631308439329371}
   - component: {fileID: 4614831288024681059}
   m_Layer: 9
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarImage: {fileID: 5847591285802073822}
---- !u!114 &2511883530395069280
+--- !u!114 &268035664082138238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -790,16 +790,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5356174307607862439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e116e753b85ad3d4383508329936e331, type: 3}
+  m_Script: {fileID: 11500000, guid: f598f3e397595a8439136678de007625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 94874360717655630}
-  characterController: {fileID: 6524631308439329371}
-  lianaRigidbody: {fileID: 0}
-  movemetScript: {fileID: 1050506361374264011}
-  swingForce: 3
-  detachForce: 3
-  detachCooldown: 0.5
+  jumpForce: 2
+  lianaMovementBox: {fileID: 0}
+  moveSpeed: 5
 --- !u!143 &6524631308439329371
 CharacterController:
   m_ObjectHideFlags: 0
