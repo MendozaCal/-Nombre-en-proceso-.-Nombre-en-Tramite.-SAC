@@ -74,7 +74,6 @@ public class MoveSimplePiranha : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(Reinicio());
             PlayerLife playerLife = other.gameObject.GetComponent<PlayerLife>();
             playerLife.TakeDamage(1);
         }

@@ -189,11 +189,11 @@ public class Movement : MonoBehaviour
                     if (sapoScript.damage) { PlayerLife playerlife = GetComponent<PlayerLife>(); playerlife.TakeDamage(1); }
                     if(sapoScript.isInflating == true) velocity.y = bounceForce;
                 }
-                if(hit.collider.gameObject.CompareTag("Enemy"))
-                {
-                    hit.collider.gameObject.GetComponent<BodyDestroy>()?.PlayerDestroy();
-                    velocity.y = bounceForce;
-                }
+                //if(hit.collider.gameObject.CompareTag("Enemy"))
+                //{
+                //    hit.collider.gameObject.GetComponent<BodyDestroy>()?.PlayerDestroy();
+                //    velocity.y = bounceForce;
+                //}
             }
         }
     }

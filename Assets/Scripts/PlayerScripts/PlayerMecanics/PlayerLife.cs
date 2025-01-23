@@ -10,6 +10,7 @@ public class PlayerLife : Life
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private float bananas;
+    [SerializeField] private float monkeys;
 
     private bool reduceShield;
 
@@ -93,6 +94,13 @@ public class PlayerLife : Life
         {
             Heal(1);
             bananas++;
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("MonkeyColectable"))
+        {
+            Heal(1);
+            bananas++;
+            monkeys++;
             Destroy(other.gameObject);
         }
     }

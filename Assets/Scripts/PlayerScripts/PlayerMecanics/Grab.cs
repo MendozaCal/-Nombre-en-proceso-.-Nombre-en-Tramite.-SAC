@@ -37,7 +37,7 @@ public class Grab : MonoBehaviour
 
     private void HandleGrab()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.G))
         {
             if (isActive)
             {
