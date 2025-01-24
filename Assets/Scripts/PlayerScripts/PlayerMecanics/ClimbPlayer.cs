@@ -169,21 +169,30 @@ public class WallClimbing : MonoBehaviour
 
     private Vector3 CalculateClimbingMoveDirection(float horizontal, float vertical)
     {
-        Vector3 surfaceUp;
-        Vector3 surfaceRight;
+        Vector3 surfaceUp, surfaceRight;
 
-        if (Vector3.Dot(currentSurfaceNormal, Vector3.up) < -0.9f)
+        if (Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.up)) > 0.9f)
         {
-            surfaceRight = Vector3.ProjectOnPlane(Vector3.right, currentSurfaceNormal).normalized;
+            surfaceRight = Vector3.ProjectOnPlane(transform.right, currentSurfaceNormal).normalized;
             surfaceUp = Vector3.Cross(currentSurfaceNormal, surfaceRight).normalized;
-            return (surfaceUp * horizontal + surfaceRight * vertical).normalized;
+        }
+        else if (Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.forward)) > 0.9f ||
+                 Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.right)) > 0.9f)
+        {
+            surfaceUp = Vector3.ProjectOnPlane(Vector3.up, currentSurfaceNormal).normalized;
+            surfaceRight = Vector3.Cross(currentSurfaceNormal, surfaceUp).normalized;
         }
         else
         {
             surfaceUp = Vector3.ProjectOnPlane(Vector3.up, currentSurfaceNormal).normalized;
             surfaceRight = Vector3.Cross(currentSurfaceNormal, surfaceUp).normalized;
-            return (surfaceUp * vertical + surfaceRight * horizontal).normalized;
         }
+
+        Vector3 moveDirection = (surfaceUp * vertical + surfaceRight * horizontal).normalized;
+
+        moveDirection = Vector3.Slerp(moveDirection, currentSurfaceNormal * 0.1f, 0.2f);
+
+        return moveDirection;
     }
 
     private void StopClimbing()
