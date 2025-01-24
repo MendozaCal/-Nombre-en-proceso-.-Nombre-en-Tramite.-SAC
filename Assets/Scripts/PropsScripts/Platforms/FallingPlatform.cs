@@ -5,9 +5,11 @@ using UnityEngine;
 public class FallingPlatform : MonoBehaviour
 {
     [SerializeField] private float fallDelay = 3f;
-
-    [SerializeField] private Rigidbody rb;
-    private bool isActivated = false;
+    [SerializeField] private float resetDelay = 5f;
+    private Rigidbody rb;
+    private MeshRenderer meshRenderer;
+    private Collider platformCollider;
+    private Vector3 originalPosition;
 
     private void Start()
     {
@@ -18,23 +20,51 @@ public class FallingPlatform : MonoBehaviour
             Debug.LogError("El objeto necesita un Rigidbody.");
         }
         rb.isKinematic = true;
+
+        meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer == null)
+        {
+            Debug.LogError("El objeto necesita un MeshRenderer.");
+        }
+
+        platformCollider = GetComponent<Collider>();
+        if (platformCollider == null)
+        {
+            Debug.LogError("El objeto necesita un Collider.");
+        }
+
+        originalPosition = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isActivated && other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            isActivated = true;
-
-            Debug.Log($"Jugador ha activado la plataforma (Trigger): {gameObject.name}.");
-
+            Debug.Log($"Jugador ha activado la plataforma: {gameObject.name}.");
             Invoke(nameof(Fall), fallDelay);
         }
     }
 
     private void Fall()
     {
-        rb.isKinematic = false; 
-        Destroy(gameObject, 5f); 
+        Debug.Log($"La plataforma {gameObject.name} está cayendo.");
+        rb.isKinematic = false;
+        platformCollider.enabled = false;
+        Invoke(nameof(DisableMesh), 2f);
+        Invoke(nameof(ResetPlatform), resetDelay);
+    }
+
+    private void ResetPlatform()
+    {
+        Debug.Log($"Restableciendo la plataforma: {gameObject.name}.");
+        rb.isKinematic = true;
+        transform.position = originalPosition; 
+        meshRenderer.enabled = true; 
+        platformCollider.enabled = true; 
+    }
+
+    private void DisableMesh()
+    {
+        meshRenderer.enabled = false;
     }
 }
