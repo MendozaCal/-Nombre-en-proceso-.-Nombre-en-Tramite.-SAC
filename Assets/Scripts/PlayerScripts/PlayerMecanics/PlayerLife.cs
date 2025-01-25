@@ -7,10 +7,16 @@ public class PlayerLife : Life
 {
     [SerializeField] private float maxLife = 3f;
     [SerializeField] private float pointsShield = 3f;
+    [SerializeField] private float Timer = 500;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI TimerGame;
+    [SerializeField] private TextMeshProUGUI BananasCont;
+    [SerializeField] private TextMeshProUGUI KeyCont;
+    [SerializeField] private GameObject KeyController;
     [SerializeField] private float bananas;
     [SerializeField] private float monkeys;
+    [SerializeField] private float key;
 
     private bool reduceShield;
 
@@ -18,9 +24,20 @@ public class PlayerLife : Life
     {
         pointsLife = maxLife;
         healthBar.Initialize(maxLife);
-        healthText.text = Mathf.RoundToInt(pointsLife).ToString(); 
+        healthText.text = Mathf.RoundToInt(pointsLife).ToString();
     }
+    private void Update()
+    {
+        Timer -= Time.deltaTime;
+        TimerGame.text = Mathf.RoundToInt(Timer).ToString();
+        BananasCont.text = Mathf.RoundToInt(bananas).ToString();
+        KeyCont.text = Mathf.RoundToInt(key).ToString() + "/1";
 
+        if (Timer <= 0)
+        {
+            base.TakeDamage(1);
+        }
+    }
     public override void TakeDamage(float damage)
     {
         if (!reduceShield)
@@ -55,7 +72,7 @@ public class PlayerLife : Life
             pointsLife = maxLife;
         }
         healthBar.UpdateHealthBar(pointsShield);
-        healthText.text = Mathf.RoundToInt(pointsLife).ToString(); 
+        healthText.text = Mathf.RoundToInt(pointsLife).ToString();
     }
 
     private IEnumerator InvulnerabilityPeriodShield()
@@ -78,10 +95,10 @@ public class PlayerLife : Life
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.CompareTag("Enemy"))
-        {
-            TakeDamage(1);
-        }
+        //if (hit.gameObject.CompareTag("Enemy"))
+        //{
+        //    TakeDamage(1);
+        //}
 
     }
     private void OnTriggerEnter(Collider other)
@@ -94,6 +111,12 @@ public class PlayerLife : Life
         {
             Heal(1);
             bananas++;
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Key"))
+        {
+            key++;
+            KeyController.SetActive(true);
             Destroy(other.gameObject);
         }
         if (other.CompareTag("MonkeyColectable"))

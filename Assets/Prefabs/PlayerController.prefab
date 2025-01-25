@@ -765,9 +765,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLife: 3
   pointsShield: 3
+  Timer: 10
   healthBar: {fileID: 8254752401578140906}
   healthText: {fileID: 3795542290190324673}
+  TimerGame: {fileID: 0}
   bananas: 0
+  monkeys: 0
 --- !u!114 &8254752401578140906
 MonoBehaviour:
   m_ObjectHideFlags: 0
