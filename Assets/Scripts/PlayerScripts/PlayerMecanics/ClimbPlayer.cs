@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class WallClimbing : MonoBehaviour
 {
     [Header("Climbing Settings")]
@@ -9,7 +10,7 @@ public class WallClimbing : MonoBehaviour
     [SerializeField] private float maxClimbTime = 5f;
     [SerializeField] private float exitJumpForce = 8f;
     [SerializeField] private float exitCooldown = 0.5f;
-
+    [SerializeField] private Image statusClimbBar;
     [Header("Surface Detection")]
     [SerializeField] private float surfaceDetectionDistance = 0.5f;
     [SerializeField] private float cornerCheckRadius = 0.4f;
@@ -77,11 +78,16 @@ public class WallClimbing : MonoBehaviour
         hangScritp.enabled = false;
         currentSurfaceNormal = surfaceNormal;
         lastValidPosition = transform.position;
+
+        statusClimbBar.fillAmount = 1f;
+
     }
 
     private void HandleClimbing()
     {
         climbTimer -= Time.deltaTime;
+        statusClimbBar.fillAmount = climbTimer / maxClimbTime;
+
         if (climbTimer <= 0 || Input.GetKeyDown(KeyCode.E))
         {
             StopClimbing();
@@ -203,6 +209,9 @@ public class WallClimbing : MonoBehaviour
         StartCoroutine(ApplyExitForce(-currentSurfaceNormal, exitJumpForce));
         canClimbAgain = false;
         cooldownTimer = exitCooldown;
+
+        statusClimbBar.fillAmount = 0f;
+
     }
 
     private IEnumerator ApplyExitForce(Vector3 direction, float force)
