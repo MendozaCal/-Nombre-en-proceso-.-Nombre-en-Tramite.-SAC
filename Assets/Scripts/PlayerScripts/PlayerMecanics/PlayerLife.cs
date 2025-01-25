@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : Life
 {
-    [SerializeField] private float maxLife = 3f;
+    [SerializeField] private float initialLife = 3f;
     [SerializeField] private float pointsShield = 3f;
     [SerializeField] private float Timer = 500;
     [SerializeField] private HealthBar healthBar;
@@ -14,17 +14,18 @@ public class PlayerLife : Life
     [SerializeField] private TextMeshProUGUI BananasCont;
     [SerializeField] private TextMeshProUGUI KeyCont;
     [SerializeField] private GameObject KeyController;
-    [SerializeField] private float bananas;
-    [SerializeField] private float monkeys;
+    [SerializeField] private int bananas;
+    [SerializeField] private int monkeys;
     [SerializeField] private float key;
     [SerializeField] private Transform spawnPoint;
 
     private bool reduceShield;
+    private int multiplesProcesados = 0;
 
     private void Start()
     {
-        pointsLife = maxLife;
-        healthBar.Initialize(maxLife);
+        pointsLife = initialLife;
+        healthBar.Initialize(initialLife);
         healthText.text = Mathf.RoundToInt(pointsLife).ToString();
     }
     private void Update()
@@ -62,18 +63,23 @@ public class PlayerLife : Life
     public override void Heal(float amount)
     {
         pointsShield += amount;
-        if (pointsShield >= 3 && pointsLife <= 2)
-        {
-            pointsShield = 1;
-            base.Heal(amount);
-        }
-        if (pointsShield >= 3 && pointsLife >= maxLife)
+        if (pointsShield >= 3)
         {
             pointsShield = 3;
-            pointsLife = maxLife;
         }
         healthBar.UpdateHealthBar(pointsShield);
         healthText.text = Mathf.RoundToInt(pointsLife).ToString();
+    }
+    private void UpdateLifeAndPoints()
+    {
+        int multiplesActuales = bananas / 100;
+        if (multiplesActuales > multiplesProcesados)
+        {
+            multiplesProcesados = multiplesActuales;
+            base.Heal(1);
+            healthText.text = Mathf.RoundToInt(pointsLife).ToString();
+            pointsShield = 3;
+        }
     }
 
     private IEnumerator InvulnerabilityPeriodShield()
@@ -111,8 +117,9 @@ public class PlayerLife : Life
         if (other.CompareTag("Banana"))
         {
             Heal(1);
-            bananas++;
+            bananas+=10;
             Destroy(other.gameObject);
+            UpdateLifeAndPoints();
         }
         if (other.CompareTag("Key"))
         {
@@ -123,9 +130,10 @@ public class PlayerLife : Life
         if (other.CompareTag("MonkeyColectable"))
         {
             Heal(1);
-            bananas++;
+            bananas += 20;
             monkeys++;
             Destroy(other.gameObject);
+            UpdateLifeAndPoints();
         }
     }
     private IEnumerator ExecuteAnimationHazard(float seconds)
