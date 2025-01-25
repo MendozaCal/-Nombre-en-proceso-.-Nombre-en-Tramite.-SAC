@@ -11,10 +11,16 @@ public class WallClimbing : MonoBehaviour
     [SerializeField] private float exitJumpForce = 8f;
     [SerializeField] private float exitCooldown = 0.5f;
     [SerializeField] private Image statusClimbBar;
+
     [Header("Surface Detection")]
     [SerializeField] private float surfaceDetectionDistance = 0.5f;
     [SerializeField] private float cornerCheckRadius = 0.4f;
     [SerializeField] private int cornerRayCount = 8;
+
+    [Header("Rotation Settings")]
+    [SerializeField] private float rotationSpeed = 10f;
+
+    private Quaternion targetRotation;
 
     private CharacterController controller;
     private Movement movementScript;
@@ -25,6 +31,8 @@ public class WallClimbing : MonoBehaviour
     private bool canClimbAgain = true;
     private Vector3 currentSurfaceNormal;
     private Vector3 lastValidPosition;
+
+    private List<Vector3> surfaceHistory = new List<Vector3>();
 
     private void Start()
     {
@@ -80,7 +88,8 @@ public class WallClimbing : MonoBehaviour
         lastValidPosition = transform.position;
 
         statusClimbBar.fillAmount = 1f;
-
+        targetRotation = Quaternion.LookRotation(-surfaceNormal, Vector3.up);
+        transform.rotation = targetRotation;
     }
 
     private void HandleClimbing()
@@ -116,9 +125,14 @@ public class WallClimbing : MonoBehaviour
         {
             controller.Move(lastValidPosition - transform.position);
         }
-    }
 
-    List<Vector3> surfaceHistory = new List<Vector3>();
+        if (Vector3.Dot(currentSurfaceNormal, Vector3.up) < 0.9f &&
+            Vector3.Dot(currentSurfaceNormal, Vector3.down) < 0.9f)
+        {
+            targetRotation = Quaternion.LookRotation(-currentSurfaceNormal, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
 
     private bool CheckAndUpdateSurface(ref Vector3 position, Vector3 moveDirection)
     {
