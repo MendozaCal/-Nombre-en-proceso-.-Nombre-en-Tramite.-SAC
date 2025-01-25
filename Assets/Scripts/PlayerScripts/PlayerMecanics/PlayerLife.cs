@@ -137,6 +137,8 @@ public class PlayerLife : Life
     private void ReduceLife()
     {
         base.TakeDamage(1);
+        pointsShield = 3;
+        healthBar.UpdateHealthBar(pointsShield);
 
         if (spawnPoint != null)
         {

@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 55087125}
   - component: {fileID: 55087124}
   - component: {fileID: 55087129}
+  - component: {fileID: 55087130}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -389,6 +390,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &55087130
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55087123}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9999999, y: 10.49, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &110978637
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +425,7 @@ GameObject:
   - component: {fileID: 110978639}
   - component: {fileID: 110978638}
   - component: {fileID: 110978643}
+  - component: {fileID: 110978644}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -537,6 +560,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &110978644
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110978637}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9999999, y: 10.49, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &142264886
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,7 +3217,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9999999, y: 3.79, z: 1}
+  m_Size: {x: 0.9999999, y: 10.49, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1252827163
 GameObject:
@@ -3681,6 +3725,7 @@ MonoBehaviour:
   maxClimbTime: 5
   exitJumpForce: 8
   exitCooldown: 0.5
+  statusClimbBar: {fileID: 0}
   surfaceDetectionDistance: 0.5
   cornerCheckRadius: 0.4
   cornerRayCount: 8
@@ -3853,6 +3898,7 @@ GameObject:
   - component: {fileID: 1521074185}
   - component: {fileID: 1521074184}
   - component: {fileID: 1521074189}
+  - component: {fileID: 1521074190}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -3987,6 +4033,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1521074190
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521074183}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9999999, y: 10.49, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1539455521
 GameObject:
   m_ObjectHideFlags: 0

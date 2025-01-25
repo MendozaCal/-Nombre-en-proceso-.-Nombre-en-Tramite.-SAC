@@ -37,16 +37,16 @@ public class Grab : MonoBehaviour
 
     private void HandleGrab()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (isActive)
-            {
-                DropObject();
-            }
-            else if (grabbedObject != null)
+            if (grabbedObject != null)
             {
                 StartGrab();
             }
+        }
+        if (isActive && Input.GetKeyDown(KeyCode.G))
+        {
+            DropObject();
         }
     }
 
