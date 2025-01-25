@@ -7,10 +7,10 @@ public class WallClimbing : MonoBehaviour
     [Header("Climbing Settings")]
     [SerializeField] private LayerMask climbLayer;
     [SerializeField] private float climbSpeed = 3f;
-    [SerializeField] private float maxClimbTime = 5f;
+    //[SerializeField] private float maxClimbTime = 5f;
     [SerializeField] private float exitJumpForce = 8f;
     [SerializeField] private float exitCooldown = 0.5f;
-    [SerializeField] private Image statusClimbBar;
+    //[SerializeField] private Image statusClimbBar;
 
     [Header("Surface Detection")]
     [SerializeField] private float surfaceDetectionDistance = 0.5f;
@@ -26,7 +26,7 @@ public class WallClimbing : MonoBehaviour
     private Movement movementScript;
     private Hang hangScritp;
     private bool isClimbing;
-    private float climbTimer;
+    //private float climbTimer;
     private float cooldownTimer;
     private bool canClimbAgain = true;
     private Vector3 currentSurfaceNormal;
@@ -81,23 +81,23 @@ public class WallClimbing : MonoBehaviour
     private void StartClimbing(Vector3 surfaceNormal)
     {
         isClimbing = true;
-        climbTimer = maxClimbTime;
+        //climbTimer = maxClimbTime;
         movementScript.enabled = false;
         hangScritp.enabled = false;
         currentSurfaceNormal = surfaceNormal;
         lastValidPosition = transform.position;
 
-        statusClimbBar.fillAmount = 1f;
+        //statusClimbBar.fillAmount = 1f;
         targetRotation = Quaternion.LookRotation(-surfaceNormal, Vector3.up);
         transform.rotation = targetRotation;
     }
 
     private void HandleClimbing()
     {
-        climbTimer -= Time.deltaTime;
-        statusClimbBar.fillAmount = climbTimer / maxClimbTime;
+        //climbTimer -= Time.deltaTime;
+        //statusClimbBar.fillAmount = climbTimer / maxClimbTime;
 
-        if (climbTimer <= 0 || Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E)) /* climbTimer <= 0 ||*/
         {
             StopClimbing();
             return;
@@ -224,7 +224,7 @@ public class WallClimbing : MonoBehaviour
         canClimbAgain = false;
         cooldownTimer = exitCooldown;
 
-        statusClimbBar.fillAmount = 0f;
+        //statusClimbBar.fillAmount = 0f;
 
     }
 
