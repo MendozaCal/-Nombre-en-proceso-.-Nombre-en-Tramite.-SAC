@@ -17,6 +17,7 @@ public class PlayerLife : Life
     [SerializeField] private float bananas;
     [SerializeField] private float monkeys;
     [SerializeField] private float key;
+    [SerializeField] private Transform spawnPoint;
 
     private bool reduceShield;
 
@@ -45,8 +46,8 @@ public class PlayerLife : Life
             pointsShield -= damage;
             if (pointsShield <= 0)
             {
-                pointsShield = 3; 
-                base.TakeDamage(1);
+                pointsShield = 3;
+                ReduceLife();
                 healthText.text = Mathf.RoundToInt(pointsLife).ToString();
                 StartCoroutine(InvulnerabilityPeriodShield());
             }
@@ -130,7 +131,20 @@ public class PlayerLife : Life
     private IEnumerator ExecuteAnimationHazard(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        base.TakeDamage(1);
+        ReduceLife();
         healthText.text = Mathf.RoundToInt(pointsLife).ToString();
+    }
+    private void ReduceLife()
+    {
+        base.TakeDamage(1);
+
+        if (spawnPoint != null)
+        {
+            CharacterController controller = GetComponent<CharacterController>();
+            controller.enabled = false;
+            transform.position = spawnPoint.position;
+            controller.enabled = true;
+            Debug.Log("Respawn");
+        }
     }
 }

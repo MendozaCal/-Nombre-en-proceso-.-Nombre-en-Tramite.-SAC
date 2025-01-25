@@ -74,9 +74,25 @@ public class MoveSimplePiranha : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Player"))
         {
+            StartCoroutine(Reinicio());
             PlayerLife playerLife = other.gameObject.GetComponent<PlayerLife>();
             playerLife.TakeDamage(1);
+            StartCoroutine (IgnorePlayer());
         }
+    }
+
+    IEnumerator IgnorePlayer()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        int layerToIgnore = LayerMask.NameToLayer("Player");
+        int currentLayer = gameObject.layer;
+
+        Physics.IgnoreLayerCollision(currentLayer, layerToIgnore, true);
+
+        yield return new WaitForSeconds(1);
+
+        Physics.IgnoreLayerCollision(currentLayer, layerToIgnore, false);
     }
 
     private void OnCollisionStay(Collision collision)
