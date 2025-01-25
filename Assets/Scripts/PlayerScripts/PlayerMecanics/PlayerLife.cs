@@ -96,10 +96,10 @@ public class PlayerLife : Life
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        //if (hit.gameObject.CompareTag("Enemy"))
-        //{
-        //    TakeDamage(1);
-        //}
+        if (hit.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(1);
+        }
 
     }
     private void OnTriggerEnter(Collider other)
