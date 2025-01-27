@@ -3,6 +3,7 @@ using UnityEngine;
 public class Hang : MonoBehaviour
 {
     private GameObject target;
+    private GameObject ignoredLiana;
     private bool isStuck = false;
     private bool canDetect = false;
     private CharacterController characterController;
@@ -11,8 +12,10 @@ public class Hang : MonoBehaviour
     private bool canJump = false;
 
     [SerializeField] private BoxCollider lianaMovementBox;
+    [SerializeField] private float moveSpeed = 5f;
 
-    [SerializeField] private float moveSpeed = 5f; 
+    [SerializeField] private float ignoreDuration = 1f;
+    private float ignoreTimer = 0f;
 
     private void Awake()
     {
@@ -40,11 +43,12 @@ public class Hang : MonoBehaviour
         }
 
         HangMonkey();
+        HandleIgnoreTimer();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Liana"))
+        if (other.CompareTag("Liana") && other.gameObject != ignoredLiana)
         {
             target = other.gameObject;
             canDetect = true;
@@ -82,6 +86,10 @@ public class Hang : MonoBehaviour
 
     private void ReleaseFromLiana()
     {
+        ignoredLiana = target;
+        ignoreTimer = ignoreDuration;
+        target = null;
+
         characterController.enabled = true;
         movementScripts.enabled = true;
         isStuck = false;
@@ -94,7 +102,7 @@ public class Hang : MonoBehaviour
 
     private void MoveWhileHanging()
     {
-        float verticalInput = Input.GetAxis("Vertical"); 
+        float verticalInput = Input.GetAxis("Vertical");
         float newY = transform.position.y + verticalInput * moveSpeed * Time.deltaTime;
 
         float yMin = lianaMovementBox.bounds.min.y;
@@ -102,5 +110,19 @@ public class Hang : MonoBehaviour
         newY = Mathf.Clamp(newY, yMin, yMax);
 
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+    }
+
+    private void HandleIgnoreTimer()
+    {
+        if (ignoredLiana != null)
+        {
+            ignoreTimer -= Time.deltaTime;
+
+            if (ignoreTimer <= 0f)
+            {
+                ignoredLiana = null;
+                ignoreTimer = 0f;
+            }
+        }
     }
 }
