@@ -34,6 +34,11 @@ public class Movement : MonoBehaviour
     private int wallDirX;
     private GameObject currentWall;
 
+    private GameObject currentPlatform; 
+    private Vector3 lastPlatformPosition; 
+    private bool isOnPlatform;
+
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -49,6 +54,7 @@ public class Movement : MonoBehaviour
         HandleJump();
         HandleWallMovement();
         CheckEnemyBelow();
+        ApplyPlatformMovement();
         ApplyGravity();
     }
 
@@ -58,6 +64,29 @@ public class Movement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
+        }
+
+          if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, Quaternion.identity, groundCheckDistance))
+        {
+            if (hit.collider.CompareTag("MovablePlatform")) 
+            {
+                isOnPlatform = true;
+                if (currentPlatform != hit.collider.gameObject)
+                {
+                    currentPlatform = hit.collider.gameObject;
+                    lastPlatformPosition = currentPlatform.transform.position;
+                }
+            }
+            else
+            {
+                isOnPlatform = false;
+                currentPlatform = null;
+            }
+        }
+        else
+        {
+            isOnPlatform = false;
+            currentPlatform = null;
         }
     }
 
@@ -105,6 +134,18 @@ public class Movement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        }
+    }
+
+    private void ApplyPlatformMovement()
+    {
+        if (isOnPlatform && currentPlatform != null)
+        {
+            Vector3 platformDisplacement = currentPlatform.transform.position - lastPlatformPosition;
+
+            controller.Move(platformDisplacement);
+
+            lastPlatformPosition = currentPlatform.transform.position;
         }
     }
 
