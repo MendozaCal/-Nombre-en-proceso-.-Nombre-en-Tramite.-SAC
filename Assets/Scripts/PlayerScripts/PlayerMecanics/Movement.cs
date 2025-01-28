@@ -191,8 +191,12 @@ public class Movement : MonoBehaviour
                 }
                 if(hit.collider.gameObject.CompareTag("Enemy"))
                 {
-                    hit.collider.gameObject.GetComponent<BodyDestroy>()?.PlayerDestroy();
-                    velocity.y = bounceForce;
+                    BodyDestroy bodyDestroy = hit.collider.gameObject.GetComponent<BodyDestroy>();
+                    if (bodyDestroy != null)
+                    {
+                        bodyDestroy.PlayerDestroy();
+                        velocity.y = bounceForce;
+                    }
                 }
             }
         }

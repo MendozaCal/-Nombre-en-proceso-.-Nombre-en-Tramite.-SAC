@@ -19,6 +19,11 @@ public class PlayerLife : Life
     [SerializeField] private float key;
     [SerializeField] private Transform spawnPoint;
 
+    [Header("BoxCast Settings")]
+    [SerializeField] private Vector3 boxSize = new Vector3(1f, 1f, 1f); 
+    [SerializeField] private float maxDistance = 0.1f; 
+    [SerializeField] private LayerMask enemyLayer; 
+
     private bool reduceShield;
     private int multiplesProcesados = 0;
 
@@ -39,6 +44,7 @@ public class PlayerLife : Life
         {
             base.TakeDamage(1);
         }
+        DetectEnemies();
     }
     public override void TakeDamage(float damage)
     {
@@ -100,13 +106,31 @@ public class PlayerLife : Life
         SceneManager.LoadScene(currentSceneName);
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void DetectEnemies()
     {
-        if (hit.gameObject.CompareTag("Enemy"))
-        {
-            TakeDamage(1);
-        }
+        Vector3 boxCenter = transform.position;
 
+        Vector3 direction = transform.forward;
+
+        Quaternion orientation = transform.rotation;
+
+        RaycastHit[] hits = Physics.BoxCastAll(
+            boxCenter,          
+            boxSize / 2,      
+            direction,        
+            orientation,        
+            maxDistance,        
+            enemyLayer       
+        );
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                TakeDamage(1);
+                break; 
+            }
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -156,5 +180,11 @@ public class PlayerLife : Life
             controller.enabled = true;
             Debug.Log("Respawn");
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, boxSize);
     }
 }
