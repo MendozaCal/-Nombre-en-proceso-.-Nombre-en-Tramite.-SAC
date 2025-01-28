@@ -26,10 +26,10 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: _EfectoTextura
@@ -59,7 +59,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _CantidadEspuma: 1
-    - _DegradadoTextura: 0.91
+    - _DegradadoTextura: 2
     - _Efecto: 2
     - _EfectoEspuma: 0.1
     - _EfectoTextura: 2
@@ -67,7 +67,7 @@ Material:
     - _QueueControl: 1
     - _QueueOffset: 50
     - _ScalaTecturaCaustica: 1
-    - _Scalatextura: 0.81
+    - _Scalatextura: 1
     - _VelocidadCaustica: 0.05
     - _VelocidadOlas: 1
     - _degradado: 2
