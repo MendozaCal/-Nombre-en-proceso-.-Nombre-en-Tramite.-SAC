@@ -1333,7 +1333,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  boxSize: {x: 0.75, y: 0.1, z: 0.75}
+  boxSize: {x: 0.75, y: 0.2, z: 0.75}
   groundCheckDistance: 0.5
   wallLayer:
     serializedVersion: 2
@@ -1406,6 +1406,11 @@ MonoBehaviour:
   monkeys: 0
   key: 0
   spawnPoint: {fileID: 0}
+  boxSize: {x: 1, y: 1, z: 1}
+  maxDistance: 0.1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &8254752401578140906
 MonoBehaviour:
   m_ObjectHideFlags: 0
