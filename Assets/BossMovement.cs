@@ -47,12 +47,12 @@ public class BossMovement : MonoBehaviour
 
             transform.position = objetive.position;
 
-            yield return StartCoroutine(RotarHaciaJugador(waitBetweenJumps));
+            yield return StartCoroutine(RotateatAtPlayer(waitBetweenJumps));
 
             currentIndex = (currentIndex + 1) % points.Length;
         }
     }
-    IEnumerator RotarHaciaJugador(float tiempo)
+    IEnumerator RotateatAtPlayer(float tiempo)
     {
         float elapsedTime = 0f;
         while (elapsedTime < tiempo)
