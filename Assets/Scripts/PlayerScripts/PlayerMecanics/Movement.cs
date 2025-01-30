@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Movement : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class Movement : MonoBehaviour
     [SerializeField] private float wallSlideSpeed = 2f;
     private bool isWallClimbing;
 
+    private Combat combatScript;
+    private Grab grabScript;
+    [SerializeField] private GameObject hand;
+
     private CharacterController controller;
     private Vector3 velocity;
     private float turnSmoothVelocity;
@@ -42,6 +47,8 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        grabScript = GetComponent<Grab>();
+        combatScript = GetComponent<Combat>();
         moveSpeed = moveSpeedBase;
     }
 
@@ -242,6 +249,21 @@ public class Movement : MonoBehaviour
             }
         }
     }
+
+    public void DesativateGrabandCombat()
+    {
+        grabScript.enabled = false;
+        combatScript.enabled = false;
+        hand.SetActive(false);
+    }
+
+    public void AtivateGrabandCombat()
+    {
+        grabScript.enabled = true;
+        combatScript.enabled = true;
+        hand.SetActive(true);
+    }
+
 
     private void ApplyGravity()
     {

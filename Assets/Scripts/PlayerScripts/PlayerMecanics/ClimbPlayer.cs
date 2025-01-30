@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 public class WallClimbing : MonoBehaviour
 {
     [Header("Climbing Settings")]
@@ -81,6 +81,7 @@ public class WallClimbing : MonoBehaviour
     private void StartClimbing(Vector3 surfaceNormal)
     {
         isClimbing = true;
+        movementScript.DesativateGrabandCombat();
         //climbTimer = maxClimbTime;
         movementScript.enabled = false;
         hangScritp.enabled = false;
@@ -221,6 +222,7 @@ public class WallClimbing : MonoBehaviour
         movementScript.enabled = true;
         hangScritp.enabled = true;
         StartCoroutine(ApplyExitForce(-currentSurfaceNormal, exitJumpForce));
+        movementScript.AtivateGrabandCombat();
         canClimbAgain = false;
         cooldownTimer = exitCooldown;
 

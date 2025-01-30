@@ -68,6 +68,7 @@ public class Hang : MonoBehaviour
                 movementScripts.enabled = false;
                 transform.position = target.transform.position;
                 isStuck = true;
+                movementScripts.DesativateGrabandCombat();
                 canDetect = false;
                 canJump = true;
             }
@@ -93,7 +94,9 @@ public class Hang : MonoBehaviour
         characterController.enabled = true;
         movementScripts.enabled = true;
         isStuck = false;
+        movementScripts.AtivateGrabandCombat();
     }
+
 
     private void Jump()
     {
