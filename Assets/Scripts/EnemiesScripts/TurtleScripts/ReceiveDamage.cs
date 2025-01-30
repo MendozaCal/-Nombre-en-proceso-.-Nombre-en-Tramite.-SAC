@@ -8,9 +8,11 @@ public class ReceiveDamage : MonoBehaviour
     public List<string> targetTags = new List<string>();
     [SerializeField] GameObject head;
     private BodyDestroy bodyDestroy;
-
+    public new ParticleSystem particleSystem;
     private void Start()
     {
+        particleSystem = GetComponent<ParticleSystem>();
+        particleSystem.Stop();
         if (head != null)
         {
             bodyDestroy = head.GetComponent<BodyDestroy>();
@@ -21,7 +23,7 @@ public class ReceiveDamage : MonoBehaviour
 
     private void Update()
     {
-        if (isTapGrab && bodyDestroy != null)
+        if (isTapGrab)
         {
             bodyDestroy.PlayerDestroy();
         }

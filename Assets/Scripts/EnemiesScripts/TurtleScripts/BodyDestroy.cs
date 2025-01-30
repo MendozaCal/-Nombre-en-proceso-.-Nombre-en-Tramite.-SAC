@@ -4,18 +4,17 @@ public class BodyDestroy : MonoBehaviour
 {
     public bool isTap;
     [SerializeField] GameObject Body;
-    ParticleSystem ParticleSystem;
-    Vector3 vector3;
+    [SerializeField] GameObject Mover;
+    ReceiveDamage ReceiveDamage;
     private void Start()
     {
-        ParticleSystem = Body.GetComponent<ParticleSystem>();
-        ParticleSystem.Stop();
+        ReceiveDamage = Mover.GetComponent<ReceiveDamage>();
     }
     public void PlayerDestroy()
     {
         isTap = true;
-        ParticleSystem.Play();
         Body.SetActive(false);
+        ReceiveDamage.particleSystem.Play();
     }
     private void OnCollisionEnter(Collision collision)
     {
