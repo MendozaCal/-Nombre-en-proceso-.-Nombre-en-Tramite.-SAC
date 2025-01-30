@@ -100,7 +100,7 @@ public class Hang : MonoBehaviour
 
     private void Jump()
     {
-        movementScripts.Jump(jumpForce);
+        movementScripts.JumpForward(jumpForce, 6);
     }
 
     private void MoveWhileHanging()

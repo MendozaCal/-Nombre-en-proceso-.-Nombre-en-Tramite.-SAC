@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Movement : MonoBehaviour
 {
@@ -99,13 +98,25 @@ public class Movement : MonoBehaviour
 
     private void CheckWallState()
     {
-        Vector3 boxCenter = transform.position + Vector3.up * (controller.height / 2); 
-        isTouchingWall = Physics.BoxCast(boxCenter, new Vector3(0.5f, 1f, 0.5f), transform.forward, out RaycastHit hit, Quaternion.identity, wallCheckDistance, wallLayer);
+        Vector3 boxCenter = transform.position + Vector3.up * (controller.height / 2);
+
+        isTouchingWall = Physics.BoxCast(
+            boxCenter,
+            new Vector3(0.5f, 1f, 0.5f),
+            transform.TransformDirection(Vector3.forward), 
+            out RaycastHit hit,
+            transform.rotation,
+            wallCheckDistance,
+            wallLayer
+        );
 
         if (isTouchingWall)
         {
             currentWall = hit.collider.gameObject;
-            wallDirX = hit.normal.x < 0 ? -1 : 1; 
+
+            Vector3 hitDirection = -hit.normal;
+
+            wallDirX = hitDirection.x < 0 ? -1 : 1;
         }
         else
         {
@@ -113,6 +124,7 @@ public class Movement : MonoBehaviour
             currentWall = null;
         }
     }
+
 
     private void HandleMovement()
     {
@@ -284,5 +296,44 @@ public class Movement : MonoBehaviour
     public void Jump(float jumpForceDetach)
     {
         velocity.y = Mathf.Sqrt(jumpForceDetach * -2f * gravity);
+    }
+
+    public void JumpForward(float jumpForceDetach, float forwardForce)
+    {
+        velocity.y = Mathf.Sqrt(jumpForceDetach * -2f * gravity);
+
+        Vector3 cameraForward = cameraTransform.forward;
+        cameraForward.y = 0f;
+        cameraForward = cameraForward.normalized;
+
+        float targetAngle = Mathf.Atan2(cameraForward.x, cameraForward.z) * Mathf.Rad2Deg;
+        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+
+        velocity += moveDir * forwardForce;
+
+        StartCoroutine(ResetForwardMomentum());
+    }
+
+    private IEnumerator ResetForwardMomentum()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        float resetDuration = 0.3f;
+        float elapsedTime = 0f;
+        Vector3 initialVelocity = new Vector3(velocity.x, 0f, velocity.z);
+
+        while (elapsedTime < resetDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / resetDuration;
+
+            velocity.x = Mathf.Lerp(initialVelocity.x, 0f, t);
+            velocity.z = Mathf.Lerp(initialVelocity.z, 0f, t);
+
+            yield return null;
+        }
+
+        velocity.x = 0f;
+        velocity.z = 0f;
     }
 }
