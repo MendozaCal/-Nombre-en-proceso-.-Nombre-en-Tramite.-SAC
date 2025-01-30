@@ -55,7 +55,6 @@ public class Grab : MonoBehaviour
         Vector3 offset = GetOffsetForCurrentType();
 
         target.localPosition = offset;
-
         switch (currentGrabType)
         {
             case GrabType.Stick:
@@ -141,6 +140,7 @@ public class Grab : MonoBehaviour
     private void StartGrab()
     {
         isActive = true;
+        grabbedObject.SetParent(target);
     }
 
     public void DropObject()
