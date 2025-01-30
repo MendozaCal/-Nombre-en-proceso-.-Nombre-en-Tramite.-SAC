@@ -134,43 +134,54 @@ public class PlayerLife : Life
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Crocodile"))
+        switch (other.tag)
         {
-            StartCoroutine(ExecuteAnimationHazard(0.25f));
-        }
-        if (other.CompareTag("Banana"))
-        {
-            Heal(1);
-            bananas+=10;
-            Destroy(other.gameObject);
-            UpdateLifeAndPoints();
-        }
-        if (other.CompareTag("Key"))
-        {
-            key++;
-            KeyController.SetActive(true);
-            Destroy(other.gameObject);
-        }
-        if (other.CompareTag("MonkeyColectable"))
-        {
-            Heal(1);
-            bananas += 20;
-            monkeys++;
-            Destroy(other.gameObject);
-            UpdateLifeAndPoints();
+            case "Crocodile":
+                StartCoroutine(ExecuteAnimationHazard(0.25f));
+                break;
+
+            case "Banana":
+                Heal(1);
+                bananas += 10;
+                Destroy(other.gameObject);
+                UpdateLifeAndPoints();
+                break;
+
+            case "Key":
+                key++;
+                KeyController.SetActive(true);
+                Destroy(other.gameObject);
+                break;
+
+            case "MonkeyColectable":
+                Heal(1);
+                bananas += 20;
+                monkeys++;
+                Destroy(other.gameObject);
+                UpdateLifeAndPoints();
+                break;
+
+            case "InstantDeath":
+                ReduceLife();
+                break;
+
+
+            default:
+                break;
         }
     }
+
     private IEnumerator ExecuteAnimationHazard(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         ReduceLife();
-        healthText.text = Mathf.RoundToInt(pointsLife).ToString();
     }
     private void ReduceLife()
     {
         base.TakeDamage(1);
         pointsShield = 3;
         healthBar.UpdateHealthBar(pointsShield);
+        healthText.text = Mathf.RoundToInt(pointsLife).ToString();
 
         if (spawnPoint != null)
         {
