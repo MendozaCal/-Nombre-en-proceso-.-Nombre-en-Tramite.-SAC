@@ -23,7 +23,7 @@ public class ReceiveDamage : MonoBehaviour
 
     private void Update()
     {
-        if (isTapGrab)
+        if (isTapGrab || bodyDestroy != null)
         {
             bodyDestroy.PlayerDestroy();
         }
