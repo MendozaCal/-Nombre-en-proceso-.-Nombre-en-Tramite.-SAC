@@ -2,11 +2,17 @@ using UnityEngine;
 
 public class PropsLife : Life
 {
-    [SerializeField] private float maxLife = 10f; 
+    [SerializeField] private float maxLife = 10f;
+    [SerializeField] bool isNecesary;
 
     private void Start()
     {
-        pointsLife = maxLife; 
+        pointsLife = maxLife;
+        if (isNecesary)
+        {
+            ParticleSystem particleSystem = GetComponent<ParticleSystem>();
+            particleSystem.Play();
+        }
     }
 
     public override void TakeDamage(float damage)
@@ -15,10 +21,7 @@ public class PropsLife : Life
 
         if (pointsLife <= 0)
         {
-            
-                DestroyProp();
-            
- 
+            DestroyProp();
         }
     }
 
@@ -34,7 +37,6 @@ public class PropsLife : Life
             TakeDamage(2); 
         }
     }
-
 
     public virtual void DestroyProp()
     {
