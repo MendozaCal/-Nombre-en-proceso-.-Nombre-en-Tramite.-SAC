@@ -130,6 +130,12 @@ public class PlayerLife : Life
                 TakeDamage(1);
                 break; 
             }
+            if (hit.collider.CompareTag("Barrel"))
+            {
+                TakeDamage(1);
+                Destroy(hit.collider.gameObject);
+                break;
+            }
         }
     }
     private void OnTriggerEnter(Collider other)
