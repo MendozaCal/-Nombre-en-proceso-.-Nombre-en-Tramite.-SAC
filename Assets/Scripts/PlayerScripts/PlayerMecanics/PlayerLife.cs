@@ -165,6 +165,9 @@ public class PlayerLife : Life
                 ReduceLife();
                 break;
 
+            case "Checkpoint":
+                CheckPoint(other.transform.position);
+                break;
 
             default:
                 break;
@@ -191,6 +194,10 @@ public class PlayerLife : Life
             controller.enabled = true;
             Debug.Log("Respawn");
         }
+    }
+    private void CheckPoint(Vector3 vector3)
+    {
+        spawnPoint.position = vector3;
     }
     private void OnDrawGizmos()
     {
