@@ -10,6 +10,8 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private float waitBetweenJumps = 1f;
     [SerializeField] private float heightJump = 2f;
     [SerializeField] private float stunDuration = 2f;
+    [SerializeField] private Transform centerPoint;
+    [SerializeField] private Movement movement;
 
     private bool attckGorilla;
     private bool activeAttack;
@@ -159,5 +161,13 @@ public class BossMovement : MonoBehaviour
         yield return new WaitForSeconds(stunDuration);
         Debug.Log("Ya no estoy estuneado");
         isStunned = false;
+    }
+
+    public void OnHeadJump()
+    {
+        Debug.Log("Golpeado en la cabeza");
+        isStunned = false;
+
+        movement.StartCenterPoint(centerPoint);
     }
 }

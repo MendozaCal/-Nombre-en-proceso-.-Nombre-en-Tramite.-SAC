@@ -254,8 +254,18 @@ public class Movement : MonoBehaviour
                     BodyDestroy bodyDestroy = hit.collider.gameObject.GetComponent<BodyDestroy>();
                     if (bodyDestroy != null)
                     {
-                        bodyDestroy.PlayerDestroy();
                         velocity.y = bounceForce;
+                        bodyDestroy.PlayerDestroy();
+                    }
+                }
+                if (hit.collider.gameObject.CompareTag("Gorilla"))
+                {
+                    BossMovement bossMovement = hit.collider.gameObject.GetComponent<BossMovement>();
+                    GorillaLife gorillaLife = hit.collider.GetComponent<GorillaLife>();
+                    if (bossMovement != null && gorillaLife != null)
+                    {
+                        bossMovement.OnHeadJump();
+                        gorillaLife.TakeDamage(1);
                     }
                 }
             }
@@ -335,5 +345,31 @@ public class Movement : MonoBehaviour
 
         velocity.x = 0f;
         velocity.z = 0f;
+    }
+
+    public void StartCenterPoint(Transform centerPoint)
+    {
+        StartCoroutine(ThrowToCenterPoint(centerPoint));
+    }
+    IEnumerator ThrowToCenterPoint(Transform centerPoint)
+    {
+        Jump(2);
+        yield return new WaitForSeconds(0.5f);
+        Vector3 start = transform.position;
+        float time = 0f;
+        float throwDuration = 1f;
+
+        while (time < throwDuration)
+        {
+            time += Time.deltaTime;
+            float t = time / throwDuration;
+
+            transform.position = Vector3.Lerp(start, centerPoint.position, t);
+            transform.position += Vector3.up * Mathf.Sin(t * Mathf.PI) * 2f;
+
+            yield return null;
+        }
+
+        transform.position = centerPoint.position;
     }
 }

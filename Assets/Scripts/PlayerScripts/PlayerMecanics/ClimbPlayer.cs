@@ -221,12 +221,26 @@ public class WallClimbing : MonoBehaviour
         movementScript.enabled = true;
         hangScritp.enabled = true;
         StartCoroutine(ApplyExitForce(-currentSurfaceNormal, exitJumpForce));
+        StartCoroutine(ResetRotation());
         movementScript.AtivateGrabandCombat();
         canClimbAgain = false;
         cooldownTimer = exitCooldown;
+    }
 
-        //statusClimbBar.fillAmount = 0f;
+    private IEnumerator ResetRotation()
+    {
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRot = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        float elapsedTime = 0f;
+        float rotationDuration = 0.2f;
 
+        while (elapsedTime < rotationDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / rotationDuration;
+            transform.rotation = Quaternion.Slerp(startRotation, targetRot, t);
+            yield return null;
+        }
     }
 
     private IEnumerator ApplyExitForce(Vector3 direction, float force)
