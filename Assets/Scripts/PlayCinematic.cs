@@ -10,6 +10,7 @@ public class PlayCinematic : MonoBehaviour
     [SerializeField] private WallClimbing wallClimbingScrpt;
 
     private PlayableDirector playableDirector;
+    private bool onplay;
 
     private void Start()
     {
@@ -20,8 +21,12 @@ public class PlayCinematic : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            DeactivateSpecificScripts();
-            playableDirector.Play(); 
+            if(!onplay)
+            {
+                onplay = true;
+                DeactivateSpecificScripts();
+                playableDirector.Play();
+            }
         }
     }
 
