@@ -12,13 +12,23 @@ public class ChangeScene : MonoBehaviour
             Time.timeScale = 1f;
             SceneManager.LoadScene(sceneName);
         }
+        
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("PlayerSelector"))
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Time.timeScale = 1f;
+                SceneManager.LoadScene(sceneName);
+            }
+        }
     }
     public void gameManagerChange()
     {
         changeScene();
     }
-
-
     public void changeScene()
     {
         SceneManager.LoadScene(sceneName);
