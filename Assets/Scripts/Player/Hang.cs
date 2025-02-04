@@ -12,7 +12,6 @@ public class Hang : MonoBehaviour
     private bool canJump = false;
 
     [SerializeField] private BoxCollider lianaMovementBox;
-    [SerializeField] private float moveSpeed = 5f;
 
     [SerializeField] private float ignoreDuration = 1f;
     private float ignoreTimer = 0f;
@@ -38,8 +37,6 @@ public class Hang : MonoBehaviour
             float yMax = lianaMovementBox.bounds.max.y;
             float clampedY = Mathf.Clamp(transform.position.y, yMin, yMax);
             transform.position = new Vector3(lianaPosition.x, clampedY, lianaPosition.z);
-
-            MoveWhileHanging();
         }
 
         HangMonkey();
@@ -101,18 +98,6 @@ public class Hang : MonoBehaviour
     private void Jump()
     {
         movementScripts.JumpForward(jumpForce, 6);
-    }
-
-    private void MoveWhileHanging()
-    {
-        float verticalInput = Input.GetAxis("Vertical");
-        float newY = transform.position.y + verticalInput * moveSpeed * Time.deltaTime;
-
-        float yMin = lianaMovementBox.bounds.min.y;
-        float yMax = lianaMovementBox.bounds.max.y;
-        newY = Mathf.Clamp(newY, yMin, yMax);
-
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 
     private void HandleIgnoreTimer()
