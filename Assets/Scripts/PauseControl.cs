@@ -59,7 +59,9 @@ public class PauseControl : MonoBehaviour
 
     public void ExitMenu()
     {
-        SceneManager.LoadScene("Menu");
+
+        ResumeGame();
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void MuteSounds()

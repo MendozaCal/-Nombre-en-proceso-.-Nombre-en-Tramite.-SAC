@@ -151,7 +151,7 @@ public class PartidaSlotUI : MonoBehaviour
         if (!hasExistingSave) return; 
 
         PlayerPrefs.SetInt("SlotNumber", slotNumber);
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("LevelSelector");
     }
 
     public void CreateNewGame()
@@ -160,12 +160,12 @@ public class PartidaSlotUI : MonoBehaviour
         SavedGame newGame = new SavedGame
         {
             slotNumber = slotNumber,
-            worldName = "World 1",
+            worldName = "Level 0",
             lives = 3,
             collectibles = 0
         };
         saveManager.savedGames.Add(newGame);
         saveManager.SaveGames();
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("LevelSelector");
     }
 }

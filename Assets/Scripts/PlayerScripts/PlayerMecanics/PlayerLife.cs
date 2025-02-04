@@ -226,18 +226,29 @@ public class PlayerLife : Life
         GameSaveManager saveManager = FindObjectOfType<GameSaveManager>();
         if (saveManager != null)
         {
-            SavedGame currentGame = new SavedGame
-            {
-                slotNumber = PlayerPrefs.GetInt("SlotNumber"),
-                worldName = SceneManager.GetActiveScene().name,
-                lives = (int)pointsLife,
-                collectibles = bananas
-            };
+            string sceneName = SceneManager.GetActiveScene().name;
 
-            saveManager.SaveGames();
+            if (sceneName.StartsWith("Level "))
+            {
+                string levelNumberString = sceneName.Replace("Level ", "");
+
+                if (int.TryParse(levelNumberString, out int levelNumber))
+                {
+                    int slotNumber = PlayerPrefs.GetInt("SlotNumber");
+                    SavedGame currentGame = saveManager.savedGames.Find(game => game.slotNumber == slotNumber);
+
+                    if (currentGame != null)
+                    {
+                        currentGame.unlockedLevel = levelNumber + 1;
+
+                        saveManager.SaveGames();
+                        Debug.Log("Nivel desbloqueado: " + currentGame.unlockedLevel); 
+                    }
+                }
+            }
         }
 
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("LevelSelector");
     }
 
     private void OnDrawGizmos()

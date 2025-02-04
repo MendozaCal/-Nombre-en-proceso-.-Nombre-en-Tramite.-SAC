@@ -237,10 +237,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 104951028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ccd4a5023b926458958c88a7680998, type: 3}
+  m_Script: {fileID: 11500000, guid: ae4cdeee0257ff74d8aa7c917785bbe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Victoria
+  levelIndex: 0
 --- !u!1 &588170550
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,10 +356,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 588170550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ccd4a5023b926458958c88a7680998, type: 3}
+  m_Script: {fileID: 11500000, guid: ae4cdeee0257ff74d8aa7c917785bbe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Victoria
+  levelIndex: 5
 --- !u!1 &675996273
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,10 +475,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 675996273}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ccd4a5023b926458958c88a7680998, type: 3}
+  m_Script: {fileID: 11500000, guid: ae4cdeee0257ff74d8aa7c917785bbe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Victoria
+  levelIndex: 4
 --- !u!1 &758055596
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,10 +712,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1013376307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ccd4a5023b926458958c88a7680998, type: 3}
+  m_Script: {fileID: 11500000, guid: ae4cdeee0257ff74d8aa7c917785bbe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Victoria
+  levelIndex: 3
 --- !u!1 &1139835102
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,10 +831,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1139835102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ccd4a5023b926458958c88a7680998, type: 3}
+  m_Script: {fileID: 11500000, guid: ae4cdeee0257ff74d8aa7c917785bbe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Victoria
+  levelIndex: 2
 --- !u!1 &1325773601
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,10 +950,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1325773601}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ccd4a5023b926458958c88a7680998, type: 3}
+  m_Script: {fileID: 11500000, guid: ae4cdeee0257ff74d8aa7c917785bbe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Victoria
+  levelIndex: 1
 --- !u!1 &1690261497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,10 +1069,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1690261497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ccd4a5023b926458958c88a7680998, type: 3}
+  m_Script: {fileID: 11500000, guid: ae4cdeee0257ff74d8aa7c917785bbe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Victoria
+  levelIndex: 6
 --- !u!1 &1955467204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,6 +1201,8 @@ MonoBehaviour:
   - {fileID: 1139835106}
   - {fileID: 1013376311}
   moveSpeed: 5
+  unlockedMaterial: {fileID: 2100000, guid: a944d462b3d9b2f409ccc286aee89dea, type: 2}
+  lockedMaterial: {fileID: 2100000, guid: af670e4bd7e7c024396574a0d1562e7d, type: 2}
 --- !u!54 &1955467210
 Rigidbody:
   m_ObjectHideFlags: 0

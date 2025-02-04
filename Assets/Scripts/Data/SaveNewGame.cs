@@ -11,7 +11,8 @@ public class SaveNewGame : MonoBehaviour
             slotNumber = slotNumber,
             worldName = worldName,
             lives = lives,
-            collectibles = collectibles
+            collectibles = collectibles,
+            unlockedLevel = 0 
         };
 
         gameSaveManager.savedGames.Add(newGame);
