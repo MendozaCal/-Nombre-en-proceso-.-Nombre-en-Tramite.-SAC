@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Vector3 boxSize = new Vector3(0.5f, 0.1f, 0.5f);
     [SerializeField] private float groundCheckDistance;
 
-    [Header("Wall Climbing")]
+    [Header("Wall Jumping")]
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float wallCheckDistance = 0.5f;
     [SerializeField] private float wallJumpForce = 10f;
@@ -174,6 +174,8 @@ public class Movement : MonoBehaviour
         {
             if (!isWallClimbing)
             {
+                velocity.y = -wallSlideSpeed;
+
                 if (Input.GetButtonDown("Jump"))
                 {
                     isWallClimbing = true;
