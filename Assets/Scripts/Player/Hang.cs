@@ -10,10 +10,7 @@ public class Hang : MonoBehaviour
     private Movement movementScripts;
     [SerializeField] private float jumpForce = 5f;
     private bool canJump = false;
-
     [SerializeField] private BoxCollider lianaMovementBox;
-    [SerializeField] private float moveSpeed = 5f;
-
     [SerializeField] private float ignoreDuration = 1f;
     private float ignoreTimer = 0f;
 
@@ -32,16 +29,13 @@ public class Hang : MonoBehaviour
                 ReleaseFromLiana();
                 return;
             }
-
             Vector3 lianaPosition = target.transform.position;
             float yMin = lianaMovementBox.bounds.min.y;
             float yMax = lianaMovementBox.bounds.max.y;
+            float middleY = (yMin + yMax) / 2f; 
             float clampedY = Mathf.Clamp(transform.position.y, yMin, yMax);
             transform.position = new Vector3(lianaPosition.x, clampedY, lianaPosition.z);
-
-            MoveWhileHanging();
         }
-
         HangMonkey();
         HandleIgnoreTimer();
     }
@@ -63,10 +57,12 @@ public class Hang : MonoBehaviour
             if (canDetect)
             {
                 if (target == null) return;
-
                 characterController.enabled = false;
                 movementScripts.enabled = false;
-                transform.position = target.transform.position;
+
+                float middleY = (lianaMovementBox.bounds.min.y + lianaMovementBox.bounds.max.y) / 2f;
+                transform.position = new Vector3(target.transform.position.x, middleY, target.transform.position.z);
+
                 isStuck = true;
                 movementScripts.DesativateGrabandCombat();
                 canDetect = false;
@@ -75,7 +71,6 @@ public class Hang : MonoBehaviour
             else
             {
                 ReleaseFromLiana();
-
                 if (canJump)
                 {
                     Jump();
@@ -90,29 +85,15 @@ public class Hang : MonoBehaviour
         ignoredLiana = target;
         ignoreTimer = ignoreDuration;
         target = null;
-
         characterController.enabled = true;
         movementScripts.enabled = true;
         isStuck = false;
         movementScripts.AtivateGrabandCombat();
     }
 
-
     private void Jump()
     {
-        movementScripts.JumpForward(jumpForce, 6);
-    }
-
-    private void MoveWhileHanging()
-    {
-        float verticalInput = Input.GetAxis("Vertical");
-        float newY = transform.position.y + verticalInput * moveSpeed * Time.deltaTime;
-
-        float yMin = lianaMovementBox.bounds.min.y;
-        float yMax = lianaMovementBox.bounds.max.y;
-        newY = Mathf.Clamp(newY, yMin, yMax);
-
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        movementScripts.JumpForward(jumpForce, 4);
     }
 
     private void HandleIgnoreTimer()
@@ -120,7 +101,6 @@ public class Hang : MonoBehaviour
         if (ignoredLiana != null)
         {
             ignoreTimer -= Time.deltaTime;
-
             if (ignoreTimer <= 0f)
             {
                 ignoredLiana = null;

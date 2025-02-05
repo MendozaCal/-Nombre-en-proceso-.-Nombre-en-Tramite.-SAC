@@ -6,9 +6,47 @@ using UnityEngine.SceneManagement;
 
 public class MovePlayerSelectorLevel : MonoBehaviour
 {
-    public Transform[] targetPoints;
+    public Transform[] targetPoints; 
     public float moveSpeed = 5f;
     private bool isMoving = false;
+
+    public Material unlockedMaterial; 
+    public Material lockedMaterial; 
+
+    private GameSaveManager gameSaveManager;
+    private int unlockedLevel; 
+
+    void Start()
+    {
+        gameSaveManager = FindObjectOfType<GameSaveManager>();
+        if (gameSaveManager != null)
+        {
+            int slotNumber = PlayerPrefs.GetInt("SlotNumber");
+            SavedGame savedGame = gameSaveManager.savedGames.Find(game => game.slotNumber == slotNumber);
+            if (savedGame != null)
+            {
+                unlockedLevel = savedGame.unlockedLevel; 
+            }
+        }
+
+        for (int i = 0; i < targetPoints.Length; i++)
+        {
+            Renderer levelRenderer = targetPoints[i].GetComponent<Renderer>();
+            LevelPoint levelPoint = targetPoints[i].GetComponent<LevelPoint>();
+
+            if (levelRenderer != null && levelPoint != null)
+            {
+                if (levelPoint.levelIndex <= unlockedLevel) 
+                {
+                    levelRenderer.material = unlockedMaterial; 
+                }
+                else
+                {
+                    levelRenderer.material = lockedMaterial; 
+                }
+            }
+        }
+    }
 
     void Update()
     {
@@ -22,6 +60,11 @@ public class MovePlayerSelectorLevel : MonoBehaviour
                 TryMove(Vector3.left);
             if (Input.GetKeyDown(KeyCode.D))
                 TryMove(Vector3.right);
+
+            if (Input.GetKeyDown(KeyCode.E)) 
+            {
+                SelectLevel();
+            }
         }
     }
 
@@ -33,7 +76,8 @@ public class MovePlayerSelectorLevel : MonoBehaviour
             .Where(point =>
                 Vector3.Dot((point.position - currentPos).normalized, direction.normalized) > 0.9f &&
                 Mathf.Approximately(point.position.y, currentPos.y) &&
-                Mathf.Abs((point.position - currentPos).magnitude) > 0.1f
+                Mathf.Abs((point.position - currentPos).magnitude) > 0.1f &&
+                IsLevelUnlocked(point) 
             )
             .OrderBy(point => Vector3.Distance(point.position, currentPos))
             .ToList();
@@ -56,5 +100,39 @@ public class MovePlayerSelectorLevel : MonoBehaviour
 
         transform.position = targetPos;
         isMoving = false;
+    }
+
+    private void SelectLevel()
+    {
+        Transform closestLevel = targetPoints
+            .OrderBy(point => Vector3.Distance(transform.position, point.position))
+            .FirstOrDefault();
+
+        if (closestLevel != null)
+        {
+            LevelPoint levelPoint = closestLevel.GetComponent<LevelPoint>();
+            if (levelPoint != null)
+            {
+                if (levelPoint.levelIndex <= unlockedLevel)
+                {
+                    Debug.Log("Cargando nivel " + levelPoint.levelIndex);
+                    SceneManager.LoadScene("Level " + levelPoint.levelIndex); 
+                }
+                else
+                {
+                    Debug.Log("Nivel " + levelPoint.levelIndex + " no está desbloqueado.");
+                }
+            }
+        }
+    }
+
+    private bool IsLevelUnlocked(Transform levelPoint)
+    {
+        LevelPoint levelPointComponent = levelPoint.GetComponent<LevelPoint>();
+        if (levelPointComponent != null)
+        {
+            return levelPointComponent.levelIndex <= unlockedLevel;
+        }
+        return false;
     }
 }

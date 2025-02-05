@@ -14,7 +14,7 @@ public class StickCombat : ICombatBehavior
 
     public IEnumerator ExecuteAttack(Transform target, Transform attackPoint, Transform stick)
     {
-        BoxCollider boxCollider = stick.GetComponent<BoxCollider>();
+        CapsuleCollider boxCollider = stick.GetComponent<CapsuleCollider>();
         if (boxCollider != null)
         {
             boxCollider.excludeLayers = LayerMask.GetMask("Nothing");

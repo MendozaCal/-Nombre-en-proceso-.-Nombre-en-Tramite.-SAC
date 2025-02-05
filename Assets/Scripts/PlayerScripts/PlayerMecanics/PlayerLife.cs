@@ -29,7 +29,18 @@ public class PlayerLife : Life
 
     private void Start()
     {
-        pointsLife = initialLife;
+        int slotNumber = PlayerPrefs.GetInt("SlotNumber");
+        GameSaveManager saveManager = FindObjectOfType<GameSaveManager>();
+        if (saveManager != null)
+        {
+            SavedGame savedGame = saveManager.savedGames.Find(game => game.slotNumber == slotNumber);
+            if (savedGame != null)
+            {
+                pointsLife = savedGame.lives;
+                bananas = savedGame.collectibles;
+            }
+        }
+
         healthBar.Initialize(initialLife);
         healthText.text = Mathf.RoundToInt(pointsLife).ToString();
     }
@@ -175,6 +186,10 @@ public class PlayerLife : Life
                 CheckPoint(other.transform.position);
                 break;
 
+            case "Finish":
+                CompleteLevel();
+                break;
+
             default:
                 break;
         }
@@ -205,6 +220,37 @@ public class PlayerLife : Life
     {
         spawnPoint.position = vector3;
     }
+
+    public void CompleteLevel()
+    {
+        GameSaveManager saveManager = FindObjectOfType<GameSaveManager>();
+        if (saveManager != null)
+        {
+            string sceneName = SceneManager.GetActiveScene().name;
+
+            if (sceneName.StartsWith("Level "))
+            {
+                string levelNumberString = sceneName.Replace("Level ", "");
+
+                if (int.TryParse(levelNumberString, out int levelNumber))
+                {
+                    int slotNumber = PlayerPrefs.GetInt("SlotNumber");
+                    SavedGame currentGame = saveManager.savedGames.Find(game => game.slotNumber == slotNumber);
+
+                    if (currentGame != null)
+                    {
+                        currentGame.unlockedLevel = levelNumber + 1;
+
+                        saveManager.SaveGames();
+                        Debug.Log("Nivel desbloqueado: " + currentGame.unlockedLevel); 
+                    }
+                }
+            }
+        }
+
+        SceneManager.LoadScene("LevelSelector");
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
