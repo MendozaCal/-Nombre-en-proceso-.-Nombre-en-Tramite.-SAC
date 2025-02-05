@@ -3,7 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    [SerializeField] private string sceneName;
+    [SerializeField] public string sceneName;
+    [SerializeField] private Transform canvas;
+    [SerializeField] private Fade fadePrefab;
+
+    public void ChangeSceneWithFade()
+    {
+        fadePrefab.StartFadeIn();
+    }
 
     public void LoadSceneStart()
     {
