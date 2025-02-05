@@ -40,6 +40,10 @@ public class PlayerLife : Life
                 bananas = savedGame.collectibles;
             }
         }
+        else
+        {
+            pointsLife = initialLife;
+        }
 
         healthBar.Initialize(initialLife);
         healthText.text = Mathf.RoundToInt(pointsLife).ToString();
