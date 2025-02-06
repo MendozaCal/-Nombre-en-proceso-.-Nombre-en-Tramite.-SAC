@@ -3495,7 +3495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &645839975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7339,12 +7339,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "              Miembros:\n   Designer: Eduardo Lopez  \n   Designer:Pablo
-    Mendoza \n\n   Artist: Adela Romero\n   Artist:Fabiana Perez  \n   Artist:Rodrigo
-    Ram\xEDrez\n   Artist:Giacomo Nakama  \n\n   Programmer: Ricardo Pariona  \n  
-    Programmer: Francisco Anticona  \n\n\n                Music:\n    Boss-Jungle
-    Chase\n    Menu/Creditos - Aztec Empire\n    Level1- Jungle Tribal Music\n   
-    Level2-Action 16-bit Chiptune\n    Cueva- Royalty Free Music"
+  m_text: "   \t\tProducer\n   - Rodrigo Abad\n\n   \t\tDirection\n   - Ricardo Pariona\n\n  
+    \t\tDesing Team\n   - Eduardo Lopez  \n   - Pablo Mendoza\n   - Ricardo Pariona\n  
+    - Alonzo P\xE9rez\n\n   \t\tArt Team\n   - Fabiana Perez\n   - Andree Lopez\n  
+    - Ricardo Pariona\n\n\tPrograming Team\n   - Pablo Mendoza\n   - Francisco Anticona\n  
+    - Alonzo Perez\n\n\t\tMusic:\n    Boss-Jungle Chase\n    Menu/Creditos - Aztec
+    Empire\n    Level1- Jungle Tribal Music\n    Level2-Action 16-bit Chiptune\n   
+    Cueva- Royalty Free Music"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 14445635ece1bae40ab6ed23b9f148cb, type: 2}
   m_sharedMaterial: {fileID: 7032909622103944861, guid: 14445635ece1bae40ab6ed23b9f148cb, type: 2}
