@@ -24,7 +24,10 @@ public class Movement : MonoBehaviour
     [SerializeField] private float wallJumpForce = 10f;
     [SerializeField] private Vector3 wallJumpDirection = new Vector3(1f, 1f, 0f);
     [SerializeField] private float wallSlideSpeed = 2f;
+    [SerializeField] private float timeToDefaultLayer = 0.5f;
+    [SerializeField] private float timeToClimbableLayer = 1f;
     private bool isWallClimbing;
+
 
     private Combat combatScript;
     private Grab grabScript;
@@ -38,8 +41,8 @@ public class Movement : MonoBehaviour
     private int wallDirX;
     private GameObject currentWall;
 
-    private GameObject currentPlatform; 
-    private Vector3 lastPlatformPosition; 
+    private GameObject currentPlatform;
+    private Vector3 lastPlatformPosition;
     private bool isOnPlatform;
 
 
@@ -72,9 +75,9 @@ public class Movement : MonoBehaviour
             velocity.y = -2f;
         }
 
-          if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, Quaternion.identity, groundCheckDistance))
+        if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, Quaternion.identity, groundCheckDistance))
         {
-            if (hit.collider.CompareTag("MovablePlatform")) 
+            if (hit.collider.CompareTag("MovablePlatform"))
             {
                 isOnPlatform = true;
                 if (currentPlatform != hit.collider.gameObject)
@@ -103,7 +106,7 @@ public class Movement : MonoBehaviour
         isTouchingWall = Physics.BoxCast(
             boxCenter,
             new Vector3(0.5f, 1f, 0.5f),
-            transform.TransformDirection(Vector3.forward), 
+            transform.TransformDirection(Vector3.forward),
             out RaycastHit hit,
             transform.rotation,
             wallCheckDistance,
@@ -217,6 +220,12 @@ public class Movement : MonoBehaviour
         {
             isWallClimbing = false;
         }
+
+
+        //if (isGrounded && Input.GetButtonDown("Jump"))
+        //{
+        //    velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        //}
     }
 
     private IEnumerator RestoreWallLayer()
@@ -225,10 +234,10 @@ public class Movement : MonoBehaviour
         {
             GameObject wallMoment = currentWall.gameObject;
             currentWall.layer = LayerMask.NameToLayer("Default");
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(timeToDefaultLayer);
             wallMoment.layer = LayerMask.NameToLayer("Climbable");
-            yield return new WaitForSeconds(1f);
-            currentWall = null; 
+            yield return new WaitForSeconds(timeToClimbableLayer);
+            currentWall = null;
         }
     }
 
@@ -249,9 +258,9 @@ public class Movement : MonoBehaviour
                 {
                     sapo sapoScript = hit.collider.gameObject.GetComponent<sapo>();
                     if (sapoScript.damage) { PlayerLife playerlife = GetComponent<PlayerLife>(); playerlife.TakeDamage(1); }
-                    if(sapoScript.isInflating == true) velocity.y = bounceForce;
+                    if (sapoScript.isInflating == true) velocity.y = bounceForce;
                 }
-                if(hit.collider.gameObject.CompareTag("Enemy"))
+                if (hit.collider.gameObject.CompareTag("Enemy"))
                 {
                     BodyDestroy bodyDestroy = hit.collider.gameObject.GetComponent<BodyDestroy>();
                     if (bodyDestroy != null)
