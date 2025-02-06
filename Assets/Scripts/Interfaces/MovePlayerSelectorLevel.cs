@@ -1,22 +1,35 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MovePlayerSelectorLevel : MonoBehaviour
 {
-    public Transform[] targetPoints; 
+    public Transform[] targetPoints;
     public float moveSpeed = 5f;
     private bool isMoving = false;
 
-    public Material unlockedMaterial; 
-    public Material lockedMaterial; 
+    public Material unlockedMaterial;
+    public Material lockedMaterial;
 
     private GameSaveManager gameSaveManager;
-    private int unlockedLevel; 
+    private int unlockedLevel;
 
     void Start()
+    {
+        InitializeGameData();
+        UnlockAllLevels(); //eliminar esta linea mas adelante y quitar los "//" en las demas lineas de codigo
+        UpdateLevelMaterials();
+    }
+
+    void Update()
+    {
+        HandleMovementInput();
+        HandleLevelSelection();
+        //HandleUnlockLevelInput();
+    }
+
+    private void InitializeGameData()
     {
         gameSaveManager = FindObjectOfType<GameSaveManager>();
         if (gameSaveManager != null)
@@ -25,30 +38,26 @@ public class MovePlayerSelectorLevel : MonoBehaviour
             SavedGame savedGame = gameSaveManager.savedGames.Find(game => game.slotNumber == slotNumber);
             if (savedGame != null)
             {
-                unlockedLevel = savedGame.unlockedLevel; 
-            }
-        }
-
-        for (int i = 0; i < targetPoints.Length; i++)
-        {
-            Renderer levelRenderer = targetPoints[i].GetComponent<Renderer>();
-            LevelPoint levelPoint = targetPoints[i].GetComponent<LevelPoint>();
-
-            if (levelRenderer != null && levelPoint != null)
-            {
-                if (levelPoint.levelIndex <= unlockedLevel) 
-                {
-                    levelRenderer.material = unlockedMaterial; 
-                }
-                else
-                {
-                    levelRenderer.material = lockedMaterial; 
-                }
+                unlockedLevel = savedGame.unlockedLevel;
             }
         }
     }
 
-    void Update()
+    private void UpdateLevelMaterials()
+    {
+        foreach (var point in targetPoints)
+        {
+            Renderer levelRenderer = point.GetComponent<Renderer>();
+            LevelPoint levelPoint = point.GetComponent<LevelPoint>();
+
+            if (levelRenderer != null && levelPoint != null)
+            {
+                levelRenderer.material = levelPoint.levelIndex <= unlockedLevel ? unlockedMaterial : lockedMaterial;
+            }
+        }
+    }
+
+    private void HandleMovementInput()
     {
         if (!isMoving)
         {
@@ -60,13 +69,24 @@ public class MovePlayerSelectorLevel : MonoBehaviour
                 TryMove(Vector3.left);
             if (Input.GetKeyDown(KeyCode.D))
                 TryMove(Vector3.right);
-
-            if (Input.GetKeyDown(KeyCode.E)) 
-            {
-                SelectLevel();
-            }
         }
     }
+
+    private void HandleLevelSelection()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && !Input.GetKey(KeyCode.LeftControl))
+        {
+            SelectLevel();
+        }
+    }
+
+    /*private void HandleUnlockLevelInput()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.E))
+        {
+            UnlockAllLevels();
+        }
+    }*/ //mas adelante esto servira para los atajos rapidos de desarrollador
 
     private void TryMove(Vector3 direction)
     {
@@ -77,7 +97,7 @@ public class MovePlayerSelectorLevel : MonoBehaviour
                 Vector3.Dot((point.position - currentPos).normalized, direction.normalized) > 0.9f &&
                 Mathf.Approximately(point.position.y, currentPos.y) &&
                 Mathf.Abs((point.position - currentPos).magnitude) > 0.1f &&
-                IsLevelUnlocked(point) 
+                IsLevelUnlocked(point)
             )
             .OrderBy(point => Vector3.Distance(point.position, currentPos))
             .ToList();
@@ -116,7 +136,7 @@ public class MovePlayerSelectorLevel : MonoBehaviour
                 if (levelPoint.levelIndex <= unlockedLevel)
                 {
                     Debug.Log("Cargando nivel " + levelPoint.levelIndex);
-                    SceneManager.LoadScene("Level " + levelPoint.levelIndex); 
+                    SceneManager.LoadScene("Level " + levelPoint.levelIndex);
                 }
                 else
                 {
@@ -124,6 +144,13 @@ public class MovePlayerSelectorLevel : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void UnlockAllLevels()
+    {
+        unlockedLevel = targetPoints.Length;
+        UpdateLevelMaterials();
+        Debug.Log("Todos los niveles han sido desbloqueados.");
     }
 
     private bool IsLevelUnlocked(Transform levelPoint)

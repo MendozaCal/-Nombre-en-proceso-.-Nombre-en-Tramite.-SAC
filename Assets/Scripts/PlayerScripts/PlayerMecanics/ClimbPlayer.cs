@@ -6,11 +6,10 @@ public class WallClimbing : MonoBehaviour
 {
     [Header("Climbing Settings")]
     [SerializeField] private LayerMask climbLayer;
+    [SerializeField] private LayerMask groundLayer; 
     [SerializeField] private float climbSpeed = 3f;
-    //[SerializeField] private float maxClimbTime = 5f;
     [SerializeField] private float exitJumpForce = 8f;
     [SerializeField] private float exitCooldown = 0.5f;
-    //[SerializeField] private Image statusClimbBar;
 
     [Header("Surface Detection")]
     [SerializeField] private float surfaceDetectionDistance = 0.5f;
@@ -26,7 +25,6 @@ public class WallClimbing : MonoBehaviour
     private Movement movementScript;
     private Hang hangScritp;
     private bool isClimbing;
-    //private float climbTimer;
     private float cooldownTimer;
     private bool canClimbAgain = true;
     private Vector3 currentSurfaceNormal;
@@ -52,6 +50,7 @@ public class WallClimbing : MonoBehaviour
         else if (isClimbing)
         {
             HandleClimbing();
+            CheckForGround();
         }
     }
 
@@ -82,28 +81,22 @@ public class WallClimbing : MonoBehaviour
     {
         isClimbing = true;
         movementScript.DesativateGrabandCombat();
-        //climbTimer = maxClimbTime;
         movementScript.enabled = false;
         hangScritp.enabled = false;
         currentSurfaceNormal = surfaceNormal;
         lastValidPosition = transform.position;
 
-        //statusClimbBar.fillAmount = 1f;
         targetRotation = Quaternion.LookRotation(-surfaceNormal, Vector3.up);
         transform.rotation = targetRotation;
     }
 
     private void HandleClimbing()
     {
-        //climbTimer -= Time.deltaTime;
-        //statusClimbBar.fillAmount = climbTimer / maxClimbTime;
-
-        if (Input.GetKeyDown(KeyCode.E)) /* climbTimer <= 0 ||*/
+        if (Input.GetKeyDown(KeyCode.E))
         {
             StopClimbing();
             return;
         }
-
 
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
@@ -135,13 +128,19 @@ public class WallClimbing : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void CheckForGround()
     {
-        if (collision.gameObject.CompareTag("Rocks"))
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, surfaceDetectionDistance, groundLayer))
         {
             StopClimbing();
-            return;
+            StartCoroutine(ReenableClimbingAfterGround());
         }
+    }
+
+    private IEnumerator ReenableClimbingAfterGround()
+    {
+        yield return new WaitForSeconds(0.75f); 
+        canClimbAgain = true; 
     }
 
     private bool CheckAndUpdateSurface(ref Vector3 position, Vector3 moveDirection)
@@ -195,7 +194,6 @@ public class WallClimbing : MonoBehaviour
 
         return false;
     }
-
 
     private Vector3 CalculateClimbingMoveDirection(float horizontal, float vertical)
     {
@@ -303,7 +301,6 @@ public class WallClimbing : MonoBehaviour
 
                 Gizmos.DrawRay(transform.position, direction * surfaceDetectionDistance);
             }
-
         }
     }
 }
