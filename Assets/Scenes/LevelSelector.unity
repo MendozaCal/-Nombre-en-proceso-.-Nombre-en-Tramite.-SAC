@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 104951029}
   - component: {fileID: 104951033}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 588170551}
   - component: {fileID: 588170555}
   m_Layer: 0
-  m_Name: Sphere (4)
+  m_Name: Nivel 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 675996274}
   - component: {fileID: 675996278}
   m_Layer: 0
-  m_Name: Sphere (7)
+  m_Name: Nivel 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -611,7 +611,7 @@ GameObject:
   - component: {fileID: 1013376308}
   - component: {fileID: 1013376312}
   m_Layer: 0
-  m_Name: Sphere (8)
+  m_Name: Nivel 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -730,7 +730,7 @@ GameObject:
   - component: {fileID: 1139835103}
   - component: {fileID: 1139835107}
   m_Layer: 0
-  m_Name: Sphere (5)
+  m_Name: Nivel 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -849,7 +849,7 @@ GameObject:
   - component: {fileID: 1325773602}
   - component: {fileID: 1325773606}
   m_Layer: 0
-  m_Name: Sphere (2)
+  m_Name: Nivel 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1496,9 +1496,9 @@ SceneRoots:
   - {fileID: 2075272839}
   - {fileID: 1955467208}
   - {fileID: 104951032}
+  - {fileID: 1325773605}
+  - {fileID: 1139835106}
   - {fileID: 1690261501}
   - {fileID: 588170554}
   - {fileID: 675996277}
-  - {fileID: 1325773605}
-  - {fileID: 1139835106}
   - {fileID: 1013376311}
