@@ -50,6 +50,11 @@ public class PlayerLife : Life
     }
     private void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+
         Timer -= Time.deltaTime;
         TimerGame.text = Mathf.RoundToInt(Timer).ToString();
         BananasCont.text = Mathf.RoundToInt(bananas).ToString();
@@ -61,8 +66,14 @@ public class PlayerLife : Life
         }
         DetectEnemies();
     }
+
     public override void TakeDamage(float damage)
     {
+        if (pointsLife <= 0 || Time.timeScale == 0)
+        {
+            return;
+        }
+
         if (!reduceShield)
         {
             pointsShield -= damage;
@@ -77,10 +88,35 @@ public class PlayerLife : Life
             {
                 StartCoroutine(InvulnerabilityPeriodShield());
             }
-            healthBar.UpdateHealthBar(pointsShield); 
+            healthBar.UpdateHealthBar(pointsShield);
         }
     }
 
+    private void ReduceLife()
+    {
+        if (pointsLife <= 0 || Time.timeScale == 0)
+        {
+            return;
+        }
+
+        base.TakeDamage(1);
+        pointsShield = 3;
+        healthBar.UpdateHealthBar(pointsShield);
+        healthText.text = Mathf.RoundToInt(pointsLife).ToString();
+
+        if (spawnPoint != null && pointsLife > 0)
+        {
+            CharacterController controller = GetComponent<CharacterController>();
+            controller.enabled = false;
+            transform.position = spawnPoint.position;
+            controller.enabled = true;
+            Debug.Log("Respawn");
+        }
+        else if (pointsLife <= 0)
+        {
+            FreezePlayer();
+        }
+    }
     public override void Heal(float amount)
     {
         pointsShield += amount;
@@ -208,26 +244,6 @@ public class PlayerLife : Life
     {
         yield return new WaitForSeconds(seconds);
         ReduceLife();
-    }
-    private void ReduceLife()
-    {
-        base.TakeDamage(1);
-        pointsShield = 3;
-        healthBar.UpdateHealthBar(pointsShield);
-        healthText.text = Mathf.RoundToInt(pointsLife).ToString();
-
-        if (spawnPoint != null && pointsLife > 0)
-        {
-            CharacterController controller = GetComponent<CharacterController>();
-            controller.enabled = false;
-            transform.position = spawnPoint.position;
-            controller.enabled = true;
-            Debug.Log("Respawn");
-        }
-        else if (pointsLife <= 0)
-        {
-            FreezePlayer();
-        }
     }
 
     private void UnFreezePlayer()
