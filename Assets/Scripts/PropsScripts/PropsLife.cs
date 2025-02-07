@@ -17,7 +17,8 @@ public class PropsLife : Life
 
     public override void TakeDamage(float damage)
     {
-        base.TakeDamage(damage); 
+        base.TakeDamage(damage);
+        Debug.Log($"Vida restante de {gameObject.name}: {pointsLife}");
 
         if (pointsLife <= 0)
         {

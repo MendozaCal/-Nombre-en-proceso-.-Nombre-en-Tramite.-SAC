@@ -12,6 +12,7 @@ public class EnemyLife : Life
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        Debug.Log($"Vida restante de {gameObject.name}: {pointsLife}");
     }
 
     public override void Heal(float amount)

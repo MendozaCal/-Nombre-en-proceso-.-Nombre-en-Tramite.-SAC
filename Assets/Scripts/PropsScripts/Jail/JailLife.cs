@@ -1,18 +1,45 @@
 using UnityEngine;
 
-public class JailLife : PropsLife
+public class JailLife : Life
 {
-    private Transform parentObject; 
+    [SerializeField] private float maxLife = 10f;
+    private Transform parentObject;
 
-    private void Awake()
+    private void Start()
     {
-        
+        pointsLife = maxLife;
+    }
+    private void Awake()
+    {        
         parentObject = transform.parent;
     }
 
-    public override void DestroyProp()
+    public override void TakeDamage(float damage)
     {
-        base.DestroyProp(); 
+        base.TakeDamage(damage);
+        Debug.Log($"Vida restante de {gameObject.name}: {pointsLife}");
+
+        if (pointsLife <= 0)
+        {
+            DestroyJailProp();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.CompareTag("Stick"))
+        {
+            TakeDamage(1);
+        }
+        else if (other.gameObject.CompareTag("Honda"))
+        {
+            TakeDamage(2);
+        }
+    }
+
+    public virtual void DestroyJailProp()
+    {
 
         if (parentObject != null)
         {
