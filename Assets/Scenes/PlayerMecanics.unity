@@ -1697,10 +1697,10 @@ GameObject:
   - component: {fileID: 196037443}
   - component: {fileID: 196037442}
   - component: {fileID: 196037441}
-  - component: {fileID: 196037440}
-  - component: {fileID: 196037447}
   - component: {fileID: 196037446}
   - component: {fileID: 196037445}
+  - component: {fileID: 196037447}
+  - component: {fileID: 196037448}
   m_Layer: 0
   m_Name: ComponentCinematic
   m_TagString: Untagged
@@ -1708,33 +1708,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!320 &196037440
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196037439}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: a8601f62ee2b82b4f8f00fbe3d718f42, type: 2}
-  m_InitialState: 0
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: -5271030915170558425, guid: a8601f62ee2b82b4f8f00fbe3d718f42, type: 2}
-    value: {fileID: 1685094009}
-  - key: {fileID: -9013503613740041749, guid: a8601f62ee2b82b4f8f00fbe3d718f42, type: 2}
-    value: {fileID: 196037445}
-  - key: {fileID: 4596960895395661060, guid: a8601f62ee2b82b4f8f00fbe3d718f42, type: 2}
-    value: {fileID: 614406045}
-  - key: {fileID: -9204005088934464103, guid: a8601f62ee2b82b4f8f00fbe3d718f42, type: 2}
-    value: {fileID: 1019886153}
-  - key: {fileID: -7206426659842574570, guid: a8601f62ee2b82b4f8f00fbe3d718f42, type: 2}
-    value: {fileID: 1019886155}
-  m_ExposedReferences:
-    m_References: []
 --- !u!65 &196037441
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1860,7 +1833,7 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 196037447}
+        - m_Target: {fileID: 196037448}
           m_TargetAssemblyTypeName: PlayCinematic, Assembly-CSharp
           m_MethodName: ActivateSpecificScripts
           m_Mode: 1
@@ -1872,7 +1845,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &196037447
+--- !u!320 &196037447
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196037439}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: f67abd2e1c7dee94ebc18108a5bdec23, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -5271030915170558425, guid: f67abd2e1c7dee94ebc18108a5bdec23, type: 2}
+    value: {fileID: 1685094009}
+  - key: {fileID: -9013503613740041749, guid: f67abd2e1c7dee94ebc18108a5bdec23, type: 2}
+    value: {fileID: 196037445}
+  - key: {fileID: 4596960895395661060, guid: f67abd2e1c7dee94ebc18108a5bdec23, type: 2}
+    value: {fileID: 614406045}
+  - key: {fileID: -9204005088934464103, guid: f67abd2e1c7dee94ebc18108a5bdec23, type: 2}
+    value: {fileID: 1019886153}
+  - key: {fileID: -7206426659842574570, guid: f67abd2e1c7dee94ebc18108a5bdec23, type: 2}
+    value: {fileID: 1019886155}
+  m_ExposedReferences:
+    m_References: []
+--- !u!114 &196037448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19228,6 +19228,14 @@ PrefabInstance:
       propertyPath: wallClimbingScrpt
       value: 
       objectReference: {fileID: 1478282846}
+    - target: {fileID: 2621104054773733542, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8267593380367897713}
+    - target: {fileID: 2621104054773733542, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActivateSpecificScripts
+      objectReference: {fileID: 0}
     - target: {fileID: 3428647462521602469, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.550001
@@ -19277,6 +19285,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
+--- !u!114 &8267593380367897713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2289139638299905271, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
+  m_PrefabInstance: {fileID: 8267593380367897712}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e07eb32f5cd8145a661c1034fb620b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8297781128758488315
 GameObject:
   m_ObjectHideFlags: 0
