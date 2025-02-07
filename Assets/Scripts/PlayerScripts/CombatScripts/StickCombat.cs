@@ -42,6 +42,7 @@ public class StickCombat : ICombatBehavior
         if (boxCollider != null)
         {
             boxCollider.excludeLayers = LayerMask.GetMask("Enemy");
+            boxCollider.excludeLayers = LayerMask.GetMask("Prop");
         }
     }
 }

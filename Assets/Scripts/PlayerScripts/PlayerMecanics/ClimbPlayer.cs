@@ -6,7 +6,7 @@ public class WallClimbing : MonoBehaviour
 {
     [Header("Climbing Settings")]
     [SerializeField] private LayerMask climbLayer;
-    [SerializeField] private LayerMask groundLayer; 
+    [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float climbSpeed = 3f;
     [SerializeField] private float exitJumpForce = 8f;
     [SerializeField] private float exitCooldown = 0.5f;
@@ -71,8 +71,11 @@ public class WallClimbing : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, surfaceDetectionDistance, climbLayer))
             {
-                StartClimbing(hit.normal);
-                break;
+                if (Input.GetKeyDown(KeyCode.E)) 
+                {
+                    StartClimbing(hit.normal);
+                    break;
+                }
             }
         }
     }
@@ -86,13 +89,16 @@ public class WallClimbing : MonoBehaviour
         currentSurfaceNormal = surfaceNormal;
         lastValidPosition = transform.position;
 
-        targetRotation = Quaternion.LookRotation(-surfaceNormal, Vector3.up);
-        transform.rotation = targetRotation;
+        if (Mathf.Abs(Vector3.Dot(surfaceNormal, Vector3.up)) < 0.9f) 
+        {
+            targetRotation = Quaternion.LookRotation(-surfaceNormal, Vector3.up);
+            transform.rotation = targetRotation;
+        }
     }
 
     private void HandleClimbing()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E)) 
         {
             StopClimbing();
             return;
@@ -101,7 +107,7 @@ public class WallClimbing : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
-        if (Vector3.Dot(currentSurfaceNormal, Vector3.up) > 0.9f)
+        if (Vector3.Dot(currentSurfaceNormal, Vector3.up) > 0.9f) 
         {
             StopClimbing();
             return;
@@ -121,7 +127,7 @@ public class WallClimbing : MonoBehaviour
             controller.Move(lastValidPosition - transform.position);
         }
 
-        if (Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.up)) < 0.25f)
+        if (Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.up)) < 0.25f) 
         {
             targetRotation = Quaternion.LookRotation(-currentSurfaceNormal, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -139,8 +145,8 @@ public class WallClimbing : MonoBehaviour
 
     private IEnumerator ReenableClimbingAfterGround()
     {
-        yield return new WaitForSeconds(0.75f); 
-        canClimbAgain = true; 
+        yield return new WaitForSeconds(0.75f);
+        canClimbAgain = true;
     }
 
     private bool CheckAndUpdateSurface(ref Vector3 position, Vector3 moveDirection)
@@ -237,17 +243,20 @@ public class WallClimbing : MonoBehaviour
 
     private IEnumerator ResetRotation()
     {
-        Quaternion startRotation = transform.rotation;
-        Quaternion targetRot = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
-        float elapsedTime = 0f;
-        float rotationDuration = 0.2f;
-
-        while (elapsedTime < rotationDuration)
+        if (Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.up)) < 0.9f) 
         {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / rotationDuration;
-            transform.rotation = Quaternion.Slerp(startRotation, targetRot, t);
-            yield return null;
+            Quaternion startRotation = transform.rotation;
+            Quaternion targetRot = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            float elapsedTime = 0f;
+            float rotationDuration = 0.2f;
+
+            while (elapsedTime < rotationDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / rotationDuration;
+                transform.rotation = Quaternion.Slerp(startRotation, targetRot, t);
+                yield return null;
+            }
         }
     }
 
