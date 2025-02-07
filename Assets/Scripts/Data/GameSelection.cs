@@ -16,8 +16,9 @@ public class GameSelection : MonoBehaviour
     private void LoadGame(SavedGame savedGame)
     {
         PlayerPrefs.SetInt("SlotNumber", savedGame.slotNumber);
-        PlayerPrefs.SetString("World", savedGame.worldName);
+        PlayerPrefs.SetInt("UnlockedLevel", savedGame.unlockedLevel);
         PlayerPrefs.SetInt("Lives", savedGame.lives);
+        PlayerPrefs.SetInt("Score", savedGame.score);
         PlayerPrefs.SetInt("Collectibles", savedGame.collectibles);
 
         Debug.Log("Loading game in slot: " + savedGame.slotNumber);

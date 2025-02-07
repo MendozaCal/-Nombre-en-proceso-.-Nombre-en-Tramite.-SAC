@@ -29,6 +29,10 @@ public class PlayerLife : Life
 
     private void Start()
     {
+        PlayerPrefs.SetInt("LastLevelBananas", 0);
+        PlayerPrefs.SetInt("LastLevelMonkeys", 0);
+        PlayerPrefs.Save();
+
         int slotNumber = PlayerPrefs.GetInt("SlotNumber");
         GameSaveManager saveManager = FindObjectOfType<GameSaveManager>();
         if (saveManager != null)
@@ -293,6 +297,8 @@ public class PlayerLife : Life
                     if (currentGame != null)
                     {
                         currentGame.unlockedLevel = levelNumber + 1;
+                        currentGame.collectibles += monkeys;
+                        currentGame.lives = (int)pointsLife;
 
                         saveManager.SaveGames();
                         Debug.Log("Nivel desbloqueado: " + currentGame.unlockedLevel); 
@@ -301,7 +307,13 @@ public class PlayerLife : Life
             }
         }
 
-        SceneManager.LoadScene("LevelSelector");
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        PlayerPrefs.SetInt("LastLevelBananas", bananas);
+        PlayerPrefs.SetInt("LastLevelMonkeys", monkeys);
+        PlayerPrefs.SetString("LastLevel", currentSceneName);
+        PlayerPrefs.Save();
+
+        SceneManager.LoadScene("Victory");
     }
 
     private void OnDrawGizmos()
