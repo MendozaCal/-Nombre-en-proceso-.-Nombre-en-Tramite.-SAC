@@ -17,11 +17,12 @@ public class Fade : MonoBehaviour
     {
         if (!isFading) return;
 
-        canvasGroup.alpha += Time.deltaTime * speed; 
+        canvasGroup.alpha += Time.deltaTime * speed;
 
-        if (canvasGroup.alpha >= 1) 
+        if (canvasGroup.alpha >= 1)
         {
-            SceneManager.LoadScene(loadScene.sceneName);
+            if (loadScene != null) SceneManager.LoadScene(loadScene.sceneName);
+            else SceneManager.LoadScene("GameOver");
         }
     }
 

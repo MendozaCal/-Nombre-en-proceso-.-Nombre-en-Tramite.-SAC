@@ -44,7 +44,7 @@ public class PlayerLife : Life
         {
             pointsLife = initialLife;
         }
-
+        UnFreezePlayer();
         healthBar.Initialize(initialLife);
         healthText.text = Mathf.RoundToInt(pointsLife).ToString();
     }
@@ -112,7 +112,12 @@ public class PlayerLife : Life
 
     protected override void Die()
     {
-        ReloadCurrentScene();
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        PlayerPrefs.SetString("LastLevel", currentSceneName);
+        PlayerPrefs.Save();
+
+        Fade fade = FindObjectOfType<Fade>();
+        fade.StartFadeIn();
     }
 
     public void ReloadCurrentScene()
@@ -211,7 +216,7 @@ public class PlayerLife : Life
         healthBar.UpdateHealthBar(pointsShield);
         healthText.text = Mathf.RoundToInt(pointsLife).ToString();
 
-        if (spawnPoint != null)
+        if (spawnPoint != null && pointsLife > 0)
         {
             CharacterController controller = GetComponent<CharacterController>();
             controller.enabled = false;
@@ -219,6 +224,34 @@ public class PlayerLife : Life
             controller.enabled = true;
             Debug.Log("Respawn");
         }
+        else if (pointsLife <= 0)
+        {
+            FreezePlayer();
+        }
+    }
+
+    private void UnFreezePlayer()
+    {
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller != null)
+        {
+            controller.enabled = true;
+        }
+
+        Movement movement = GetComponent<Movement>();
+        movement.enabled = true;
+    }
+
+    private void FreezePlayer()
+    {
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller != null)
+        {
+            controller.enabled = false;
+        }
+        
+        Movement movement = GetComponent<Movement>();
+        movement.enabled = false;
     }
     private void CheckPoint(Vector3 vector3)
     {
