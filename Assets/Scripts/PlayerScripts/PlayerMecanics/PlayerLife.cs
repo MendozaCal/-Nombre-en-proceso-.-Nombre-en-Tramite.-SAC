@@ -16,7 +16,7 @@ public class PlayerLife : Life
     [SerializeField] private GameObject KeyController;
     [SerializeField] private int bananas;
     [SerializeField] private int monkeys;
-    [SerializeField] private float key;
+    public float key;
     [SerializeField] private Transform spawnPoint;
 
     [Header("BoxCast Settings")]

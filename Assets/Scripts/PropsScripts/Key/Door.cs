@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    private PlayerLife playerLife;
 
     public Vector3 openRotationEulerAngles; 
     public float rotationSpeed = 2f;  
     private bool isOpen = false;
 
 
-    private bool hasStartedOpening = false;
+    public bool hasStartedOpening = false;
 
 
     private Quaternion initialRotation;
@@ -16,15 +17,17 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
+        playerLife = FindObjectOfType<PlayerLife>();
         initialRotation = transform.rotation;
         targetRotation = Quaternion.Euler(openRotationEulerAngles) * initialRotation;
     }
 
     private void Update()
     {
-        if (hasStartedOpening && !isOpen)
+        if (hasStartedOpening  && Input.GetKeyDown(KeyCode.E))
         {
             RotateDoor(targetRotation);
+            
         }
     }
 
@@ -38,11 +41,22 @@ public class Door : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Player") && !hasStartedOpening && (playerLife.key >= 1))
+    //    {
+    //        Debug.Log("Toco puerta");
+    //        hasStartedOpening = true;
+    //    }
+    //}
+
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("Key") && !hasStartedOpening)
+        if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Toco puerta");
             hasStartedOpening = true;
         }
+
     }
 }
