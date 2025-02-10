@@ -17,6 +17,7 @@ public class PlayerLife : Life
     [SerializeField] private int bananas;
     [SerializeField] private int monkeys;
     public float key;
+    public bool isTouchDoor;
     [SerializeField] private Transform spawnPoint;
 
     [Header("BoxCast Settings")]
@@ -243,8 +244,41 @@ public class PlayerLife : Life
                 break;
         }
     }
+    private void OnTriggerStay(Collider other)
+    {
+        switch (other.tag)
+        {
+            case "Door":
+                Debug.Log("está tocando");
+                Door door = other.gameObject.GetComponent<Door>();
+                if (door == null)
+                {
+                    Debug.LogWarning("El objeto no tiene el componente Door");
+                    return;
+                }
+                if (key >= 1 && Input.GetKeyDown(KeyCode.E))
+                {
+                    isTouchDoor = true;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        switch (other.tag)
+        {
+            case "Door":
+                isTouchDoor = false; 
+                break;
 
-    private IEnumerator ExecuteAnimationHazard(float seconds)
+            default :
+                break;
+        }
+
+    }
+        private IEnumerator ExecuteAnimationHazard(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         ReduceLife();

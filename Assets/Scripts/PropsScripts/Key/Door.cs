@@ -2,61 +2,41 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    private PlayerLife playerLife;
-
-    public Vector3 openRotationEulerAngles; 
-    public float rotationSpeed = 2f;  
-    private bool isOpen = false;
-
-
-    public bool hasStartedOpening = false;
-
-
-    private Quaternion initialRotation;
-    private Quaternion targetRotation;
+    public float rotationSpeed = 100f; // Velocidad de rotación en grados por segundo
+    private float targetAngle;
+    [SerializeField] float finalAngle = 90;
+    private bool rotating;
+    PlayerLife PlayerLife;
 
     private void Start()
     {
-        playerLife = FindObjectOfType<PlayerLife>();
-        initialRotation = transform.rotation;
-        targetRotation = Quaternion.Euler(openRotationEulerAngles) * initialRotation;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        PlayerLife = player.GetComponent<PlayerLife>();
     }
-
-    private void Update()
+    void Update()
     {
-        if (hasStartedOpening  && Input.GetKeyDown(KeyCode.E))
+        if (PlayerLife.isTouchDoor && !rotating)
         {
-            RotateDoor(targetRotation);
-            
+            targetAngle = transform.eulerAngles.y - finalAngle;
+            rotating = true;
+            Debug.Log("está abiert");
+        }
+
+        if (rotating)
+        {
+            RotateToTarget();
         }
     }
 
-    private void RotateDoor(Quaternion target)
+    private void RotateToTarget()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, target, rotationSpeed * Time.deltaTime);
+        float currentY = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, rotationSpeed * Time.deltaTime);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentY, transform.eulerAngles.z);
 
-        if (Quaternion.Angle(transform.rotation, target) < 0.1f)
+        if (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle)) < 0.01f)
         {
-            isOpen = true;
+            rotating = false;
+            PlayerLife.isTouchDoor = false;
         }
-    }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player") && !hasStartedOpening && (playerLife.key >= 1))
-    //    {
-    //        Debug.Log("Toco puerta");
-    //        hasStartedOpening = true;
-    //    }
-    //}
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Toco puerta");
-            hasStartedOpening = true;
-        }
-
     }
 }
