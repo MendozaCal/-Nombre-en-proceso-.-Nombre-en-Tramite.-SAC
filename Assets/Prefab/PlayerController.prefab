@@ -2091,6 +2091,7 @@ GameObject:
   - component: {fileID: 4614831288024681059}
   - component: {fileID: 8106879353901568382}
   - component: {fileID: 1193619926501199469}
+  - component: {fileID: 7989669906839972732}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -2215,7 +2216,7 @@ MonoBehaviour:
   groundCheckDistance: 1.62
   wallLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1024
   wallCheckDistance: 1
   wallJumpForce: 6
   wallJumpDirection: {x: 0, y: 2, z: 0.5}
@@ -2241,7 +2242,7 @@ MonoBehaviour:
   normalOffset: {x: 1, y: 0, z: 0}
   stickOffset: {x: 1, y: 0.2, z: 0}
   hondaOffset: {x: 1, y: 0, z: 0}
-  keyOffset: {x: 1, y: 0, z: 0}
+  keyOffset: {x: 1, y: 0, z: 0.75}
 --- !u!114 &3079938152066590050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2286,6 +2287,7 @@ MonoBehaviour:
   bananas: 0
   monkeys: 0
   key: 0
+  totalKey: 2
   spawnPoint: {fileID: 0}
   boxSize: {x: 1.5, y: 3, z: 1.5}
   maxDistance: 0.1
@@ -2484,6 +2486,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7989669906839972732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5356174307607862439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 673e044fc20d2994f996363cfd1ae454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  climbSpeed: 3
+  exitJumpForce: 8
+  exitCooldown: 0.5
+  surfaceDetectionDistance: 0.5
+  cornerCheckRadius: 0.4
+  cornerRayCount: 8
+  rotationSpeed: 10
 --- !u!1 &5480599337253975852
 GameObject:
   m_ObjectHideFlags: 0

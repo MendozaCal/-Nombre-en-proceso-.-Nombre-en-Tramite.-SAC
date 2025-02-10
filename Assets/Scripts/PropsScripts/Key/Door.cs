@@ -2,41 +2,35 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public float rotationSpeed = 100f; // Velocidad de rotación en grados por segundo
-    private float targetAngle;
-    [SerializeField] float finalAngle = 90;
+    public float moveSpeed = 100f;
+    public float newHeight = 4;
     private bool rotating;
-    PlayerLife PlayerLife;
+    public bool isTouchDoor;
+    private float targetHeight;
 
-    private void Start()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        PlayerLife = player.GetComponent<PlayerLife>();
-    }
     void Update()
     {
-        if (PlayerLife.isTouchDoor && !rotating)
+        if (isTouchDoor && !rotating)
         {
-            targetAngle = transform.eulerAngles.y - finalAngle;
             rotating = true;
-            Debug.Log("está abiert");
+            targetHeight = transform.position.y + newHeight;
         }
 
         if (rotating)
         {
-            RotateToTarget();
+            MoveToTarget();
         }
     }
 
-    private void RotateToTarget()
+    private void MoveToTarget()
     {
-        float currentY = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, rotationSpeed * Time.deltaTime);
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentY, transform.eulerAngles.z);
-
-        if (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle)) < 0.01f)
+        float newY = Mathf.MoveTowards(transform.position.y, targetHeight, moveSpeed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        this.GetComponent<BoxCollider>().enabled = false;
+        if (Mathf.Abs(transform.position.y - targetHeight) < 0.01f)
         {
             rotating = false;
-            PlayerLife.isTouchDoor = false;
+            isTouchDoor = false;
         }
     }
 }

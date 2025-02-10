@@ -16,8 +16,8 @@ public class PlayerLife : Life
     [SerializeField] private GameObject KeyController;
     [SerializeField] private int bananas;
     [SerializeField] private int monkeys;
-    public float key;
-    public bool isTouchDoor;
+    [SerializeField] public float key;
+    [SerializeField] public float totalKey;
     [SerializeField] private Transform spawnPoint;
 
     [Header("BoxCast Settings")]
@@ -63,8 +63,8 @@ public class PlayerLife : Life
         Timer -= Time.deltaTime;
         TimerGame.text = Mathf.RoundToInt(Timer).ToString();
         BananasCont.text = Mathf.RoundToInt(bananas).ToString();
-        KeyCont.text = Mathf.RoundToInt(key).ToString() + "/1";
-
+        if (key > 0) KeyCont.text = Mathf.RoundToInt(key).ToString() + "/" + totalKey;
+        else KeyCont.text = "";
         if (Timer <= 0)
         {
             base.TakeDamage(1);
@@ -250,15 +250,12 @@ public class PlayerLife : Life
         {
             case "Door":
                 Debug.Log("está tocando");
-                Door door = other.gameObject.GetComponent<Door>();
-                if (door == null)
+                GameObject newDoor = other.gameObject;
+                Door door = newDoor.gameObject.GetComponent<Door>();
+                if (key >= 1 && Input.GetKey(KeyCode.E) && !door.isTouchDoor)
                 {
-                    Debug.LogWarning("El objeto no tiene el componente Door");
-                    return;
-                }
-                if (key >= 1 && Input.GetKeyDown(KeyCode.E))
-                {
-                    isTouchDoor = true;
+                    key--;
+                    door.isTouchDoor = true;
                 }
                 break;
             default:
@@ -270,7 +267,9 @@ public class PlayerLife : Life
         switch (other.tag)
         {
             case "Door":
-                isTouchDoor = false; 
+                GameObject newDoor = other.gameObject;
+                Door door = newDoor.gameObject.GetComponent<Door>();
+                door.isTouchDoor = false;
                 break;
 
             default :
