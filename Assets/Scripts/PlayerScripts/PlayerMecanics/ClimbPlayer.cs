@@ -27,6 +27,7 @@ public class WallClimbing : MonoBehaviour
     private bool isClimbing;
     private float cooldownTimer;
     private bool canClimbAgain = true;
+    private bool isGrounded;
     private Vector3 currentSurfaceNormal;
     private Vector3 lastValidPosition;
 
@@ -65,23 +66,31 @@ public class WallClimbing : MonoBehaviour
 
     private void CheckForClimbableSurface()
     {
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, surfaceDetectionDistance, groundLayer);
+
+        if (isGrounded) return;
+
         Vector3[] checkDirections = { transform.forward, -transform.forward, transform.right, -transform.right, transform.up, -transform.up };
 
         foreach (Vector3 direction in checkDirections)
         {
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, surfaceDetectionDistance, climbLayer))
             {
-                if (Input.GetKeyDown(KeyCode.E)) 
-                {
-                    StartClimbing(hit.normal);
-                    break;
-                }
+                StartClimbing(hit.normal);
+                break;
             }
+            //if (Input.GetKeyDown(KeyCode.E)) 
+            //{
+            //    StartClimbing(hit.normal);
+            //    break;
+            //}
         }
     }
 
     private void StartClimbing(Vector3 surfaceNormal)
     {
+        if (isGrounded) return;
+
         isClimbing = true;
         movementScript.DesativateGrabandCombat();
         movementScript.enabled = false;
@@ -89,7 +98,7 @@ public class WallClimbing : MonoBehaviour
         currentSurfaceNormal = surfaceNormal;
         lastValidPosition = transform.position;
 
-        if (Mathf.Abs(Vector3.Dot(surfaceNormal, Vector3.up)) < 0.9f) 
+        if (Mathf.Abs(Vector3.Dot(surfaceNormal, Vector3.up)) < 0.9f)
         {
             targetRotation = Quaternion.LookRotation(-surfaceNormal, Vector3.up);
             transform.rotation = targetRotation;
@@ -98,7 +107,7 @@ public class WallClimbing : MonoBehaviour
 
     private void HandleClimbing()
     {
-        if (Input.GetKeyDown(KeyCode.E)) 
+        if (Input.GetKeyDown(KeyCode.E))
         {
             StopClimbing();
             return;
@@ -107,7 +116,7 @@ public class WallClimbing : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
-        if (Vector3.Dot(currentSurfaceNormal, Vector3.up) > 0.9f) 
+        if (Vector3.Dot(currentSurfaceNormal, Vector3.up) > 0.9f)
         {
             StopClimbing();
             return;
@@ -127,7 +136,7 @@ public class WallClimbing : MonoBehaviour
             controller.Move(lastValidPosition - transform.position);
         }
 
-        if (Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.up)) < 0.25f) 
+        if (Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.up)) < 0.25f)
         {
             targetRotation = Quaternion.LookRotation(-currentSurfaceNormal, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -138,8 +147,13 @@ public class WallClimbing : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, surfaceDetectionDistance, groundLayer))
         {
+            isGrounded = true;
             StopClimbing();
             StartCoroutine(ReenableClimbingAfterGround());
+        }
+        else
+        {
+            isGrounded = false;
         }
     }
 
@@ -210,12 +224,6 @@ public class WallClimbing : MonoBehaviour
             surfaceRight = Vector3.ProjectOnPlane(transform.right, currentSurfaceNormal).normalized;
             surfaceUp = Vector3.Cross(currentSurfaceNormal, surfaceRight).normalized;
         }
-        else if (Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.forward)) > 0.9f ||
-                 Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.right)) > 0.9f)
-        {
-            surfaceUp = Vector3.ProjectOnPlane(Vector3.up, currentSurfaceNormal).normalized;
-            surfaceRight = Vector3.Cross(currentSurfaceNormal, surfaceUp).normalized;
-        }
         else
         {
             surfaceUp = Vector3.ProjectOnPlane(Vector3.up, currentSurfaceNormal).normalized;
@@ -223,7 +231,7 @@ public class WallClimbing : MonoBehaviour
         }
 
         Vector3 moveDirection = (surfaceUp * vertical + surfaceRight * horizontal).normalized;
-
+        
         moveDirection = Vector3.Slerp(moveDirection, currentSurfaceNormal * 0.1f, 0.2f);
 
         return moveDirection;
@@ -287,13 +295,13 @@ public class WallClimbing : MonoBehaviour
 
             Gizmos.color = Color.blue;
             Vector3[] predefinedDirections = {
-                -currentSurfaceNormal,
-                currentSurfaceNormal,
-                Vector3.Cross(currentSurfaceNormal, Vector3.up),
-                Vector3.Cross(currentSurfaceNormal, Vector3.forward),
-                Vector3.Cross(Vector3.up, currentSurfaceNormal),
-                Vector3.Cross(Vector3.forward, currentSurfaceNormal)
-            };
+            -currentSurfaceNormal,
+            currentSurfaceNormal,
+            Vector3.Cross(currentSurfaceNormal, Vector3.up),
+            Vector3.Cross(currentSurfaceNormal, Vector3.forward),
+            Vector3.Cross(Vector3.up, currentSurfaceNormal),
+            Vector3.Cross(Vector3.forward, currentSurfaceNormal)
+        };
 
             for (int i = 0; i < cornerRayCount; i++)
             {
