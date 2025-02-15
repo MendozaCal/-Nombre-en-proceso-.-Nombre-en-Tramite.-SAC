@@ -89,7 +89,7 @@ public class WallClimbing : MonoBehaviour
 
     private void StartClimbing(Vector3 surfaceNormal)
     {
-        if (isGrounded) return;
+        if (movementScript.isGrounded) return;
 
         isClimbing = true;
         movementScript.DesativateGrabandCombat();
