@@ -2145,7 +2145,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f0c7a9a4e2f35a447a9c50a46f6b242e, type: 2}
+  - {fileID: 2100000, guid: a315cf1a8831bc449a8d40b31c72d830, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2211,8 +2211,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  boxSize: {x: 1.4, y: 0.38, z: 1.38}
-  groundCheckDistance: 1.62
+  boxSize: {x: 1.01, y: 0.41, z: 1.24}
+  groundCheckDistance: 1.61
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -2368,7 +2368,7 @@ MonoBehaviour:
   climbSpeed: 3
   exitJumpForce: 15
   exitCooldown: 1
-  surfaceDetectionDistance: 1.5
+  surfaceDetectionDistance: 1.58
   cornerCheckRadius: 1.5
   cornerRayCount: 8
   rotationSpeed: 10
