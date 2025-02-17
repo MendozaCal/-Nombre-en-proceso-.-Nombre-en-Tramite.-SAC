@@ -2915,7 +2915,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4969243558794666181, guid: 545596891b9d8a441a36751ce28a966d, type: 3}
 --- !u!1 &743321262 stripped
@@ -4631,6 +4631,18 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 2077297906}
+    - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.99116
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.99116
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.99116
+      objectReference: {fileID: 0}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 83.5
