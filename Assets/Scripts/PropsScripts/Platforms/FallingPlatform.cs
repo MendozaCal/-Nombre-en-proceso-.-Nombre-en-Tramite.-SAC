@@ -60,6 +60,7 @@ public class FallingPlatform : MonoBehaviour
     {
         Debug.Log($"Restableciendo la plataforma: {gameObject.name}.");
         animator.enabled = false;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         rb.isKinematic = true;
         transform.position = originalPosition; 
         meshRenderer.enabled = true; 

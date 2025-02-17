@@ -386,7 +386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
+  m_AnchoredPosition: {x: 0, y: -20.000008}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &1346775721807848372
@@ -2107,7 +2107,7 @@ Transform:
   m_GameObject: {fileID: 5356174307607862439}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7, y: 1.04, z: -0.4}
+  m_LocalPosition: {x: -0.7, y: 0.65, z: -0.4}
   m_LocalScale: {x: 1.5, y: 3, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2200,19 +2200,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5237a99099213f84c9d68969d074399a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedBase: 4
-  moveSpeedMax: 8
+  moveSpeedBase: 10
+  moveSpeedMax: 20
   jumpForce: 3
   gravity: -30
   turnSmoothTime: 0.1
   cameraTransform: {fileID: 94874360717655630}
   bounceForce: 18
-  raycastDistance: 1.3
+  raycastDistance: 1.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  boxSize: {x: 1.01, y: 0.41, z: 1.24}
-  groundCheckDistance: 1.61
+  boxSize: {x: 1.5, y: 0.41, z: 1.5}
+  groundCheckDistance: 1.6
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -2365,11 +2365,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 65536
-  climbSpeed: 3
+  climbSpeed: 12
   exitJumpForce: 15
   exitCooldown: 1
-  surfaceDetectionDistance: 1.58
-  cornerCheckRadius: 1.5
+  surfaceDetectionDistance: 1
+  cornerCheckRadius: 0.8
   cornerRayCount: 8
   rotationSpeed: 10
 --- !u!114 &8106879353901568382
@@ -3072,7 +3072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 20, y: -20}
+  m_AnchoredPosition: {x: 20, y: -20.000008}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8106289081952985710
@@ -3109,7 +3109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
+  m_AnchoredPosition: {x: 0, y: -20.000008}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &8201606674960709050
