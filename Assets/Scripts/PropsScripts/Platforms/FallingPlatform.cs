@@ -10,10 +10,11 @@ public class FallingPlatform : MonoBehaviour
     private MeshRenderer meshRenderer;
     private Collider platformCollider;
     private Vector3 originalPosition;
-
+    Animator animator;
     private void Start()
     {
-
+        animator = GetComponent<Animator>();
+        animator.enabled = false;
         rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
@@ -40,6 +41,7 @@ public class FallingPlatform : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            animator.enabled = true;
             Debug.Log($"Jugador ha activado la plataforma: {gameObject.name}.");
             Invoke(nameof(Fall), fallDelay);
         }
@@ -57,6 +59,7 @@ public class FallingPlatform : MonoBehaviour
     private void ResetPlatform()
     {
         Debug.Log($"Restableciendo la plataforma: {gameObject.name}.");
+        animator.enabled = false;
         rb.isKinematic = true;
         transform.position = originalPosition; 
         meshRenderer.enabled = true; 
