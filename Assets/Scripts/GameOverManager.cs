@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class GameOverManager : MonoBehaviour
 {
     public Button retryButton;
+    [SerializeField] private Transform canvas;
+    [SerializeField] private Fade fadePrefab;
 
     private void Start()
     {
@@ -14,6 +16,6 @@ public class GameOverManager : MonoBehaviour
     private void OnRetryButtonClicked()
     {
         string lastLevel = PlayerPrefs.GetString("LastLevel", "Level1"); 
-        SceneManager.LoadScene(lastLevel);
+        fadePrefab.StartFadeIn(lastLevel);
     }
 }

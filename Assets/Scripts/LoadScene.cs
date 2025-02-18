@@ -9,7 +9,7 @@ public class LoadScene : MonoBehaviour
 
     public void ChangeSceneWithFade()
     {
-        fadePrefab.StartFadeIn();
+        fadePrefab.StartFadeIn(sceneName);
     }
 
     public void LoadSceneStart()

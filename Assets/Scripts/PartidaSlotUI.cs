@@ -115,7 +115,7 @@ public class PartidaSlotUI : MonoBehaviour
         }
     }
 
-    private void HidePanels()
+    public void HidePanels()
     {
         if (newGamePanel != null) newGamePanel.SetActive(false);
         if (loadGamePanel != null) loadGamePanel.SetActive(false);

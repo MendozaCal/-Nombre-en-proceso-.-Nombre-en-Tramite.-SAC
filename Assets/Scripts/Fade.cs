@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,24 +11,28 @@ public class Fade : MonoBehaviour
 
     private void Start()
     {
-        canvasGroup.alpha = 0f; 
+        canvasGroup.alpha = 0f;
     }
 
-    private void Update()
-    {
-        if (!isFading) return;
-
-        canvasGroup.alpha += Time.deltaTime * speed;
-
-        if (canvasGroup.alpha >= 1)
-        {
-            if (loadScene != null) SceneManager.LoadScene(loadScene.sceneName);
-            else SceneManager.LoadScene("GameOver");
-        }
-    }
-
-    public void StartFadeIn()
+    public IEnumerator Fading(string sceneName)
     {
         isFading = true;
+
+        while (canvasGroup.alpha < 1)
+        {
+            canvasGroup.alpha += Time.deltaTime * speed;
+            yield return null; 
+        }
+
+        if (loadScene != null)
+            SceneManager.LoadScene(sceneName);
+        else
+            SceneManager.LoadScene("GameOver");
+    }
+
+    public void StartFadeIn(string sceneName)
+    {
+        if (!isFading)
+            StartCoroutine(Fading(sceneName));
     }
 }

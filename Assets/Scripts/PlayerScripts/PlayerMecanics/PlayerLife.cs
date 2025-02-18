@@ -158,7 +158,7 @@ public class PlayerLife : Life
         PlayerPrefs.Save();
 
         Fade fade = FindObjectOfType<Fade>();
-        fade.StartFadeIn();
+        fade.StartFadeIn("GameOver");
     }
 
     public void ReloadCurrentScene()

@@ -1895,7 +1895,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 408936285}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 875864305}
+        m_TargetAssemblyTypeName: PartidaSlotUI, Assembly-CSharp
+        m_MethodName: HidePanels
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &408936285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2150,7 +2162,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 656977679}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 700407597}
+        m_TargetAssemblyTypeName: PartidaSlotUI, Assembly-CSharp
+        m_MethodName: HidePanels
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &656977679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2884,6 +2908,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: MainMenu
+  canvas: {fileID: 0}
+  fadePrefab: {fileID: 0}
 --- !u!1 &731016278
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,7 +2992,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 731016281}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2130625271}
+        m_TargetAssemblyTypeName: PartidaSlotUI, Assembly-CSharp
+        m_MethodName: HidePanels
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &731016281
 MonoBehaviour:
   m_ObjectHideFlags: 0
