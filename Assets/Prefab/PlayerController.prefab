@@ -2321,7 +2321,7 @@ MonoBehaviour:
   groundCheckDistance: 1.6
   wallLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   wallCheckDistance: 1
   wallJumpForce: 6
   wallJumpDirection: {x: 0, y: 2, z: 0.5}
