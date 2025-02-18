@@ -19,6 +19,9 @@ public class WallClimbing : MonoBehaviour
     [Header("Rotation Settings")]
     [SerializeField] private float rotationSpeed = 10f;
 
+    [Header("Camera Reference")]
+    [SerializeField] private Transform cameraTransform; 
+
     private Quaternion targetRotation;
 
     private CharacterController controller;
@@ -30,6 +33,7 @@ public class WallClimbing : MonoBehaviour
     private bool isGrounded;
     private Vector3 currentSurfaceNormal;
     private Vector3 lastValidPosition;
+    private bool isOnCeiling; 
 
     private List<Vector3> surfaceHistory = new List<Vector3>();
 
@@ -38,6 +42,11 @@ public class WallClimbing : MonoBehaviour
         controller = GetComponent<CharacterController>();
         movementScript = GetComponent<Movement>();
         hangScritp = GetComponent<Hang>();
+
+        if (cameraTransform == null)
+        {
+            cameraTransform = Camera.main.transform;
+        }
     }
 
     private void Update()
@@ -79,11 +88,6 @@ public class WallClimbing : MonoBehaviour
                 StartClimbing(hit.normal);
                 break;
             }
-            //if (Input.GetKeyDown(KeyCode.E)) 
-            //{
-            //    StartClimbing(hit.normal);
-            //    break;
-            //}
         }
     }
 
@@ -97,6 +101,8 @@ public class WallClimbing : MonoBehaviour
         hangScritp.enabled = false;
         currentSurfaceNormal = surfaceNormal;
         lastValidPosition = transform.position;
+
+        isOnCeiling = Vector3.Dot(surfaceNormal, Vector3.down) > 0.9f;
 
         if (Mathf.Abs(Vector3.Dot(surfaceNormal, Vector3.up)) < 0.9f)
         {
@@ -122,7 +128,15 @@ public class WallClimbing : MonoBehaviour
             return;
         }
 
-        Vector3 moveDirection = CalculateClimbingMoveDirection(horizontal, vertical);
+        Vector3 moveDirection;
+        if (isOnCeiling)
+        {
+            moveDirection = CalculateCeilingMoveDirection(horizontal, vertical);
+        }
+        else
+        {
+            moveDirection = CalculateClimbingMoveDirection(horizontal, vertical);
+        }
 
         Vector3 newPosition = transform.position;
         if (CheckAndUpdateSurface(ref newPosition, moveDirection))
@@ -141,6 +155,21 @@ public class WallClimbing : MonoBehaviour
             targetRotation = Quaternion.LookRotation(-currentSurfaceNormal, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+    }
+
+    private Vector3 CalculateCeilingMoveDirection(float horizontal, float vertical)
+    {
+        Vector3 cameraForward = cameraTransform.forward;
+        Vector3 cameraRight = cameraTransform.right;
+
+        cameraForward = Vector3.ProjectOnPlane(cameraForward, -currentSurfaceNormal).normalized;
+        cameraRight = Vector3.ProjectOnPlane(cameraRight, -currentSurfaceNormal).normalized;
+
+        Vector3 moveDirection = (cameraForward * vertical + cameraRight * horizontal).normalized;
+
+        moveDirection = Vector3.Slerp(moveDirection, currentSurfaceNormal * 0.1f, 0.2f);
+
+        return moveDirection;
     }
 
     private void CheckForGround()
@@ -171,13 +200,13 @@ public class WallClimbing : MonoBehaviour
         Vector3 targetPosition = position + moveDirection * climbSpeed * Time.deltaTime;
 
         Vector3[] directions = {
-        -currentSurfaceNormal,
-        currentSurfaceNormal,
-        Vector3.Cross(currentSurfaceNormal, Vector3.up),
-        Vector3.Cross(currentSurfaceNormal, Vector3.forward),
-        Vector3.Cross(Vector3.up, currentSurfaceNormal),
-        Vector3.Cross(Vector3.forward, currentSurfaceNormal)
-    };
+            -currentSurfaceNormal,
+            currentSurfaceNormal,
+            Vector3.Cross(currentSurfaceNormal, Vector3.up),
+            Vector3.Cross(currentSurfaceNormal, Vector3.forward),
+            Vector3.Cross(Vector3.up, currentSurfaceNormal),
+            Vector3.Cross(Vector3.forward, currentSurfaceNormal)
+        };
 
         for (int i = 0; i < directions.Length; i++)
         {
@@ -192,6 +221,8 @@ public class WallClimbing : MonoBehaviour
                     newNormal = hit.normal;
                     position = hit.point + hit.normal * surfaceDetectionDistance;
                     foundSurface = true;
+
+                    isOnCeiling = Vector3.Dot(newNormal, Vector3.down) > 0.9f;
                 }
             }
         }
@@ -231,7 +262,7 @@ public class WallClimbing : MonoBehaviour
         }
 
         Vector3 moveDirection = (surfaceUp * vertical + surfaceRight * horizontal).normalized;
-        
+
         moveDirection = Vector3.Slerp(moveDirection, currentSurfaceNormal * 0.1f, 0.2f);
 
         return moveDirection;
@@ -240,6 +271,7 @@ public class WallClimbing : MonoBehaviour
     private void StopClimbing()
     {
         isClimbing = false;
+        isOnCeiling = false;
         movementScript.enabled = true;
         hangScritp.enabled = true;
         StartCoroutine(ApplyExitForce(-currentSurfaceNormal, exitJumpForce));
@@ -251,7 +283,7 @@ public class WallClimbing : MonoBehaviour
 
     private IEnumerator ResetRotation()
     {
-        if (Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.up)) < 0.9f) 
+        if (Mathf.Abs(Vector3.Dot(currentSurfaceNormal, Vector3.up)) < 0.9f)
         {
             Quaternion startRotation = transform.rotation;
             Quaternion targetRot = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
@@ -295,13 +327,13 @@ public class WallClimbing : MonoBehaviour
 
             Gizmos.color = Color.blue;
             Vector3[] predefinedDirections = {
-            -currentSurfaceNormal,
-            currentSurfaceNormal,
-            Vector3.Cross(currentSurfaceNormal, Vector3.up),
-            Vector3.Cross(currentSurfaceNormal, Vector3.forward),
-            Vector3.Cross(Vector3.up, currentSurfaceNormal),
-            Vector3.Cross(Vector3.forward, currentSurfaceNormal)
-        };
+                -currentSurfaceNormal,
+                currentSurfaceNormal,
+                Vector3.Cross(currentSurfaceNormal, Vector3.up),
+                Vector3.Cross(currentSurfaceNormal, Vector3.forward),
+                Vector3.Cross(Vector3.up, currentSurfaceNormal),
+                Vector3.Cross(Vector3.forward, currentSurfaceNormal)
+            };
 
             for (int i = 0; i < cornerRayCount; i++)
             {
