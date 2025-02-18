@@ -4,6 +4,7 @@ public class PropsLife : Life
 {
     [SerializeField] private float maxLife = 10f;
     [SerializeField] bool isNecesary;
+    [SerializeField] bool isWoodWall;
 
     private void Start()
     {
@@ -36,6 +37,10 @@ public class PropsLife : Life
         else if (other.gameObject.CompareTag("Honda"))
         {
             TakeDamage(2); 
+        }
+        if (isWoodWall && other.gameObject.CompareTag("Player"))
+        {
+            TakeDamage(1);
         }
     }
 
