@@ -13,20 +13,45 @@ public class Combat : MonoBehaviour
     [SerializeField] private float maxSize = 10f;
     [SerializeField] private float cooldownTime = 2f;
 
-    [SerializeField] private Transform attackFoward;
-    [SerializeField] private Transform attackUp;
-    [SerializeField] private Transform target;
-
-
+    [Header("Targets")]
+    [SerializeField] private Transform attackForward;  
+    [SerializeField] private Transform attackUp;       
+    [SerializeField] private Transform hand;          
+    [SerializeField] private Transform targetPosition; 
 
     private Grab grabSystem;
     private Dictionary<GrabType, ICombatBehavior> combatBehaviors;
+    private Vector3 handOriginalPosition;
+
     public static bool IsAttacking { get; private set; }
 
     private void Awake()
     {
         grabSystem = GetComponent<Grab>();
         InitializeCombatBehaviors();
+
+        if (hand != null)
+        {
+            handOriginalPosition = hand.localPosition;
+        }
+    }
+
+    private void Start()
+    {
+        if (targetPosition != null && hand != null)
+        {
+            targetPosition.position = hand.position;
+        }
+    }
+
+    private void Update()
+    {
+        if (!IsAttacking && targetPosition != null && hand != null)
+        {
+            targetPosition.position = hand.position;
+        }
+
+        HandleAttack();
     }
 
     private void InitializeCombatBehaviors()
@@ -34,13 +59,8 @@ public class Combat : MonoBehaviour
         combatBehaviors = new Dictionary<GrabType, ICombatBehavior>
         {
             { GrabType.Stick, new StickCombat(stickAttackSpeed, stickReturnSpeed) },
-            { GrabType.Honda, new HondaAttack(growthSpeed, maxSize , cooldownTime) }
+            { GrabType.Honda, new HondaAttack(growthSpeed, maxSize, cooldownTime) }
         };
-    }
-
-    private void Update()
-    {
-        HandleAttack();
     }
 
     private void HandleAttack()
@@ -61,18 +81,29 @@ public class Combat : MonoBehaviour
     private IEnumerator ExecuteAttackRoutine(GrabType type)
     {
         IsAttacking = true;
-
         Transform launchTarget = grabSystem.GrabbedObject;
+
         if (launchTarget != null)
         {
-            if (type == GrabType.Honda) // esto me parece que deberia ser otro switch
+            Vector3 currentTargetPosition = targetPosition.position;
+
+            Transform attackDestination = (type == GrabType.Honda) ? attackUp : attackForward;
+
+            yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(hand, attackDestination, launchTarget));
+
+            float returnDuration = 0.3f;
+            float elapsedTime = 0;
+            Vector3 startPosition = hand.position;
+
+            while (elapsedTime < returnDuration)
             {
-                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(target, attackUp, launchTarget));
+                float t = elapsedTime / returnDuration;
+                hand.position = Vector3.Lerp(startPosition, transform.TransformPoint(handOriginalPosition), t);
+                elapsedTime += Time.deltaTime;
+                yield return null;
             }
-            else
-            {
-                yield return StartCoroutine(combatBehaviors[type].ExecuteAttack(target, attackFoward, launchTarget));
-            }
+
+            hand.localPosition = handOriginalPosition;
         }
         else
         {
