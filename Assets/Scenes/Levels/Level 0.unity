@@ -589,9 +589,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
+    - target: {fileID: 3563514856234661007, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20
+      objectReference: {fileID: 0}
     - target: {fileID: 4785429583969675501, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.z
       value: -8.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8921503287984538830, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9123858047251372893, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21400,7 +21412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 5
+  slideForce: 30
 --- !u!4 &1199962912 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2696105153345243746, guid: 7d35379ae3c406a47b8aabf02c0a0892, type: 3}
@@ -22475,7 +22487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889132b9c34c8d54aa3f6e8340f0b3b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceObj: {fileID: 0}
+  referenceObj: {fileID: 894197621}
 --- !u!65 &1244676098
 BoxCollider:
   m_ObjectHideFlags: 0
