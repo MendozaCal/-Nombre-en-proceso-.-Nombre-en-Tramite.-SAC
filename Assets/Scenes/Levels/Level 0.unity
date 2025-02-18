@@ -15073,6 +15073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slideForce: 5
+  repositionThreshold: 5
 --- !u!64 &894197624
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21413,6 +21414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slideForce: 30
+  repositionThreshold: 5
 --- !u!4 &1199962912 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2696105153345243746, guid: 7d35379ae3c406a47b8aabf02c0a0892, type: 3}
