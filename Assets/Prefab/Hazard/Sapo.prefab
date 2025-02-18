@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1172369251523775836}
   - component: {fileID: 4119545413819267471}
   - component: {fileID: 5739424275398362526}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: Sapo
   m_TagString: Sapo
   m_Icon: {fileID: 0}
@@ -125,6 +125,7 @@ MonoBehaviour:
   inflatedScale: 2
   damagePercentage: 10
   iniciodeSapo: 0
+  damage: 0
   isInflating: 0
   fuerzaDeEmpuje: 20
   animator: {fileID: 8922731243838746102}

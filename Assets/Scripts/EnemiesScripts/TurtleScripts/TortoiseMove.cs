@@ -27,6 +27,7 @@ public class TortoiseMove : MonoBehaviour
 
     private void Start()
     {
+        maxSpeed = Random.Range(5f, 10f);
         if (targetDetectorRute != null)
         {
             detectorPatrollToAttack = targetDetectorRute.GetComponent<DetectorPatrollToAttack>();

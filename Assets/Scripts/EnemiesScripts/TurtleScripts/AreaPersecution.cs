@@ -15,20 +15,8 @@ public class AreaPersecution : MonoBehaviour
     {
         TurtleMove = Turtle.GetComponent<TortoiseMove>();
         sphereCollider = GetComponent<SphereCollider>();
-
-        if (PointA == null || PointB == null)
-        {
-            Debug.LogError("Faltan referencias a PointA o PointB en el Inspector.");
-            return;
-        }
-
-        // Calcular el centro entre PointA y PointB
         Vector3 centerPosition = (PointA.position + PointB.position) / 2f;
-
-        // Centrar el collider en el punto medio (convertido a coordenadas locales)
         sphereCollider.center = transform.InverseTransformPoint(centerPosition);
-
-        // Ajustar el radio del collider en base a la distancia entre los puntos
         sphereCollider.radius = Vector3.Distance(PointA.position, PointB.position) / 2f;
     }
 

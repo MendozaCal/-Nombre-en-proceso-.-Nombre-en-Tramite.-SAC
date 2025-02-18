@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 8790931718222118577}
   - component: {fileID: 6108183984819384311}
   - component: {fileID: 4167571972211794781}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: Head
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 1963983718203741124}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.493, z: 0}
+  m_LocalPosition: {x: 0, y: 0.509, z: 0}
   m_LocalScale: {x: 0.6, y: 0.05, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -263,7 +263,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.99999994, y: 0.34, z: 0.99999994}
+  m_Size: {x: 1.5, y: 0.34, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4167571972211794781
 MonoBehaviour:
@@ -308,7 +308,7 @@ Transform:
   m_GameObject: {fileID: 2882865059909624641}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.10499954, y: 0, z: 0}
+  m_LocalPosition: {x: 22.63, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5455,7 +5455,7 @@ Transform:
   m_GameObject: {fileID: 7600094558247756364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.32, z: 0}
   m_LocalScale: {x: 1.5, y: 3, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
