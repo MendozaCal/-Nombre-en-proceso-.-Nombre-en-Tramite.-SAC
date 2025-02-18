@@ -2368,8 +2368,8 @@ MonoBehaviour:
   climbSpeed: 12
   exitJumpForce: 15
   exitCooldown: 1
-  surfaceDetectionDistance: 1
-  cornerCheckRadius: 0.8
+  surfaceDetectionDistance: 1.58
+  cornerCheckRadius: 1.5
   cornerRayCount: 8
   rotationSpeed: 10
 --- !u!114 &8106879353901568382
