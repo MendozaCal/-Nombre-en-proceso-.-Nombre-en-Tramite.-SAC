@@ -3494,6 +3494,91 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.99999994}
   m_Center: {x: 0.5000009, y: -0.50000036, z: -0.5}
+--- !u!1001 &1588393871
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2913430238573471597, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913430238573471597, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913430238573471597, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -120.1707
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913430238573471597, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6889837
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913430238573471597, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.15906441
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913430238573471597, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6889837
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913430238573471597, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.15906441
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913430238573471597, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913430238573471597, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913430238573471597, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6514360102996363268, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: launchForce
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6514360102996363268, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: spawnAreaSize.x
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6514360102996363268, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: spawnAreaSize.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6514360102996363268, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: spawnAreaSize.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6514360102996363268, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6514360102996363268, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: spawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8921383758313827217, guid: d42c48d52f4ee2f4283c633ad53afa05, type: 3}
+    - target: {fileID: 6514360102996363268, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: spawnPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2368625509653291822, guid: e662712d926423c48ac1fc2738d63ca5, type: 3}
+    - target: {fileID: 8030127068350895291, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
+      propertyPath: m_Name
+      value: PropSpawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: add6f2cd767332b45834aa602d2370ad, type: 3}
 --- !u!65 &1623024473
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4787,3 +4872,4 @@ SceneRoots:
   - {fileID: 1453646314}
   - {fileID: 180766155}
   - {fileID: 1265622921}
+  - {fileID: 1588393871}
