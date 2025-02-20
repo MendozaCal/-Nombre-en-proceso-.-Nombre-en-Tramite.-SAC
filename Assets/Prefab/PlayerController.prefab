@@ -2312,13 +2312,18 @@ MonoBehaviour:
   gravity: -30
   turnSmoothTime: 0.1
   cameraTransform: {fileID: 94874360717655630}
+  groundCheckDistance: 1.2
+  groundedOffset: -0.14
+  groundedRadius: 0.4
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 196608
   bounceForce: 18
   raycastDistance: 1.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 131072
   boxSize: {x: 1.5, y: 0.41, z: 1.5}
-  groundCheckDistance: 1.6
   wallLayer:
     serializedVersion: 2
     m_Bits: 64

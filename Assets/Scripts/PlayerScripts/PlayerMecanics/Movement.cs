@@ -11,12 +11,17 @@ public class Movement : MonoBehaviour
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private Transform cameraTransform;
 
+    [Header("Ground Check")]
+    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private float groundedOffset = -0.14f;
+    [SerializeField] private float groundedRadius = 0.28f;
+    [SerializeField] private LayerMask groundLayers;
+
     [Header("Jump Damage")]
     [SerializeField] private float bounceForce = 5f;
     [SerializeField] private float raycastDistance = 1f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Vector3 boxSize = new Vector3(0.5f, 0.1f, 0.5f);
-    [SerializeField] private float groundCheckDistance;
 
     [Header("Wall Jumping")]
     [SerializeField] private LayerMask wallLayer;
@@ -28,7 +33,6 @@ public class Movement : MonoBehaviour
     [SerializeField] private float timeToClimbableLayer = 1f;
     private bool isWallClimbing;
 
-
     private Combat combatScript;
     private Grab grabScript;
     [SerializeField] private GameObject hand;
@@ -37,14 +41,15 @@ public class Movement : MonoBehaviour
     private Vector3 velocity;
     private float turnSmoothVelocity;
     public bool isGrounded;
+    private bool wasGroundedLastFrame;
+    private float lastGroundedTime;
+    private const float COYOTE_TIME = 0.15f;
     private bool isTouchingWall;
     private int wallDirX;
     private GameObject currentWall;
-
     private GameObject currentPlatform;
     private Vector3 lastPlatformPosition;
     private bool isOnPlatform;
-
 
     private void Start()
     {
@@ -69,20 +74,29 @@ public class Movement : MonoBehaviour
 
     private void CheckGroundState()
     {
-        isGrounded = controller.isGrounded;
-        if (isGrounded && velocity.y < 0)
+        wasGroundedLastFrame = isGrounded;
+
+        Vector3 spherePosition = transform.position + Vector3.up * groundedOffset;
+        isGrounded = Physics.SphereCast(spherePosition, groundedRadius, Vector3.down, out RaycastHit hit, groundCheckDistance, groundLayers, QueryTriggerInteraction.Ignore);
+
+        if (isGrounded && !wasGroundedLastFrame)
         {
-            velocity.y = -2f;
+            velocity.y = -1f;
         }
 
-        if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, Quaternion.identity, groundCheckDistance))
+        if (isGrounded)
         {
-            if (hit.collider.CompareTag("MovablePlatform"))
+            lastGroundedTime = Time.time;
+        }
+
+        if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit platformHit, Quaternion.identity, groundCheckDistance))
+        {
+            if (platformHit.collider.CompareTag("MovablePlatform"))
             {
                 isOnPlatform = true;
-                if (currentPlatform != hit.collider.gameObject)
+                if (currentPlatform != platformHit.collider.gameObject)
                 {
-                    currentPlatform = hit.collider.gameObject;
+                    currentPlatform = platformHit.collider.gameObject;
                     lastPlatformPosition = currentPlatform.transform.position;
                 }
             }
@@ -116,9 +130,7 @@ public class Movement : MonoBehaviour
         if (isTouchingWall)
         {
             currentWall = hit.collider.gameObject;
-
             Vector3 hitDirection = -hit.normal;
-
             wallDirX = hitDirection.x < 0 ? -1 : 1;
         }
         else
@@ -127,7 +139,6 @@ public class Movement : MonoBehaviour
             currentWall = null;
         }
     }
-
 
     private void HandleMovement()
     {
@@ -153,9 +164,12 @@ public class Movement : MonoBehaviour
 
     private void HandleJump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        bool canJump = isGrounded || (Time.time - lastGroundedTime <= COYOTE_TIME);
+
+        if (Input.GetButtonDown("Jump") && canJump)
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            lastGroundedTime = 0f;
         }
     }
 
@@ -164,9 +178,7 @@ public class Movement : MonoBehaviour
         if (isOnPlatform && currentPlatform != null)
         {
             Vector3 platformDisplacement = currentPlatform.transform.position - lastPlatformPosition;
-
             controller.Move(platformDisplacement);
-
             lastPlatformPosition = currentPlatform.transform.position;
         }
     }
@@ -220,12 +232,6 @@ public class Movement : MonoBehaviour
         {
             isWallClimbing = false;
         }
-
-
-        //if (isGrounded && Input.GetButtonDown("Jump"))
-        //{
-        //    velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-        //}
     }
 
     private IEnumerator RestoreWallLayer()
@@ -297,21 +303,21 @@ public class Movement : MonoBehaviour
         hand.SetActive(true);
     }
 
-
     private void ApplyGravity()
     {
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position + Vector3.down * groundCheckDistance, boxSize);
+        Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
+        Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + transform.right * wallCheckDistance);
-        Gizmos.DrawLine(transform.position, transform.position - transform.right * wallCheckDistance);
+        Gizmos.color = isGrounded ? transparentGreen : transparentRed;
+
+        Vector3 spherePosition = transform.position + Vector3.up * groundedOffset;
+        Gizmos.DrawSphere(spherePosition, groundedRadius);
     }
 
     public void Jump(float jumpForceDetach)
@@ -362,6 +368,7 @@ public class Movement : MonoBehaviour
     {
         StartCoroutine(ThrowToCenterPoint(centerPoint));
     }
+
     IEnumerator ThrowToCenterPoint(Transform centerPoint)
     {
         Jump(2);
