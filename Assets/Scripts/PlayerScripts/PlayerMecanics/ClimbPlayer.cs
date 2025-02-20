@@ -113,7 +113,7 @@ public class WallClimbing : MonoBehaviour
 
     private void HandleClimbing()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             StopClimbing();
             return;
