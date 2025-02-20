@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class SpawnerEvent : MonoBehaviour
 {
-    public List<GameObject> spawnPrefabs; 
-    public float spawnInterval = 1f;
-    public Vector3 spawnAreaSize = new Vector3(10f, 0f, 10f); 
-    public float launchForce = 10f; 
-    private float timeSinceLastSpawn;
+    [SerializeField] private List<GameObject> spawnPrefabs;
+    [SerializeField] private float spawnInterval = 1f;
+    [SerializeField] private Vector3 spawnAreaSize = new Vector3(10f, 0f, 10f);
+    [SerializeField] private float launchForce = 10f;
+    [SerializeField] private float timeSinceLastSpawn;
+    [SerializeField] private float destroyPropsTime = 5f;
 
     void Start()
     {
@@ -46,6 +47,9 @@ public class SpawnerEvent : MonoBehaviour
         {
             rb.AddForce(transform.forward * launchForce, ForceMode.Impulse); 
         }
+
+        Destroy(spawnedObject, destroyPropsTime);
+
     }
 
     private void OnDrawGizmos()
