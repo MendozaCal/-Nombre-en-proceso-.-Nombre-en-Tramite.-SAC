@@ -11,8 +11,12 @@ public class FallingPlatform : MonoBehaviour
     private Collider platformCollider;
     private Vector3 originalPosition;
     Animator animator;
+    PlayerLife playerLife;
+    GameObject Player;
     private void Start()
     {
+        Player = GameObject.FindWithTag("Player");
+        playerLife = Player.gameObject.GetComponent<PlayerLife>();
         animator = GetComponent<Animator>();
         animator.enabled = false;
         rb = GetComponent<Rigidbody>();
