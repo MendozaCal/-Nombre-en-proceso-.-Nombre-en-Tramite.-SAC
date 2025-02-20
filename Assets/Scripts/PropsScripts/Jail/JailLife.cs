@@ -4,10 +4,12 @@ public class JailLife : Life
 {
     [SerializeField] private float maxLife = 10f;
     private Transform parentObject;
-
+    [SerializeField] private bool isDestroy; // Permite modificarlo en el Inspector
+    public bool IsDestroy => isDestroy; // Getter público
     private void Start()
     {
         pointsLife = maxLife;
+        
     }
     private void Awake()
     {        
@@ -21,13 +23,13 @@ public class JailLife : Life
 
         if (pointsLife <= 0)
         {
-            DestroyJailProp();
+            //DestroyJailProp();
+            isDestroy = true;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.CompareTag("Stick"))
         {
             TakeDamage(1);
@@ -40,11 +42,9 @@ public class JailLife : Life
 
     public virtual void DestroyJailProp()
     {
-
         if (parentObject != null)
         {
-            Debug.Log($"{parentObject.name} y sus hijos fueron destruidos.");
-            Destroy(parentObject.gameObject); 
+            //Destroy(parentObject.gameObject);
         }
     }
 }
