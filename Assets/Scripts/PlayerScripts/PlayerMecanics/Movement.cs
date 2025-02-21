@@ -14,14 +14,13 @@ public class Movement : MonoBehaviour
     [Header("Ground Check")]
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private float groundedOffset = -0.14f;
-    [SerializeField] private float groundedRadius = 0.28f;
+    [SerializeField] private Vector3 boxSize = new Vector3(0.5f, 0.1f, 0.5f);
     [SerializeField] private LayerMask groundLayers;
 
     [Header("Jump Damage")]
     [SerializeField] private float bounceForce = 5f;
     [SerializeField] private float raycastDistance = 1f;
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private Vector3 boxSize = new Vector3(0.5f, 0.1f, 0.5f);
 
     [Header("Wall Jumping")]
     [SerializeField] private LayerMask wallLayer;
@@ -76,34 +75,29 @@ public class Movement : MonoBehaviour
     {
         wasGroundedLastFrame = isGrounded;
 
-        Vector3 spherePosition = transform.position + Vector3.up * groundedOffset;
-        isGrounded = Physics.SphereCast(spherePosition, groundedRadius, Vector3.down, out RaycastHit hit, groundCheckDistance, groundLayers, QueryTriggerInteraction.Ignore);
+        Vector3 boxCenter = transform.position + Vector3.up * groundedOffset;
+        isGrounded = Physics.BoxCast(
+            boxCenter,
+            boxSize / 2,
+            Vector3.down,
+            out RaycastHit hit,
+            transform.rotation,
+            groundCheckDistance,
+            groundLayers,
+            QueryTriggerInteraction.Ignore
+        );
 
-        if (isGrounded && !wasGroundedLastFrame)
-        {
-            velocity.y = -1f;
-        }
+        if (isGrounded && !wasGroundedLastFrame) velocity.y = -1f;
 
-        if (isGrounded)
-        {
-            lastGroundedTime = Time.time;
-        }
+        if (isGrounded) lastGroundedTime = Time.time;
 
-        if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit platformHit, Quaternion.identity, groundCheckDistance))
+        if (isGrounded && hit.collider.CompareTag("MovablePlatform"))
         {
-            if (platformHit.collider.CompareTag("MovablePlatform"))
+            isOnPlatform = true;
+            if (currentPlatform != hit.collider.gameObject)
             {
-                isOnPlatform = true;
-                if (currentPlatform != platformHit.collider.gameObject)
-                {
-                    currentPlatform = platformHit.collider.gameObject;
-                    lastPlatformPosition = currentPlatform.transform.position;
-                }
-            }
-            else
-            {
-                isOnPlatform = false;
-                currentPlatform = null;
+                currentPlatform = hit.collider.gameObject;
+                lastPlatformPosition = currentPlatform.transform.position;
             }
         }
         else
@@ -120,7 +114,7 @@ public class Movement : MonoBehaviour
         isTouchingWall = Physics.BoxCast(
             boxCenter,
             new Vector3(0.5f, 1f, 0.5f),
-            transform.TransformDirection(Vector3.forward),
+            transform.forward,
             out RaycastHit hit,
             transform.rotation,
             wallCheckDistance,
@@ -258,7 +252,7 @@ public class Movement : MonoBehaviour
     {
         if (velocity.y < 0)
         {
-            if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, Quaternion.identity, raycastDistance, enemyLayer))
+            if (Physics.BoxCast(transform.position, boxSize / 2, Vector3.down, out RaycastHit hit, transform.rotation, raycastDistance, enemyLayer))
             {
                 if (hit.collider.gameObject.CompareTag("Sapo"))
                 {
@@ -316,8 +310,10 @@ public class Movement : MonoBehaviour
 
         Gizmos.color = isGrounded ? transparentGreen : transparentRed;
 
-        Vector3 spherePosition = transform.position + Vector3.up * groundedOffset;
-        Gizmos.DrawSphere(spherePosition, groundedRadius);
+        Vector3 boxCenter = transform.position + Vector3.up * groundedOffset;
+        Gizmos.matrix = Matrix4x4.TRS(boxCenter, transform.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.down * (groundCheckDistance / 2), boxSize);
+        Gizmos.DrawCube(Vector3.down * (groundCheckDistance / 2), boxSize);
     }
 
     public void Jump(float jumpForceDetach)

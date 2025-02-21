@@ -204,6 +204,7 @@ public class PlayerLife : Life
         switch (other.tag)
         {
             case "Crocodile":
+                Debug.Log("comido");
                 StartCoroutine(ExecuteAnimationHazard(0.25f));
                 break;
 
