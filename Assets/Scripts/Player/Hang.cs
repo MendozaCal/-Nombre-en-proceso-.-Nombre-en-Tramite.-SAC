@@ -49,6 +49,14 @@ public class Hang : MonoBehaviour
             lianaMovementBox = target.GetComponent<BoxCollider>();
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Liana"))
+        {
+            target = null;
+            canDetect = false;
+        }
+    }
 
     void HangMonkey()
     {
