@@ -4,8 +4,8 @@ public class JailLife : Life
 {
     [SerializeField] private float maxLife = 10f;
     private Transform parentObject;
-    [SerializeField] private bool isDestroy; // Permite modificarlo en el Inspector
-    public bool IsDestroy => isDestroy; // Getter público
+    [SerializeField] private bool isDestroy;
+    public bool IsDestroy => isDestroy;
     private void Start()
     {
         pointsLife = maxLife;
@@ -23,7 +23,6 @@ public class JailLife : Life
 
         if (pointsLife <= 0)
         {
-            //DestroyJailProp();
             isDestroy = true;
         }
     }
@@ -37,14 +36,6 @@ public class JailLife : Life
         else if (other.gameObject.CompareTag("Honda"))
         {
             TakeDamage(2);
-        }
-    }
-
-    public virtual void DestroyJailProp()
-    {
-        if (parentObject != null)
-        {
-            //Destroy(parentObject.gameObject);
         }
     }
 }
