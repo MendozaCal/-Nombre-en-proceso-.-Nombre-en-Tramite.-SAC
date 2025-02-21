@@ -2754,15 +2754,15 @@ PrefabInstance:
       objectReference: {fileID: 1053034023}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 597.5
+      value: -70.37
       objectReference: {fileID: 0}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.7
+      value: -90.76
       objectReference: {fileID: 0}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 29.3
+      value: -15.3
       objectReference: {fileID: 0}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4011,9 +4011,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c964da81692f6547a14275d6ff5ed9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 8921383758313827217, guid: d42c48d52f4ee2f4283c633ad53afa05, type: 3}
+  spawnPrefabs: []
   spawnInterval: 2
   spawnAreaSize: {x: 2, y: 0, z: 21.76}
+  launchForce: 10
+  timeSinceLastSpawn: 0
+  destroyPropsTime: 5
 --- !u!4 &1502322918
 Transform:
   m_ObjectHideFlags: 0
