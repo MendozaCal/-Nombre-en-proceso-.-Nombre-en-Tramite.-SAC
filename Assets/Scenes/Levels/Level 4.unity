@@ -657,6 +657,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -13.480004
       objectReference: {fileID: 0}
+    - target: {fileID: -3615062822594958979, guid: 43ad66de3dc3748438970f5afaa6b49d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.19
+      objectReference: {fileID: 0}
     - target: {fileID: -3240943859759636219, guid: 43ad66de3dc3748438970f5afaa6b49d, type: 3}
       propertyPath: m_Layer
       value: 11
@@ -1808,6 +1812,14 @@ PrefabInstance:
       propertyPath: wallClimbingScrpt
       value: 
       objectReference: {fileID: 1602808778}
+    - target: {fileID: 3133394666350764511, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133394666350764511, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 3428647462521602469, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 89.52
@@ -1863,6 +1875,14 @@ PrefabInstance:
     - target: {fileID: 6507354686932909172, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
       propertyPath: m_Name
       value: SceneCinematicLevel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675279750224229393, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675279750224229393, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 8006060708359325232, guid: 8180c6580bc6d7f4f87da064cbc1316c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2303,6 +2323,14 @@ PrefabInstance:
     - target: {fileID: 4854787614405202731, guid: 39a15a94186e8f24ab2f9882cda7f479, type: 3}
       propertyPath: m_Name
       value: Nenufar (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854787614405202731, guid: 39a15a94186e8f24ab2f9882cda7f479, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854787614405202731, guid: 39a15a94186e8f24ab2f9882cda7f479, type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
