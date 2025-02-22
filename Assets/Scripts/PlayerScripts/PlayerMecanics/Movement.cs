@@ -181,46 +181,25 @@ public class Movement : MonoBehaviour
     {
         if (isTouchingWall && !isGrounded)
         {
-            if (!isWallClimbing)
-            {
-                velocity.y = -wallSlideSpeed;
-
-                if (Input.GetButtonDown("Jump"))
-                {
-                    isWallClimbing = true;
-                    velocity.y = 0;
-
-                    RaycastHit hit;
-                    if (Physics.Raycast(transform.position, transform.forward, out hit, wallCheckDistance, wallLayer))
-                    {
-                        currentWall = hit.collider?.gameObject;
-                    }
-                }
-            }
-            else
-            {
+                velocity.y = -wallSlideSpeed;    
+                                   
                 if (Input.GetButtonDown("Jump"))
                 {
                     Vector3 jumpDirection = wallJumpDirection.normalized;
                     jumpDirection.x *= wallDirX;
                     jumpDirection = jumpDirection.normalized;
+
                     velocity = jumpDirection * wallJumpForce;
                     velocity.y = Mathf.Sqrt(wallJumpForce * -2f * gravity);
+
                     StartCoroutine(RestoreHorizontalVelocity());
-                    StartCoroutine(RestoreWallLayer());
-                    isWallClimbing = false;
-                }
-                else if (Input.GetKeyDown(KeyCode.E))
-                {
-                    velocity.y = -wallSlideSpeed * 2;
-                    isWallClimbing = false;
                     StartCoroutine(RestoreWallLayer());
                 }
                 else
                 {
                     velocity.y = -wallSlideSpeed;
                 }
-            }
+            
         }
         else
         {
