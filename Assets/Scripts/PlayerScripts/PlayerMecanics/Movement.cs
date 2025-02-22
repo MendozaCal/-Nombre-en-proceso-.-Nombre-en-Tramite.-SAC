@@ -153,7 +153,7 @@ public class Movement : MonoBehaviour
 
     private void HandleRun()
     {
-        moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase;
+        if (isGrounded) { moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase; }
     }
 
     private void HandleJump()

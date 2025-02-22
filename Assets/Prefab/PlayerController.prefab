@@ -2313,7 +2313,7 @@ MonoBehaviour:
   gravity: -30
   turnSmoothTime: 0.1
   cameraTransform: {fileID: 94874360717655630}
-  groundCheckDistance: 1.46
+  groundCheckDistance: 0.8
   groundedOffset: -0.75
   boxSize: {x: 1, y: 0.41, z: 1}
   groundLayers:
@@ -2326,7 +2326,7 @@ MonoBehaviour:
     m_Bits: 131072
   wallLayer:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
   wallCheckDistance: 1.15
   wallJumpForce: 6
   wallJumpDirection: {x: 0, y: 2, z: 0.5}
