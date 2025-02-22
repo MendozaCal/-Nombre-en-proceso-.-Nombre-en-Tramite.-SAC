@@ -58,21 +58,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CantidadEspuma: 1
+    - _CantidadEspuma: 5.99
     - _DegradadoTextura: 2
     - _Efecto: 2
     - _EfectoEspuma: 0.1
-    - _EfectoTextura: 2
+    - _EfectoTextura: 24.35
     - _HanchoOrilla: 0.61
     - _QueueControl: 1
     - _QueueOffset: 50
-    - _ScalaTecturaCaustica: 1
-    - _Scalatextura: 1
+    - _ScalaTecturaCaustica: 5.44
+    - _Scalatextura: 42.97
     - _VelocidadCaustica: 0.05
-    - _VelocidadOlas: 1
+    - _VelocidadOlas: 0.5
     - _degradado: 0.99
-    - _efectoCaustica: 0.239
-    - _intencidadOlas: 0.005
+    - _efectoCaustica: 0.432
+    - _intencidadOlas: 0.1
     m_Colors:
     - _CausticaColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 0.24705882, g: 0.87058824, b: 0.7490196, a: 0}
