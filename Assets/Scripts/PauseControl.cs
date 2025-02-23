@@ -61,7 +61,8 @@ public class PauseControl : MonoBehaviour
     {
 
         ResumeGame();
-        SceneManager.LoadScene("MainMenu");
+        Fade fade = FindObjectOfType<Fade>();
+        fade.StartFadeIn("MainMenu");
     }
 
     public void MuteSounds()

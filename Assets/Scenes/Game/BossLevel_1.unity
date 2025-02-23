@@ -1932,6 +1932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 3
+  playerLife: {fileID: 1396681450}
 --- !u!65 &244125544
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9917,7 +9918,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1276782057}
   - component: {fileID: 1276782056}
-  - component: {fileID: 1276782055}
   - component: {fileID: 1276782054}
   - component: {fileID: 1276782053}
   m_Layer: 0
@@ -9992,14 +9992,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &1276782055
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1276782052}
-  m_Enabled: 1
 --- !u!20 &1276782056
 Camera:
   m_ObjectHideFlags: 0

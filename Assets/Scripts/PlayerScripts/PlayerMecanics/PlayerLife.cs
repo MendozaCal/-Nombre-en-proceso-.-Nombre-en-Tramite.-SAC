@@ -337,7 +337,7 @@ public class PlayerLife : Life
                         currentGame.lives = (int)pointsLife;
 
                         saveManager.SaveGames();
-                        Debug.Log("Nivel desbloqueado: " + currentGame.unlockedLevel); 
+                        Debug.Log("Nivel desbloqueado: " + currentGame.unlockedLevel);
                     }
                 }
             }
@@ -349,7 +349,8 @@ public class PlayerLife : Life
         PlayerPrefs.SetString("LastLevel", currentSceneName);
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene("Victory");
+        Fade fade = FindObjectOfType<Fade>();
+        fade.StartFadeIn("Victory");
     }
     public void ProgressWorld()
     {
@@ -398,7 +399,8 @@ public class PlayerLife : Life
         PlayerPrefs.SetInt("LastLevelMonkeys", monkeys);
         PlayerPrefs.SetInt("LastLevelLives", (int)pointsLife); 
         PlayerPrefs.Save();
-        SceneManager.LoadScene("Victory"); 
+        Fade fade = FindObjectOfType<Fade>();
+        fade.StartFadeIn("Victory");
     }
 
     private void OnDrawGizmos()
