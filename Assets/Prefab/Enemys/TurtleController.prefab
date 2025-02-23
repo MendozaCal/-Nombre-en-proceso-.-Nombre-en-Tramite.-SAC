@@ -517,12 +517,12 @@ GameObject:
   - component: {fileID: 4682757167809074220}
   - component: {fileID: 4102023914975087618}
   - component: {fileID: 1764098217084614162}
-  - component: {fileID: 4245954821201476918}
   - component: {fileID: 1118692728451776198}
   - component: {fileID: 3321441562184087810}
+  - component: {fileID: 2548997190819371662}
   m_Layer: 3
   m_Name: TurtleMove
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -614,22 +614,6 @@ MonoBehaviour:
   targetDetectorRute: {fileID: 1484650908887799570}
   targetDetectorEyes: {fileID: 3655894530093274371}
   targetDetectorArea: {fileID: 99409783543901854}
---- !u!114 &4245954821201476918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4080562335017296768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1defe924dfd4b1b40921c1dd9ab94c5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTapGrab: 0
-  targetTags: []
-  head: {fileID: 1963983718203741124}
-  particleSystem: {fileID: 0}
 --- !u!199 &1118692728451776198
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5427,6 +5411,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &2548997190819371662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4080562335017296768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2821a34488f6e35498c1ac8e040dcf7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 3
 --- !u!1 &7600094558247756364
 GameObject:
   m_ObjectHideFlags: 0
