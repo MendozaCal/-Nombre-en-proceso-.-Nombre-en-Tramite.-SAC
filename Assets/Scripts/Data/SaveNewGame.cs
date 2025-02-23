@@ -4,7 +4,7 @@ public class SaveNewGame : MonoBehaviour
 {
     public GameSaveManager gameSaveManager;
 
-    public void SaveGame(int slotNumber, string worldName, int lives, int score, int collectibles)
+    public void SaveGame(int slotNumber, int worldName, int lives, int score, int collectibles)
     {
         SavedGame newGame = new SavedGame
         {

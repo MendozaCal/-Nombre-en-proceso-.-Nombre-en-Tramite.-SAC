@@ -155,6 +155,7 @@ public class Movement : MonoBehaviour
     {
         if (isGrounded) { moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase; }
     }
+    public void ResetSpeed() { moveSpeed = moveSpeedBase; }
 
     private void HandleJump()
     {

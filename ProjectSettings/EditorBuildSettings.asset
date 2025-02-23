@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/LevelSelector.unity
     guid: df03d53be5eca754781df8b819e861d8
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 0.unity
-    guid: 83a3a8993f41c1c4e810d9efcb4164cb
+    path: Assets/Scenes/Game/Levels/Level 0.unity
+    guid: e337c90db4616f745a21e298c91764b0
   - enabled: 1
     path: Assets/Scenes/Game/Levels/Level 1.unity
     guid: ee4ea0df13c2d4c4fb78747181134095
@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/GameOver.unity
     guid: b31d49f033d1a664b9d02d680ae02951
+  - enabled: 1
+    path: Assets/Scenes/Game/LoadingScreen.unity
+    guid: b46bd8235acbf4e47ac3607b10bebeea
   - enabled: 1
     path: Assets/Scenes/PlayerMecanics.unity
     guid: 5a1a3e56d3201c24988817e39350613b

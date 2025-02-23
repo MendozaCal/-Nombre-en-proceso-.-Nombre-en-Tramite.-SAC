@@ -87,7 +87,7 @@ public class PartidaSlotUI : MonoBehaviour
 
             if (hasExistingSave)
             {
-                worldNameText.text = "Level: " + savedGame.unlockedLevel;
+                worldNameText.text = "World: " + savedGame.worldName;
                 livesText.text = "Lives: " + savedGame.lives;
                 collectiblesText.text = "Collectibles: " + savedGame.collectibles;
                 deleteButton.gameObject.SetActive(hasExistingSave);
@@ -162,7 +162,7 @@ public class PartidaSlotUI : MonoBehaviour
         SavedGame newGame = new SavedGame
         {
             slotNumber = slotNumber,
-            worldName = "Level 0",
+            worldName = 1,
             lives = 3,
             score = 0,
             collectibles = 0

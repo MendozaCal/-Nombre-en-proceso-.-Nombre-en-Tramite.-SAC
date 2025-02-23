@@ -1137,7 +1137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e152877ca187d48a3f4db9fc3eb8e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: UserGameSelector
   progressBar: {fileID: 1161316331}
   monkey: {fileID: 2012916820}
   monkeyMoveDistance: 80
@@ -1191,8 +1190,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_AnchoredPosition: {x: -0.13400269, y: 0}
+  m_SizeDelta: {x: 9.732, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1122180900
 CanvasRenderer:
@@ -1414,7 +1413,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.034
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

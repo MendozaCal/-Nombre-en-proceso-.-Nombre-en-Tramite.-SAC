@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MovePlayerSelectorLevel : MonoBehaviour
 {
@@ -14,11 +13,14 @@ public class MovePlayerSelectorLevel : MonoBehaviour
 
     private GameSaveManager gameSaveManager;
     private int unlockedLevel;
+    [SerializeField] private bool iskey;
+
+    [SerializeField] private Fade fadePrefab;
 
     void Start()
     {
         InitializeGameData();
-        UnlockAllLevels(); //eliminar esta linea mas adelante y quitar los "//" en las demas lineas de codigo
+        if (iskey) UnlockAllLevels();
         UpdateLevelMaterials();
     }
 
@@ -26,7 +28,7 @@ public class MovePlayerSelectorLevel : MonoBehaviour
     {
         HandleMovementInput();
         HandleLevelSelection();
-        //HandleUnlockLevelInput();
+        if (!iskey) HandleUnlockLevelInput();
     }
 
     private void InitializeGameData()
@@ -74,19 +76,19 @@ public class MovePlayerSelectorLevel : MonoBehaviour
 
     private void HandleLevelSelection()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             SelectLevel();
         }
     }
 
-    /*private void HandleUnlockLevelInput()
+    private void HandleUnlockLevelInput()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
         {
             UnlockAllLevels();
         }
-    }*/ //mas adelante esto servira para los atajos rapidos de desarrollador
+    }
 
     private void TryMove(Vector3 direction)
     {
@@ -136,7 +138,8 @@ public class MovePlayerSelectorLevel : MonoBehaviour
                 if (levelPoint.levelIndex <= unlockedLevel)
                 {
                     Debug.Log("Cargando nivel " + levelPoint.levelIndex);
-                    SceneManager.LoadScene("Level " + levelPoint.levelIndex);
+                    PlayerPrefs.SetString("SceneToLoad", "Level " + levelPoint.levelIndex);
+                    fadePrefab.StartFadeIn("LoadingScreen");
                 }
                 else
                 {

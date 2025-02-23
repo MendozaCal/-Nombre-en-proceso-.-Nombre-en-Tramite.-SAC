@@ -72,6 +72,7 @@ public class Hang : MonoBehaviour
                 transform.position = new Vector3(target.transform.position.x, middleY, target.transform.position.z);
 
                 isStuck = true;
+                movementScripts.ResetSpeed();
                 movementScripts.DesativateGrabandCombat();
                 canDetect = false;
                 canJump = true;

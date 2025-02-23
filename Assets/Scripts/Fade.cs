@@ -7,6 +7,7 @@ public class Fade : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] public LoadScene loadScene;
     [SerializeField] private float speed = 1f;
+    [SerializeField] private bool changeScene;
     private bool isFading = false;
 
     private void Start()
@@ -24,7 +25,7 @@ public class Fade : MonoBehaviour
             yield return null; 
         }
 
-        if (loadScene != null)
+        if (changeScene)
             SceneManager.LoadScene(sceneName);
         else
             SceneManager.LoadScene("GameOver");
