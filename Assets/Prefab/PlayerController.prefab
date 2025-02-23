@@ -1337,6 +1337,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 5517024158771347522}
   loadScene: {fileID: 0}
   speed: 1
+  changeScene: 0
 --- !u!225 &5517024158771347522
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2879,7 +2880,7 @@ GameObject:
   - component: {fileID: 6002119990049144331}
   m_Layer: 9
   m_Name: Hand
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

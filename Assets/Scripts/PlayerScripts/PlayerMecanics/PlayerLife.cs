@@ -240,7 +240,9 @@ public class PlayerLife : Life
             case "Finish":
                 CompleteLevel();
                 break;
-
+            case "FinishWorld":
+                ProgressWorld();
+                break;
             default:
                 break;
         }
@@ -348,6 +350,55 @@ public class PlayerLife : Life
         PlayerPrefs.Save();
 
         SceneManager.LoadScene("Victory");
+    }
+    public void ProgressWorld()
+    {
+        GameSaveManager saveManager = FindObjectOfType<GameSaveManager>();
+        PlayerPrefs.SetInt("LastLevelBananas", bananas);
+        PlayerPrefs.SetInt("LastLevelMonkeys", monkeys);
+        PlayerPrefs.SetInt("LastLevelLives", (int)pointsLife);
+        PlayerPrefs.SetString("LastLevel", SceneManager.GetActiveScene().name);
+        PlayerPrefs.Save();
+        int slotNumber = PlayerPrefs.GetInt("SlotNumber");
+        SavedGame currentGame = saveManager.savedGames.Find(game => game.slotNumber == slotNumber);
+        SceneManager.LoadScene("BossLevel_" + currentGame.worldName);
+    }
+    public void CompleteWorldAfterBoss()
+    {
+        GameSaveManager saveManager = FindObjectOfType<GameSaveManager>();
+        if (saveManager != null)
+        {
+            string sceneName = SceneManager.GetActiveScene().name;
+
+            if (sceneName.StartsWith("BossLevel_"))
+            {
+                string worldNumberString = sceneName.Replace("BossLevel_", "");
+
+                if (int.TryParse(worldNumberString, out int worldNumber))
+                {
+                    int slotNumber = PlayerPrefs.GetInt("SlotNumber");
+                    SavedGame currentGame = saveManager.savedGames.Find(game => game.slotNumber == slotNumber);
+
+                    if (currentGame != null)
+                    {
+                        currentGame.worldName = worldNumber + 1;
+
+                        currentGame.collectibles += monkeys;
+                        currentGame.lives = (int)pointsLife;
+
+                        saveManager.SaveGames();
+
+                        Debug.Log("Mundo desbloqueado: " + currentGame.worldName);
+                    }
+                }
+            }
+        }
+
+        PlayerPrefs.SetInt("LastLevelBananas", bananas);
+        PlayerPrefs.SetInt("LastLevelMonkeys", monkeys);
+        PlayerPrefs.SetInt("LastLevelLives", (int)pointsLife); 
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("Victory"); 
     }
 
     private void OnDrawGizmos()

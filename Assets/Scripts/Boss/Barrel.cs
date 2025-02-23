@@ -8,6 +8,7 @@ public class Barrel : Life
     private void Start()
     {
         pointsLife = maxLife;
+        Destroy(gameObject, 10f);
     }
 
     public override void TakeDamage(float damage)
