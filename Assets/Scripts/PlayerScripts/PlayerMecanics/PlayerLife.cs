@@ -329,10 +329,13 @@ public class PlayerLife : Life
                 {
                     int slotNumber = PlayerPrefs.GetInt("SlotNumber");
                     SavedGame currentGame = saveManager.savedGames.Find(game => game.slotNumber == slotNumber);
-
                     if (currentGame != null)
                     {
-                        currentGame.unlockedLevel = levelNumber + 1;
+                        if (levelNumber + 1 > currentGame.unlockedLevel)
+                        {
+                            currentGame.unlockedLevel = levelNumber + 1;
+                        }
+
                         currentGame.collectibles += monkeys;
                         currentGame.lives = (int)pointsLife;
 
