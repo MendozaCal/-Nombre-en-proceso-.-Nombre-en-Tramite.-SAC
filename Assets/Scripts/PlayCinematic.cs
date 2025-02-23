@@ -18,6 +18,16 @@ public class PlayCinematic : MonoBehaviour
         playableDirector = GetComponent<PlayableDirector>();
     }
 
+    public void SkipToEnd()
+    {
+        if (playableDirector != null)
+        {
+            double duration = playableDirector.duration;
+
+            playableDirector.time = duration;
+            playableDirector.Evaluate();
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -38,7 +48,9 @@ public class PlayCinematic : MonoBehaviour
         PlayerLife.enabled = false;
         hangScript.enabled = false;
         wallClimbingScrpt.enabled = false;
-        tutorialMessage.SetActive(false);
+        if (tutorialMessage != null) tutorialMessage.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void ActivateSpecificScripts()
@@ -48,6 +60,8 @@ public class PlayCinematic : MonoBehaviour
         PlayerLife.enabled = true;
         hangScript.enabled = true;
         wallClimbingScrpt.enabled = true;
-        tutorialMessage.SetActive(true);
+        if (tutorialMessage != null) tutorialMessage.SetActive(true); 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
