@@ -1547,6 +1547,7 @@ GameObject:
   - component: {fileID: 1200748125}
   - component: {fileID: 1200748124}
   - component: {fileID: 1200748128}
+  - component: {fileID: 1200748129}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1655,6 +1656,21 @@ MonoBehaviour:
   sceneName: UserGameSelector
   canvas: {fileID: 1579218917}
   fadePrefab: {fileID: 1579218919}
+--- !u!114 &1200748129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200748123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2679920cd29e42b488b0c2ee083da8d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldNameText: {fileID: 1940603478}
+  livesText: {fileID: 23424013}
+  collectiblesText: {fileID: 1677200697}
 --- !u!1 &1325773601
 GameObject:
   m_ObjectHideFlags: 0
@@ -3531,10 +3547,10 @@ SceneRoots:
   - {fileID: 104951032}
   - {fileID: 1325773605}
   - {fileID: 1139835106}
-  - {fileID: 1690261501}
-  - {fileID: 588170554}
-  - {fileID: 675996277}
   - {fileID: 1013376311}
+  - {fileID: 675996277}
+  - {fileID: 588170554}
+  - {fileID: 1690261501}
   - {fileID: 1200748127}
   - {fileID: 1794968768}
   - {fileID: 1938229744}
