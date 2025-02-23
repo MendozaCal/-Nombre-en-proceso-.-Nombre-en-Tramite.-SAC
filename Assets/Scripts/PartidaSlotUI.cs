@@ -21,6 +21,8 @@ public class PartidaSlotUI : MonoBehaviour
     public Button loadAndPlayButton;
     public Button deleteButton;
 
+    [SerializeField] private Fade fadePrefab;
+
     private int slotNumber;
     private GameSaveManager saveManager;
     private static PartidaSlotUI selectedSlot;
@@ -151,7 +153,7 @@ public class PartidaSlotUI : MonoBehaviour
         if (!hasExistingSave) return; 
 
         PlayerPrefs.SetInt("SlotNumber", slotNumber);
-        SceneManager.LoadScene("LevelSelector");
+        fadePrefab.StartFadeIn("LevelSelector");
     }
 
     public void CreateNewGame()
@@ -167,6 +169,6 @@ public class PartidaSlotUI : MonoBehaviour
         };
         saveManager.savedGames.Add(newGame);
         saveManager.SaveGames();
-        SceneManager.LoadScene("LevelSelector");
+        fadePrefab.StartFadeIn("LevelSelector");
     }
 }
