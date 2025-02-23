@@ -1557,7 +1557,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 527176423}
         m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneStart
+        m_MethodName: ChangeSceneWithFade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

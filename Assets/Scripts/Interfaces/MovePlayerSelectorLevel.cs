@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovePlayerSelectorLevel : MonoBehaviour
 {
@@ -137,9 +138,18 @@ public class MovePlayerSelectorLevel : MonoBehaviour
             {
                 if (levelPoint.levelIndex <= unlockedLevel)
                 {
-                    Debug.Log("Cargando nivel " + levelPoint.levelIndex);
-                    PlayerPrefs.SetString("SceneToLoad", "Level " + levelPoint.levelIndex);
-                    fadePrefab.StartFadeIn("LoadingScreen");
+                    string sceneName = "Level " + levelPoint.levelIndex;
+
+                    if (SceneUtility.GetBuildIndexByScenePath(sceneName) >= 0)
+                    {
+                        Debug.Log("Cargando nivel " + levelPoint.levelIndex);
+                        PlayerPrefs.SetString("SceneToLoad", sceneName);
+                        fadePrefab.StartFadeIn("LoadingScreen");
+                    }
+                    else
+                    {
+                        Debug.LogError("La escena '" + sceneName + "' no está en Build Settings.");
+                    }
                 }
                 else
                 {
