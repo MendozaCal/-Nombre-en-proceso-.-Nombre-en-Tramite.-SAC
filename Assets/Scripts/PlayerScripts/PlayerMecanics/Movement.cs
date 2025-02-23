@@ -280,7 +280,7 @@ public class Movement : MonoBehaviour
     private void ApplyGravity()
     {
         velocity.y += gravity * Time.deltaTime; 
-        float maxFallSpeed = -20f;
+        float maxFallSpeed = -30f;
         if (velocity.y < maxFallSpeed)
         {
             velocity.y = maxFallSpeed;
