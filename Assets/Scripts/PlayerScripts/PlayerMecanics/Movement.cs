@@ -279,7 +279,12 @@ public class Movement : MonoBehaviour
 
     private void ApplyGravity()
     {
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += gravity * Time.deltaTime; 
+        float maxFallSpeed = -20f;
+        if (velocity.y < maxFallSpeed)
+        {
+            velocity.y = maxFallSpeed;
+        }
         controller.Move(velocity * Time.deltaTime);
     }
 
