@@ -8,6 +8,7 @@ public class PlayCinematic : MonoBehaviour
     [SerializeField] private PlayerLife PlayerLife;
     [SerializeField] private Hang hangScript;
     [SerializeField] private WallClimbing wallClimbingScrpt;
+    [SerializeField] private GameObject tutorialMessage;
 
     private PlayableDirector playableDirector;
     private bool onplay;
@@ -37,6 +38,7 @@ public class PlayCinematic : MonoBehaviour
         PlayerLife.enabled = false;
         hangScript.enabled = false;
         wallClimbingScrpt.enabled = false;
+        tutorialMessage.SetActive(false);
     }
 
     public void ActivateSpecificScripts()
@@ -46,5 +48,6 @@ public class PlayCinematic : MonoBehaviour
         PlayerLife.enabled = true;
         hangScript.enabled = true;
         wallClimbingScrpt.enabled = true;
+        tutorialMessage.SetActive(true);
     }
 }

@@ -8,13 +8,15 @@ public class DestroyEffect : MonoBehaviour
     [SerializeField] float forzeEfect;
     Rigidbody rb;
     [SerializeField] bool isTecho;
+    [SerializeField] public bool isDestroy;
+    bool isDestroying = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
     void Update()
     {
-        if (jailLife == null)
+        if (jailLife == null && !isDestroying)
         {
             rb.isKinematic = false;
             StartCoroutine(DestroyElement());
@@ -28,6 +30,8 @@ public class DestroyEffect : MonoBehaviour
     }
     IEnumerator DestroyElement()
     {
+        isDestroying = true;
+        isDestroy = true;
         yield return new WaitForSeconds(10);
         Destroy(gameObject);
     }

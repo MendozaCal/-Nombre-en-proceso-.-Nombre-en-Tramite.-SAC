@@ -4,8 +4,6 @@ public class JailLife : Life
 {
     [SerializeField] private float maxLife = 10f;
     private Transform parentObject;
-    [SerializeField] private bool isDestroy;
-    public bool IsDestroy => isDestroy;
     private void Start()
     {
         pointsLife = maxLife;
@@ -19,12 +17,6 @@ public class JailLife : Life
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        Debug.Log($"Vida restante de {gameObject.name}: {pointsLife}");
-
-        if (pointsLife <= 0)
-        {
-            isDestroy = true;
-        }
     }
 
     private void OnTriggerEnter(Collider other)
