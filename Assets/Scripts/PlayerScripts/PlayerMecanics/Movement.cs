@@ -246,7 +246,7 @@ public class Movement : MonoBehaviour
                     if (bodyDestroy != null)
                     {
                         velocity.y = bounceForce;
-                        bodyDestroy.PlayerDestroy();
+                        bodyDestroy.DamageInHead();
                     }
                 }
                 if (hit.collider.gameObject.CompareTag("Gorilla"))

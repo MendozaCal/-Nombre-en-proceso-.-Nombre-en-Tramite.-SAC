@@ -28,11 +28,11 @@ public class EnemyLife : Life
     {
         if (other.gameObject.CompareTag("Stick"))
         {
-            TakeDamage(1);
+            TakeDamage(2);
         }
         if (other.gameObject.CompareTag("Honda"))
         {
-            TakeDamage(1);
+            TakeDamage(2);
         }
     }
 }

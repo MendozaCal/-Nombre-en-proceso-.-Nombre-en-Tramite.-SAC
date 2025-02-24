@@ -5,6 +5,7 @@ public class BodyDestroy : MonoBehaviour
     public bool isTap;
     [SerializeField] GameObject Body;
     [SerializeField] GameObject Mover;
+    [SerializeField] EnemyLife enemyLife;
     ReceiveDamage ReceiveDamage;
     private void Start()
     {
@@ -16,11 +17,8 @@ public class BodyDestroy : MonoBehaviour
         Body.SetActive(false);
         ReceiveDamage.particleSystem.Play();
     }
-    private void OnCollisionEnter(Collision collision)
+    public void DamageInHead()
     {
-        if (collision.gameObject.CompareTag("feet"))
-        {
-            PlayerDestroy();
-        }
+        enemyLife.TakeDamage(1);
     }
 }

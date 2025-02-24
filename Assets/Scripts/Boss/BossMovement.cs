@@ -18,6 +18,10 @@ public class BossMovement : MonoBehaviour
     private bool isStunned = false;
     private int currentIndex = 0;
 
+    private Vector3 startPosition;
+    private Vector3 targetPosition;
+    private float elapsedTime;
+
     void Start()
     {
         StartCoroutine(MovimientoCiclo());
@@ -46,24 +50,25 @@ public class BossMovement : MonoBehaviour
 
             Transform objetive = points[currentIndex];
 
-            Vector3 start = transform.position;
-            float time = 0f;
+            startPosition = transform.position;
+            targetPosition = objetive.position;
+            elapsedTime = 0f;
 
-            while (time < jumpDuration)
+            while (elapsedTime < jumpDuration)
             {
                 if (isStunned) break;
 
-                time += Time.deltaTime;
-                float t = time / jumpDuration;
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / jumpDuration;
 
-                Vector3 direction = (objetive.position - transform.position).normalized;
+                Vector3 direction = (targetPosition - transform.position).normalized;
                 direction.y = 0;
 
                 Quaternion rotationFinal = Quaternion.LookRotation(direction);
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotationFinal, 0.2f);
 
-                Vector3 intermediatePosition = Vector3.Lerp(start, objetive.position, t);
+                Vector3 intermediatePosition = Vector3.Lerp(startPosition, targetPosition, t);
 
                 intermediatePosition.y += Mathf.Sin(t * Mathf.PI) * heightJump;
 
@@ -73,7 +78,7 @@ public class BossMovement : MonoBehaviour
 
             if (!isStunned)
             {
-                transform.position = objetive.position;
+                transform.position = targetPosition;
 
                 attckGorilla = true;
                 yield return new WaitForSeconds(waitBetweenJumps);
@@ -157,17 +162,58 @@ public class BossMovement : MonoBehaviour
     IEnumerator StunBoss()
     {
         isStunned = true;
-        Debug.Log("Fui estuneado");
-        yield return new WaitForSeconds(stunDuration);
-        Debug.Log("Ya no estoy estuneado");
+        Vector3 currentPosition = transform.position;
+
+        int nearestPointIndex = FindNearestPointIndex(currentPosition);
+        currentIndex = nearestPointIndex;
+        targetPosition = points[currentIndex].position;
+
+        float quickMoveDuration = 0.5f; 
+        float elapsedQuickMoveTime = 0f;
+        Vector3 stunStartPosition = currentPosition;
+
+        while (elapsedQuickMoveTime < quickMoveDuration)
+        {
+            elapsedQuickMoveTime += Time.deltaTime;
+            float t = elapsedQuickMoveTime / quickMoveDuration;
+
+            float smoothT = 1 - (1 - t) * (1 - t);
+
+            transform.position = Vector3.Lerp(stunStartPosition, targetPosition, smoothT);
+            yield return null;
+        }
+
+        transform.position = targetPosition;
+
+        yield return new WaitForSeconds(stunDuration - quickMoveDuration);
+
+        startPosition = targetPosition;
+        elapsedTime = 0f;
         isStunned = false;
+    }
+
+    private int FindNearestPointIndex(Vector3 position)
+    {
+        int nearestIndex = 0;
+        float nearestDistance = float.MaxValue;
+
+        int nextIndex = (currentIndex + 1) % points.Length;
+        float distanceToCurrent = Vector3.Distance(position, points[currentIndex].position);
+        float distanceToNext = Vector3.Distance(position, points[nextIndex].position);
+
+        if (distanceToCurrent <= distanceToNext)
+        {
+            return currentIndex;
+        }
+        else
+        {
+            return nextIndex;
+        }
     }
 
     public void OnHeadJump()
     {
-        Debug.Log("Golpeado en la cabeza");
         isStunned = false;
-
         movement.StartCenterPoint(centerPoint);
     }
 }
