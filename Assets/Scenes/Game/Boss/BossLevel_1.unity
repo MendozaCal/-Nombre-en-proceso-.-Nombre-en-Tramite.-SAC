@@ -1998,7 +1998,9 @@ MonoBehaviour:
   - {fileID: 191860451}
   - {fileID: 1519670256}
   player: {fileID: 1396681440}
-  barrel: {fileID: 6748992323101102352, guid: c5089615bca918942b598425b512eddd, type: 3}
+  barrel:
+  - {fileID: 6748992323101102352, guid: c5089615bca918942b598425b512eddd, type: 3}
+  - {fileID: 6748992323101102352, guid: f7d2748e8bb051d4db0e663e4016aefa, type: 3}
   jumpDuration: 1
   waitBetweenJumps: 4
   heightJump: 2
