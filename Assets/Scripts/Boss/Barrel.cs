@@ -36,13 +36,13 @@ public class Barrel : Life
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Terrain"))
-        { 
-            TakeDamage(1);
+        {
+            Destroy(gameObject);
             Instantiate(sticks, transform.position, Quaternion.identity);
         }  
         if(collision.gameObject.CompareTag("Gorilla"))
         {
-            TakeDamage(1);
+            Destroy(gameObject);
             BossMovement bossMovement = collision.gameObject.GetComponent<BossMovement>();
             bossMovement.StartStun();
         }

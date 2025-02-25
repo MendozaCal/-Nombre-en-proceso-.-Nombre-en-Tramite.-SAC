@@ -1931,6 +1931,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d27328571d2e6d479eb9d585012572f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  head: {fileID: 0}
+  particleSystem: {fileID: 0}
   maxLife: 3
   playerLife: {fileID: 1396681450}
 --- !u!65 &244125544
@@ -10083,8 +10085,8 @@ Transform:
   m_GameObject: {fileID: 1289553043}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 6.0741, y: -0.05, z: -0.04158}
+  m_LocalScale: {x: 1.495, y: 1.495, z: 1.495}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1575316413}
@@ -10121,8 +10123,8 @@ Transform:
   m_GameObject: {fileID: 1312281646}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.665119, y: -3.544411, z: 12.18029}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -9.87, y: -4.49663, z: 18.168}
+  m_LocalScale: {x: 1.495, y: 1.495, z: 1.495}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 729427423}

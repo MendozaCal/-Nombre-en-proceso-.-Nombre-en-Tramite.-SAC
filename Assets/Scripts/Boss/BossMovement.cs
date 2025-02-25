@@ -5,7 +5,7 @@ public class BossMovement : MonoBehaviour
 {
     [SerializeField] private Transform[] points;
     [SerializeField] private Transform player;
-    [SerializeField] private GameObject barrel;
+    [SerializeField] private GameObject[] barrel;
     [SerializeField] private float jumpDuration = 1f;
     [SerializeField] private float waitBetweenJumps = 1f;
     [SerializeField] private float heightJump = 2f;
@@ -113,7 +113,8 @@ public class BossMovement : MonoBehaviour
 
         (Vector3 initialVelocity, float totalTime) = CalculatePreciseTrajectory(transform.position, targetPosition, maxHeight);
 
-        GameObject obj = Instantiate(barrel, transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(barrel[Random.Range(0, barrel.Length)], transform.position, Quaternion.identity);
+
         Rigidbody rb = obj.GetComponent<Rigidbody>();
         rb.velocity = initialVelocity;
 
