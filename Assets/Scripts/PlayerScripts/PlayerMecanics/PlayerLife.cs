@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerLife : Life
 {
@@ -19,6 +20,7 @@ public class PlayerLife : Life
     [SerializeField] public float key;
     [SerializeField] public float totalKey;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Image shieldImage;
 
     [Header("BoxCast Settings")]
     [SerializeField] private Vector3 boxSize = new Vector3(1f, 1f, 1f); 
@@ -70,6 +72,26 @@ public class PlayerLife : Life
             base.TakeDamage(1);
         }
         DetectEnemies();
+        UpdateShieldColor();
+    }
+
+    private void UpdateShieldColor()
+    {
+        if (shieldImage != null)
+        {
+            if (pointsShield == 3)
+            {
+                shieldImage.color = Color.green;
+            }
+            else if (pointsShield == 2)
+            {
+                shieldImage.color = Color.yellow;
+            }
+            else if (pointsShield == 1)
+            {
+                shieldImage.color = Color.red;
+            }
+        }
     }
 
     public override void TakeDamage(float damage)
