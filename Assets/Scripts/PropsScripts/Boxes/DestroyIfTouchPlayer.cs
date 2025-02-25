@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class DestroyIfTouchPlayer : MonoBehaviour
 {
-   
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
