@@ -705,10 +705,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3590789841156702916}
   - component: {fileID: 8789021533227936411}
-  - component: {fileID: 3291667887708042780}
   - component: {fileID: 8274253468129264412}
   - component: {fileID: 6575585976764126978}
-  - component: {fileID: 5615760702810383414}
+  - component: {fileID: 5574738250255775183}
+  - component: {fileID: 1258110464382073817}
   m_Layer: 3
   m_Name: WaspMove
   m_TagString: Enemy
@@ -752,22 +752,6 @@ MonoBehaviour:
   maxSpeed: 10
   rotationSpeed: 5
   waitTimeAtWaypoint: 3
---- !u!114 &3291667887708042780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7619033740418998464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1defe924dfd4b1b40921c1dd9ab94c5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTapGrab: 0
-  targetTags: []
-  head: {fileID: 8132901919639444646}
-  particleSystem: {fileID: 0}
 --- !u!199 &8274253468129264412
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5565,8 +5549,24 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!136 &5615760702810383414
-CapsuleCollider:
+--- !u!114 &5574738250255775183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619033740418998464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2821a34488f6e35498c1ac8e040dcf7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 1
+  damageGrab: 2
+  particleSystem: {fileID: 6575585976764126978}
+  Body: {fileID: 4926125211472159049}
+--- !u!135 &1258110464382073817
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5583,10 +5583,8 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.78
-  m_Height: 3
-  m_Direction: 1
+  serializedVersion: 3
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8036566188461434816
 GameObject:
@@ -5671,7 +5669,7 @@ GameObject:
   - component: {fileID: 2190259365547176211}
   - component: {fileID: 5966524129311891534}
   - component: {fileID: 6040794947280843903}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: Head
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -5779,6 +5777,7 @@ MonoBehaviour:
   isTap: 0
   Body: {fileID: 4926125211472159049}
   Mover: {fileID: 7619033740418998464}
+  enemyLife: {fileID: 5574738250255775183}
 --- !u!1 &8720028448824586258
 GameObject:
   m_ObjectHideFlags: 0

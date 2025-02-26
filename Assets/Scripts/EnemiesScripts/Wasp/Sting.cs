@@ -9,6 +9,8 @@ public class Sting : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 initialPosition;
+    private string layerToIgnore = "Enemy";
+    private int ignoredLayer;
 
     void Start()
     {
@@ -21,6 +23,10 @@ public class Sting : MonoBehaviour
             Vector3 direction = (player.transform.position - transform.position).normalized;
             rb.velocity = direction * projectileSpeed;
         }
+        ignoredLayer = LayerMask.NameToLayer(layerToIgnore);
+        int myLayer = gameObject.layer;
+
+        Physics.IgnoreLayerCollision(myLayer, ignoredLayer, true);
 
         Destroy(gameObject, lifeTime);
     }
@@ -31,6 +37,13 @@ public class Sting : MonoBehaviour
         {
             Vector3 returnDirection = (initialPosition - transform.position).normalized;
             rb.velocity = returnDirection * projectileSpeed;
+            int myLayer = gameObject.layer;
+            Physics.IgnoreLayerCollision(myLayer, ignoredLayer, false);
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy")) Destroy(gameObject);
+        
     }
 }

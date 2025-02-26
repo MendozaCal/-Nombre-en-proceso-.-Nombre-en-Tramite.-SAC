@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class DestroyAll : MonoBehaviour
 {
-    BodyDestroy bodyDestroy;
-    [SerializeField]GameObject Head;
+    [SerializeField] GameObject Head;
     [SerializeField] int timeDestroy;
 
-    void Start()
-    {
-        bodyDestroy = Head.GetComponent<BodyDestroy>();
-    }
     private void Update()
     {
-        if (bodyDestroy != null && bodyDestroy.isTap)
+        if (Head == null)
         {
             StartCoroutine(TimeToDead());
         }

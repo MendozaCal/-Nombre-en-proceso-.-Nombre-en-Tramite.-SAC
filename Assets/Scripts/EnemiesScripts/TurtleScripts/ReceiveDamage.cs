@@ -21,14 +21,6 @@ public class ReceiveDamage : MonoBehaviour
         AddTag("Honda");
     }
 
-    private void Update()
-    {
-        if (isTapGrab && bodyDestroy != null)
-        {
-            bodyDestroy.PlayerDestroy();
-        }
-    }
-
     public void AddTag(string tag)
     {
         if (!targetTags.Contains(tag))

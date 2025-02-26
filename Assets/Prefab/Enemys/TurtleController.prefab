@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3f24c8337813e4c97b16830baccbc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 1963983718203741124}
+  Head: {fileID: 4080562335017296768}
   timeDestroy: 2
 --- !u!1 &1484650908887799570
 GameObject:
@@ -588,7 +588,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
@@ -5424,7 +5424,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2821a34488f6e35498c1ac8e040dcf7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 3
+  maxLife: 2
+  damageGrab: 2
+  particleSystem: {fileID: 3321441562184087810}
+  Body: {fileID: 7600094558247756364}
 --- !u!1 &7600094558247756364
 GameObject:
   m_ObjectHideFlags: 0
