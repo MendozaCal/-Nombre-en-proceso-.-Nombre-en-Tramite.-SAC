@@ -87,8 +87,6 @@ public class Movement : MonoBehaviour
             QueryTriggerInteraction.Ignore
         );
 
-        if (isGrounded && !wasGroundedLastFrame) velocity.y = -1f;
-
         if (isGrounded) lastGroundedTime = Time.time;
 
         if (isGrounded && hit.collider.CompareTag("MovablePlatform"))
