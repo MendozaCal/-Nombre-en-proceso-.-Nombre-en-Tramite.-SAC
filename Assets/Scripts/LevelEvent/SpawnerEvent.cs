@@ -10,7 +10,7 @@ public class SpawnerEvent : MonoBehaviour
     [SerializeField] private float launchForce = 10f;
     [SerializeField] private float timeSinceLastSpawn;
     [SerializeField] private float destroyPropsTime = 5f;
-
+    [SerializeField] bool ifEvent;
     void Start()
     {
         timeSinceLastSpawn = 0f;
@@ -25,6 +25,7 @@ public class SpawnerEvent : MonoBehaviour
             SpawnObject();
             timeSinceLastSpawn = 0f;
         }
+        //if (ifEvent) 
     }
 
     void SpawnObject()
