@@ -4,10 +4,12 @@ public class GorillaLife : Life
 {
     [SerializeField] private float maxLife = 3f;
     [SerializeField] private PlayerLife playerLife;
+    [SerializeField] private GameObject[] imageGorilaLife;
 
     private void Start()
     {
         pointsLife = maxLife;
+        UpdateGorilaLifeImages();
     }
     private void Update()
     {
@@ -33,5 +35,22 @@ public class GorillaLife : Life
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        UpdateGorilaLifeImages();
+    }
+    private void UpdateGorilaLifeImages()
+    {
+        int imagesToActivate = Mathf.CeilToInt(pointsLife);
+
+        for (int i = 0; i < imageGorilaLife.Length; i++)
+        {
+            if (i < imagesToActivate)
+            {
+                imageGorilaLife[i].SetActive(true);
+            }
+            else
+            {
+                imageGorilaLife[i].SetActive(false);
+            }
+        }
     }
 }

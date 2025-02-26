@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DestroyTime : MonoBehaviour
 {
-    private float destroyTimer = 4f; 
+    [SerializeField] private float destroyTimer = 4f; 
     private bool isTouchingSomething = false; 
 
     private void Update()
