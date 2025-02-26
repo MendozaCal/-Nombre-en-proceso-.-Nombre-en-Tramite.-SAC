@@ -216,7 +216,8 @@ public class PlayerLife : Life
             if (hit.collider.CompareTag("Barrel"))
             {
                 TakeDamage(1);
-                Destroy(hit.collider.gameObject);
+                Barrel barrel = hit.collider.GetComponent<Barrel>();
+                barrel.InstatiatePrefabs();
                 break;
             }
         }

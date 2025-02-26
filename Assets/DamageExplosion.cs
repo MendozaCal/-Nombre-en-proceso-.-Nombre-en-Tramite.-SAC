@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageExplosion : MonoBehaviour
 {
-    private bool isRecibeDamage;
+    private bool isRecibeDamage = false;
     private PlayerLife playerLife;
     private SphereCollider sphereCollider;
 

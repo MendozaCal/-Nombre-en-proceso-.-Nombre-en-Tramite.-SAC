@@ -37,14 +37,19 @@ public class Barrel : Life
     {
         if(collision.gameObject.CompareTag("Terrain"))
         {
-            Destroy(gameObject);
-            Instantiate(sticks, transform.position, Quaternion.identity);
-        }  
-        if(collision.gameObject.CompareTag("Gorilla"))
+            InstatiatePrefabs();
+        }
+        if (collision.gameObject.CompareTag("Gorilla"))
         {
             Destroy(gameObject);
             BossMovement bossMovement = collision.gameObject.GetComponent<BossMovement>();
             bossMovement.StartStun();
         }
+    }
+
+    public void InstatiatePrefabs()
+    {
+        Destroy(gameObject);
+        Instantiate(sticks, transform.position, Quaternion.identity);
     }
 }
