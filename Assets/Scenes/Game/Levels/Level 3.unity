@@ -225,8 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98600d2fe1070b479121f3c4a123dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  particleSystem: {fileID: 0}
   maxLife: 1
   isNecesary: 0
   isWoodWall: 1
@@ -315,8 +313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98600d2fe1070b479121f3c4a123dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  particleSystem: {fileID: 0}
   maxLife: 1
   isNecesary: 0
   isWoodWall: 1
@@ -564,8 +560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98600d2fe1070b479121f3c4a123dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  particleSystem: {fileID: 0}
   maxLife: 1
   isNecesary: 0
   isWoodWall: 1
@@ -628,8 +622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98600d2fe1070b479121f3c4a123dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  particleSystem: {fileID: 0}
   maxLife: 1
   isNecesary: 0
   isWoodWall: 1
@@ -1023,8 +1015,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98600d2fe1070b479121f3c4a123dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  particleSystem: {fileID: 0}
   maxLife: 1
   isNecesary: 0
   isWoodWall: 1
@@ -1634,6 +1624,14 @@ PrefabInstance:
       propertyPath: wallLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 1735168303813415887, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 1735168303813415887, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1767650308425510442, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_Name
       value: PlayerController
@@ -1642,14 +1640,118 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1861741916130650581, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968706176710266679, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 1968706176710266679, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812271369166621648, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231229029642915055, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231229029642915055, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 3231229029642915055, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231229029642915055, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3563514856234661007, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3795542290190324673, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 3795542290190324673, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 257440244518554875, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 3795542290190324673, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258415801683210377, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258415801683210377, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 4258415801683210377, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258415801683210377, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6575181005776562407, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 939597917}
+    - target: {fileID: 7665166791064521357, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665166791064521357, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 7665166791064521357, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665166791064521357, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997239639738772123, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 7997239639738772123, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 257440244518554875, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 7997239639738772123, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270097357590098925, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556092476932230190, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 8556092476932230190, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 257440244518554875, guid: 4d24cb72604e802408b15790a097fe83, type: 2}
+    - target: {fileID: 8556092476932230190, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8921503287984538830, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -20
@@ -2007,8 +2109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98600d2fe1070b479121f3c4a123dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  particleSystem: {fileID: 0}
   maxLife: 1
   isNecesary: 0
   isWoodWall: 1
@@ -2838,8 +2938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98600d2fe1070b479121f3c4a123dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  particleSystem: {fileID: 0}
   maxLife: 1
   isNecesary: 0
   isWoodWall: 1
@@ -3445,8 +3543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98600d2fe1070b479121f3c4a123dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  particleSystem: {fileID: 0}
   maxLife: 1
   isNecesary: 0
   isWoodWall: 1
@@ -3535,8 +3631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98600d2fe1070b479121f3c4a123dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  particleSystem: {fileID: 0}
   maxLife: 1
   isNecesary: 0
   isWoodWall: 1
