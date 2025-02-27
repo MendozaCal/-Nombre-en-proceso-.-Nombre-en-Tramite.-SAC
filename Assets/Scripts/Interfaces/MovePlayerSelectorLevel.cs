@@ -138,18 +138,23 @@ public class MovePlayerSelectorLevel : MonoBehaviour
             {
                 if (levelPoint.levelIndex <= unlockedLevel)
                 {
-                    string sceneName = "Level " + levelPoint.levelIndex;
+                    string levelPattern = "Level " + levelPoint.levelIndex;
 
-                    if (SceneUtility.GetBuildIndexByScenePath(sceneName) >= 0)
+                    for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
                     {
-                        Debug.Log("Cargando nivel " + levelPoint.levelIndex);
-                        PlayerPrefs.SetString("SceneToLoad", sceneName);
-                        fadePrefab.StartFadeIn("LoadingScreen");
+                        string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+                        string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+
+                        if (sceneName.Contains(levelPattern))
+                        {
+                            Debug.Log("Cargando nivel " + levelPoint.levelIndex + " (Escena: " + sceneName + ")");
+                            PlayerPrefs.SetString("SceneToLoad", scenePath);
+                            fadePrefab.StartFadeIn("LoadingScreen");
+                            return;
+                        }
                     }
-                    else
-                    {
-                        Debug.LogError("La escena '" + sceneName + "' no está en Build Settings.");
-                    }
+
+                    Debug.LogError("No se encontró ninguna escena que contenga '" + levelPattern + "'");
                 }
                 else
                 {

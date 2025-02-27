@@ -343,12 +343,13 @@ public class PlayerLife : Life
         if (saveManager != null)
         {
             string sceneName = SceneManager.GetActiveScene().name;
-
-            if (sceneName.StartsWith("Level "))
+            if (sceneName.Contains("Level"))
             {
-                string levelNumberString = sceneName.Replace("Level ", "");
+                int startIndex = sceneName.IndexOf("Level");
+                string levelPart = sceneName.Substring(startIndex);
 
-                if (int.TryParse(levelNumberString, out int levelNumber))
+                string[] parts = levelPart.Split(' ');
+                if (parts.Length >= 2 && int.TryParse(parts[1], out int levelNumber))
                 {
                     int slotNumber = PlayerPrefs.GetInt("SlotNumber");
                     SavedGame currentGame = saveManager.savedGames.Find(game => game.slotNumber == slotNumber);
@@ -358,10 +359,8 @@ public class PlayerLife : Life
                         {
                             currentGame.unlockedLevel = levelNumber + 1;
                         }
-
                         currentGame.collectibles += monkeys;
                         currentGame.lives = (int)pointsLife;
-
                         saveManager.SaveGames();
                         Debug.Log("Nivel desbloqueado: " + currentGame.unlockedLevel);
                     }
@@ -374,10 +373,10 @@ public class PlayerLife : Life
         PlayerPrefs.SetInt("LastLevelMonkeys", monkeys);
         PlayerPrefs.SetString("LastLevel", currentSceneName);
         PlayerPrefs.Save();
-
         Fade fade = FindObjectOfType<Fade>();
         fade.StartFadeIn("Victory");
     }
+
     public void ProgressWorld()
     {
         GameSaveManager saveManager = FindObjectOfType<GameSaveManager>();
@@ -390,6 +389,7 @@ public class PlayerLife : Life
         SavedGame currentGame = saveManager.savedGames.Find(game => game.slotNumber == slotNumber);
         SceneManager.LoadScene("BossLevel_" + currentGame.worldName);
     }
+
     public void CompleteWorldAfterBoss()
     {
         GameSaveManager saveManager = FindObjectOfType<GameSaveManager>();
@@ -397,24 +397,22 @@ public class PlayerLife : Life
         {
             string sceneName = SceneManager.GetActiveScene().name;
 
-            if (sceneName.StartsWith("BossLevel_"))
+            if (sceneName.Contains("BossLevel_"))
             {
-                string worldNumberString = sceneName.Replace("BossLevel_", "");
+                int startIndex = sceneName.IndexOf("BossLevel_");
+                string bossPart = sceneName.Substring(startIndex + "BossLevel_".Length);
 
-                if (int.TryParse(worldNumberString, out int worldNumber))
+                string[] parts = bossPart.Split(' ');
+                if (parts.Length >= 1 && int.TryParse(parts[0], out int worldNumber))
                 {
                     int slotNumber = PlayerPrefs.GetInt("SlotNumber");
                     SavedGame currentGame = saveManager.savedGames.Find(game => game.slotNumber == slotNumber);
-
                     if (currentGame != null)
                     {
                         currentGame.worldName = worldNumber + 1;
-
                         currentGame.collectibles += monkeys;
                         currentGame.lives = (int)pointsLife;
-
                         saveManager.SaveGames();
-
                         Debug.Log("Mundo desbloqueado: " + currentGame.worldName);
                     }
                 }
@@ -423,7 +421,7 @@ public class PlayerLife : Life
 
         PlayerPrefs.SetInt("LastLevelBananas", bananas);
         PlayerPrefs.SetInt("LastLevelMonkeys", monkeys);
-        PlayerPrefs.SetInt("LastLevelLives", (int)pointsLife); 
+        PlayerPrefs.SetInt("LastLevelLives", (int)pointsLife);
         PlayerPrefs.Save();
         Fade fade = FindObjectOfType<Fade>();
         fade.StartFadeIn("Victory");

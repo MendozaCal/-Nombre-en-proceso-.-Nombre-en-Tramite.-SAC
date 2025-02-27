@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Combat : MonoBehaviour
 {
@@ -78,6 +79,36 @@ public class Combat : MonoBehaviour
         }
     }
 
+    public void ResetCombatState()
+    {
+        StopAllCoroutines();  
+        IsAttacking = false;
+        if (hand != null)
+        {
+            hand.localPosition = handOriginalPosition;
+        }
+        if (targetPosition != null && hand != null)
+        {
+            targetPosition.position = hand.position;
+        }
+    }
+
+    private void OnEnable()
+    {
+        IsAttacking = false;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        IsAttacking = false;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetCombatState();
+    }
     private IEnumerator ExecuteAttackRoutine(GrabType type)
     {
         IsAttacking = true;

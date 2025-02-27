@@ -15,7 +15,22 @@ public class PauseControl : MonoBehaviour
 
     private void Start()
     {
-        textLevel.text = SceneManager.GetActiveScene().name;
+        string sceneName = SceneManager.GetActiveScene().name;
+        string levelText = "Level";
+
+        if (sceneName.Contains("Level"))
+        {
+            int startIndex = sceneName.IndexOf("Level");
+            string levelPart = sceneName.Substring(startIndex);
+
+            string[] parts = levelPart.Split(' ');
+            if (parts.Length >= 2 && int.TryParse(parts[1], out int levelNumber))
+            {
+                levelText = parts[0] + " " + levelNumber;
+            }
+        }
+
+        textLevel.text = levelText;
     }
 
     private void Update()
