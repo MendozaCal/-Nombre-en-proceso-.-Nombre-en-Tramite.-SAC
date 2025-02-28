@@ -14,10 +14,10 @@ public class EyesDetectorTortoise : MonoBehaviour
         DetectorPatrollToAttack detectorPatrollToAttack = RutePoints.GetComponent<DetectorPatrollToAttack>();
 
         float sizeZ = detectorPatrollToAttack.distance * 4;
-        boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, sizeZ);
+        boxCollider.size = new Vector3(sizeZ, boxCollider.size.y, sizeZ);
 
         float centerZ = sizeZ / 2;
-        boxCollider.center = new Vector3(0, 0, centerZ);
+        boxCollider.center = new Vector3(-centerZ, 0, centerZ);
     }
     private void OnTriggerEnter(Collider other)
     {
