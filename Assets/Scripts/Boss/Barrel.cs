@@ -4,6 +4,7 @@ public class Barrel : Life
 {
     [SerializeField] private float maxLife = 1f;
     [SerializeField] private GameObject sticks;
+    [SerializeField] public string barrelType;
 
     private void Start()
     {
@@ -20,15 +21,26 @@ public class Barrel : Life
     {
         if (other.gameObject.CompareTag("Stick"))
         {
-            Vector3 hitDirection = transform.position - other.transform.position;
-            Rigidbody rb = GetComponent<Rigidbody>();
-            if (rb != null)
+            if(barrelType == "Normal")
             {
-                rb.useGravity = false;
-                Vector3 horizontalDirection = Vector3.ProjectOnPlane(hitDirection, Vector3.up).normalized;
-                rb.velocity = new Vector3(horizontalDirection.x * 10f, 0f, horizontalDirection.z * 10f);
-                int enemyLayer = LayerMask.NameToLayer("Enemy");
-                rb.excludeLayers = enemyLayer;
+                Vector3 hitDirection = transform.position - other.transform.position;
+                Rigidbody rb = GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.useGravity = false;
+                    Vector3 horizontalDirection = Vector3.ProjectOnPlane(hitDirection, Vector3.up).normalized;
+                    rb.velocity = new Vector3(horizontalDirection.x * 10f, 0f, horizontalDirection.z * 10f);
+                    int enemyLayer = LayerMask.NameToLayer("Enemy");
+                    rb.excludeLayers = enemyLayer;
+                }
+            }
+            else if (barrelType == "Explosivo")
+            {
+                InstatiatePrefabs();
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
     }
@@ -50,6 +62,6 @@ public class Barrel : Life
     public void InstatiatePrefabs()
     {
         Destroy(gameObject);
-        Instantiate(sticks, transform.position, Quaternion.identity);
+        if (sticks != null) Instantiate(sticks, transform.position, Quaternion.identity);
     }
 }

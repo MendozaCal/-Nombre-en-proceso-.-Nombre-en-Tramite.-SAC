@@ -217,7 +217,15 @@ public class PlayerLife : Life
             {
                 TakeDamage(1);
                 Barrel barrel = hit.collider.GetComponent<Barrel>();
-                barrel.InstatiatePrefabs();
+
+                if (barrel.barrelType == "Explosivo")
+                {
+                    barrel.InstatiatePrefabs();
+                }
+                else
+                {
+                    Destroy(hit.collider.gameObject);
+                }
                 break;
             }
         }
@@ -234,6 +242,12 @@ public class PlayerLife : Life
             case "Banana":
                 Heal(1);
                 bananas += 10;
+                Destroy(other.gameObject);
+                UpdateLifeAndPoints();
+                break;
+            case "Bananas":
+                Heal(1);
+                bananas += 70;
                 Destroy(other.gameObject);
                 UpdateLifeAndPoints();
                 break;

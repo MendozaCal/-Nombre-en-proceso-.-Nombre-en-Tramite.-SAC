@@ -113,7 +113,7 @@ public class BossMovement : MonoBehaviour
 
         (Vector3 initialVelocity, float totalTime) = CalculatePreciseTrajectory(transform.position, targetPosition, maxHeight);
 
-        GameObject obj = Instantiate(barrel[Random.Range(0, barrel.Length)], transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(GetRandomBarrel(), transform.position, Quaternion.identity);
 
         Rigidbody rb = obj.GetComponent<Rigidbody>();
         rb.velocity = initialVelocity;
@@ -169,7 +169,7 @@ public class BossMovement : MonoBehaviour
         currentIndex = nearestPointIndex;
         targetPosition = points[currentIndex].position;
 
-        float quickMoveDuration = 0.5f; 
+        float quickMoveDuration = 0.5f;
         float elapsedQuickMoveTime = 0f;
         Vector3 stunStartPosition = currentPosition;
 
@@ -216,5 +216,16 @@ public class BossMovement : MonoBehaviour
     {
         isStunned = false;
         movement.StartCenterPoint(centerPoint);
+    }
+
+    private GameObject GetRandomBarrel()
+    {
+        float totalWeight = 45f + 15f + 20f + 20f;
+        float randomValue = Random.Range(0, totalWeight);
+
+        if (randomValue <= 45f) return barrel[0];
+        else if (randomValue <= 60f) return barrel[1];
+        else if (randomValue <= 80f) return barrel[2];
+        else return barrel[3];
     }
 }
