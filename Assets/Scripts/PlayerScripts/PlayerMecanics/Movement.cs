@@ -5,7 +5,9 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] private float moveSpeedBase = 4f;
     [SerializeField] private float moveSpeedMax = 8f;
-    private float moveSpeed;
+    [SerializeField] private float accelerationTime = 5f;
+    private float currentaccelerationTime = 0f;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce = 12f;
     [SerializeField] private float gravity = -30f;
     [SerializeField] private float turnSmoothTime = 0.1f;
@@ -140,15 +142,26 @@ public class Movement : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
+            currentaccelerationTime += Time.deltaTime;
+            moveSpeed = Mathf.Lerp(moveSpeedBase, moveSpeedMax, currentaccelerationTime / accelerationTime);
+
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+            
+           
+           
+        } 
+        else
+        {
+            moveSpeed = moveSpeedBase;
+            currentaccelerationTime = 0f;    
         }
     }
-
+        
     private void HandleRun()
     {
         if (isGrounded) { moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase; }
