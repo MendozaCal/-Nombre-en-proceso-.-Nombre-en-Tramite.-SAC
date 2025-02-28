@@ -5,9 +5,10 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] private float moveSpeedBase = 4f;
     [SerializeField] private float moveSpeedMax = 8f;
-    [SerializeField] private float accelerationTime = 5f;
-    private float currentaccelerationTime = 0f;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float accelerationTime = 2f;
+    [SerializeField] private float decelerationTime = 2f;
+    private float currentAccelerationTime = 0f;
     [SerializeField] private float jumpForce = 12f;
     [SerializeField] private float gravity = -30f;
     [SerializeField] private float turnSmoothTime = 0.1f;
@@ -142,29 +143,29 @@ public class Movement : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-            currentaccelerationTime += Time.deltaTime;
-            moveSpeed = Mathf.Lerp(moveSpeedBase, moveSpeedMax, currentaccelerationTime / accelerationTime);
-
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
-            
-           
-           
-        } 
-        else
-        {
-            moveSpeed = moveSpeedBase;
-            currentaccelerationTime = 0f;    
         }
     }
-        
+
     private void HandleRun()
     {
-        if (isGrounded) { moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase; }
+        if (isGrounded) 
+        {
+            //if (isGrounded) { moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase; }
+
+            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+            Debug.Log("shift");
+            currentAccelerationTime = isRunning ? Mathf.Min(currentAccelerationTime + Time.deltaTime / accelerationTime, 1f)
+                                      : Mathf.Max(currentAccelerationTime - Time.deltaTime / decelerationTime, 0f);
+
+            moveSpeed = Mathf.Lerp(moveSpeedBase, moveSpeedMax, currentAccelerationTime);
+
+        }
     }
     public void ResetSpeed() { moveSpeed = moveSpeedBase; }
 
@@ -193,25 +194,25 @@ public class Movement : MonoBehaviour
     {
         if (isTouchingWall && !isGrounded)
         {
-                velocity.y = -wallSlideSpeed;    
-                                   
-                if (Input.GetButtonDown("Jump"))
-                {
-                    Vector3 jumpDirection = wallJumpDirection.normalized;
-                    jumpDirection.x *= wallDirX;
-                    jumpDirection = jumpDirection.normalized;
+            velocity.y = -wallSlideSpeed;
 
-                    velocity = jumpDirection * wallJumpForce;
-                    velocity.y = Mathf.Sqrt(wallJumpForce * -2f * gravity);
+            if (Input.GetButtonDown("Jump"))
+            {
+                Vector3 jumpDirection = wallJumpDirection.normalized;
+                jumpDirection.x *= wallDirX;
+                jumpDirection = jumpDirection.normalized;
 
-                    StartCoroutine(RestoreHorizontalVelocity());
-                    StartCoroutine(RestoreWallLayer());
-                }
-                else
-                {
-                    velocity.y = -wallSlideSpeed;
-                }
-            
+                velocity = jumpDirection * wallJumpForce;
+                velocity.y = Mathf.Sqrt(wallJumpForce * -2f * gravity);
+
+                StartCoroutine(RestoreHorizontalVelocity());
+                StartCoroutine(RestoreWallLayer());
+            }
+            else
+            {
+                velocity.y = -wallSlideSpeed;
+            }
+
         }
         else
         {
@@ -290,7 +291,7 @@ public class Movement : MonoBehaviour
 
     private void ApplyGravity()
     {
-        velocity.y += gravity * Time.deltaTime; 
+        velocity.y += gravity * Time.deltaTime;
         float maxFallSpeed = -30f;
         if (velocity.y < maxFallSpeed)
         {
