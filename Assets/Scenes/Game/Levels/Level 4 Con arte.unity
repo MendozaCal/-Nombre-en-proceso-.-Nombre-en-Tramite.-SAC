@@ -1615,9 +1615,9 @@ GameObject:
   - component: {fileID: 448191021}
   - component: {fileID: 448191020}
   - component: {fileID: 448191019}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube223 (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2221,6 +2221,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9145870211805480628, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -9145870211805480628, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: -9136036433197296577, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2285,6 +2293,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8280791474358905807, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -8280791474358905807, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: -8013556200906363256, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -8013556200906363256, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: -7932054039397618321, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -7932054039397618321, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: -7812718794621064025, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2297,18 +2329,74 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 63baef0f3a7125945b0378cb4ed04eb2, type: 2}
+    - target: {fileID: -6569057146450049104, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -6569057146450049104, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: -6455437545375149447, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -6455437545375149447, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: -6423639715908504857, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -6423639715908504857, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: -6276477674939755674, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -6276477674939755674, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: -6254867827875031772, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a2ae09f8c8b23fc46ab6a586c6f08d59, type: 2}
+    - target: {fileID: -5098402967125669391, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -5098402967125669391, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: -5016723018009863408, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a944d462b3d9b2f409ccc286aee89dea, type: 2}
+    - target: {fileID: -4791061893230386206, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -4791061893230386206, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: -4761035578383383653, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 63baef0f3a7125945b0378cb4ed04eb2, type: 2}
+    - target: {fileID: -3958845022584778704, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -3958845022584778704, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: -3030085432479016906, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2317,10 +2405,42 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a944d462b3d9b2f409ccc286aee89dea, type: 2}
+    - target: {fileID: -2924585727086431497, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -2924585727086431497, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: -2900513223104968982, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -2900513223104968982, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: -2728628024713163890, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a2ae09f8c8b23fc46ab6a586c6f08d59, type: 2}
+    - target: {fileID: -2643716551204625718, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -2643716551204625718, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: -1724915360025085638, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -1724915360025085638, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: -1006413863620622272, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -57.51
@@ -2333,6 +2453,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a2ae09f8c8b23fc46ab6a586c6f08d59, type: 2}
+    - target: {fileID: -795876738903836492, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -795876738903836492, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: -642586189662459515, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -642586189662459515, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: -636675888834726955, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2357,14 +2493,38 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Floor
       objectReference: {fileID: 0}
+    - target: {fileID: 865899753405952644, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 865899753405952644, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Name
       value: Nivel 4 art
+      objectReference: {fileID: 0}
+    - target: {fileID: 1016027948993522988, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1016027948993522988, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 1113608393449779514, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 63baef0f3a7125945b0378cb4ed04eb2, type: 2}
+    - target: {fileID: 1147190473556179318, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1147190473556179318, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 1583251101675178621, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2373,10 +2533,50 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 15.77
       objectReference: {fileID: 0}
+    - target: {fileID: 2241308278599386189, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2241308278599386189, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298379577342918891, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298379577342918891, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 2346451228358404327, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a2ae09f8c8b23fc46ab6a586c6f08d59, type: 2}
+    - target: {fileID: 2608267265249037087, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608267265249037087, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099473574913355044, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099473574913355044, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111390113062850971, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111390113062850971, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 3392047622137638318, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.13398978
@@ -2417,10 +2617,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a2ae09f8c8b23fc46ab6a586c6f08d59, type: 2}
+    - target: {fileID: 5443686810573877156, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443686810573877156, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 6046712775138585848, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 63baef0f3a7125945b0378cb4ed04eb2, type: 2}
+    - target: {fileID: 6509697765012325829, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509697765012325829, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 6600579916701875733, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2433,6 +2649,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a2ae09f8c8b23fc46ab6a586c6f08d59, type: 2}
+    - target: {fileID: 7946426749833836831, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946426749833836831, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 8240668773233952088, guid: b2f37d9537aa5b94bad056dafe8a05f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
