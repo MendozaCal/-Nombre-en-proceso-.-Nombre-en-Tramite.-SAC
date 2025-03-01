@@ -10,7 +10,7 @@ public class SlipperyRamp : MonoBehaviour
     private bool isSliding = false;
     private Vector3 lastPosition;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         controller = other.GetComponent<CharacterController>();
         if (controller != null)
