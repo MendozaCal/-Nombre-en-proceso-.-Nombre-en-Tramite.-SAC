@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EyesDetectorTortoise : MonoBehaviour
@@ -12,12 +9,6 @@ public class EyesDetectorTortoise : MonoBehaviour
     {
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         DetectorPatrollToAttack detectorPatrollToAttack = RutePoints.GetComponent<DetectorPatrollToAttack>();
-
-        float sizeZ = detectorPatrollToAttack.distance * 4;
-        boxCollider.size = new Vector3(sizeZ, boxCollider.size.y, sizeZ);
-
-        float centerZ = sizeZ / 2;
-        boxCollider.center = new Vector3(-centerZ, 0, centerZ);
     }
     private void OnTriggerEnter(Collider other)
     {
