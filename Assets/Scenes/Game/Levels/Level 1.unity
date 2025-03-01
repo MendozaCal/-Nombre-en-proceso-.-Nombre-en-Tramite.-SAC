@@ -440,6 +440,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6872139702424568233, guid: 675561cc3448153498179a622f6cbb29, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.736
+      objectReference: {fileID: 0}
     - target: {fileID: -6726615986570039458, guid: 675561cc3448153498179a622f6cbb29, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -600,6 +604,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -1383628076518677221, guid: 675561cc3448153498179a622f6cbb29, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: -1276816731923613103, guid: 675561cc3448153498179a622f6cbb29, type: 3}
       propertyPath: m_Layer
       value: 11
@@ -659,6 +667,10 @@ PrefabInstance:
     - target: {fileID: -658445816637125598, guid: 675561cc3448153498179a622f6cbb29, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -658445816637125598, guid: 675561cc3448153498179a622f6cbb29, type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: -253786545196755511, guid: 675561cc3448153498179a622f6cbb29, type: 3}
       propertyPath: m_Layer
@@ -952,6 +964,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f0c7a9a4e2f35a447a9c50a46f6b242e, type: 2}
+    - target: {fileID: 7702832467200022842, guid: 675561cc3448153498179a622f6cbb29, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 61.18583
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702832467200022842, guid: 675561cc3448153498179a622f6cbb29, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.5967
+      objectReference: {fileID: 0}
     - target: {fileID: 8218188293840764883, guid: 675561cc3448153498179a622f6cbb29, type: 3}
       propertyPath: m_Layer
       value: 16
