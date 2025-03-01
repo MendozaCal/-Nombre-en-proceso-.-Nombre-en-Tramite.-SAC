@@ -29,7 +29,7 @@ public class Barrel : Life
                 {
                     rb.useGravity = false;
                     Vector3 horizontalDirection = Vector3.ProjectOnPlane(hitDirection, Vector3.up).normalized;
-                    rb.velocity = new Vector3(horizontalDirection.x * 10f, 0f, horizontalDirection.z * 10f);
+                    rb.velocity = new Vector3(horizontalDirection.x * 20f, 0f, horizontalDirection.z * 20f);
                     int enemyLayer = LayerMask.NameToLayer("Enemy");
                     rb.excludeLayers = enemyLayer;
                 }
