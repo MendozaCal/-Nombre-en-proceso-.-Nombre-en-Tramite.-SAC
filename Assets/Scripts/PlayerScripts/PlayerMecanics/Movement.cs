@@ -159,7 +159,7 @@ public class Movement : MonoBehaviour
             //if (isGrounded) { moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase; }
 
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
-            Debug.Log("shift");
+            //Debug.Log("shift");
             currentAccelerationTime = isRunning ? Mathf.Min(currentAccelerationTime + Time.deltaTime / accelerationTime, 1f)
                                       : Mathf.Max(currentAccelerationTime - Time.deltaTime / decelerationTime, 0f);
 
