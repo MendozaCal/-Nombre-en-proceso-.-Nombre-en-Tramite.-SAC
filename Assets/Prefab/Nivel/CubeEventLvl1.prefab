@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3652528967991879448}
   - component: {fileID: 8871674274246499160}
   - component: {fileID: 8989151226126383639}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CubeEventLvl1
-  m_TagString: Rocks
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,9 +115,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8921383758313827217}
   serializedVersion: 4
-  m_Mass: 2.5
+  m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 3
+  m_AngularDrag: 10000
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -146,3 +146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0714d91eec16643a949cfe0e42cc54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravedadExtra: -50
