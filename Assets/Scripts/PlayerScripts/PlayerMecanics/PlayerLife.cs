@@ -138,7 +138,9 @@ public class PlayerLife : Life
             transform.position = spawnPoint.position;
             controller.enabled = true;
             SlipperyRamp ramp = FindAnyObjectByType<SlipperyRamp>();
+            WallClimbing climb = FindAnyObjectByType<WallClimbing>();
             if (ramp != null) ramp.ResetSlidingState();
+            if (climb != null) climb.StopClimbing();
             Debug.Log("Respawn");
         }
         else if (pointsLife <= 0)

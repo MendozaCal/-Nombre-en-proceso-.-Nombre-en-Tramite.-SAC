@@ -268,7 +268,7 @@ public class WallClimbing : MonoBehaviour
         return moveDirection;
     }
 
-    private void StopClimbing()
+    public void StopClimbing()
     {
         isClimbing = false;
         isOnCeiling = false;
