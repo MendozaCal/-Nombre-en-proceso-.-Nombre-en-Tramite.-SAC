@@ -40,6 +40,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private GameObject hand;
 
     private CharacterController controller;
+    [SerializeField] private Animator animator;
     private Vector3 velocity;
     private float turnSmoothVelocity;
     public bool isGrounded;
@@ -144,14 +145,21 @@ public class Movement : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+
             controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+
+            animator.SetFloat("Velocity", moveDir.magnitude);
+        }
+        else
+        {
+            animator.SetFloat("Velocity", 0f);
         }
     }
-
     private void HandleRun()
     {
         if (isGrounded) 
