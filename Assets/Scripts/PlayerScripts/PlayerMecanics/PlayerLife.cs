@@ -13,20 +13,22 @@ public class PlayerLife : Life
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI TimerGame;
     [SerializeField] private TextMeshProUGUI BananasCont;
-    [SerializeField] private TextMeshProUGUI KeyCont;
     [SerializeField] private GameObject KeyController;
     [SerializeField] private int bananas;
     [SerializeField] private int monkeys;
     [SerializeField] public float key;
     [SerializeField] public float totalKey;
+    [SerializeField] private Image KeyImage;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Image shieldImage;
+    [SerializeField] private Image MonkeyFacePosition;
+    [SerializeField] private Sprite MonkeyFace1;
+    [SerializeField] private Sprite MonkeyFace2;
 
     [Header("BoxCast Settings")]
     [SerializeField] private Vector3 boxSize = new Vector3(1f, 1f, 1f); 
     [SerializeField] private float maxDistance = 0.1f; 
-    [SerializeField] private LayerMask enemyLayer; 
-
+    [SerializeField] private LayerMask enemyLayer;
     private bool reduceShield;
     private int multiplesProcesados = 0;
 
@@ -54,6 +56,10 @@ public class PlayerLife : Life
         UnFreezePlayer();
         healthBar.Initialize(initialLife);
         healthText.text = Mathf.RoundToInt(pointsLife).ToString();
+        if (totalKey >= 1)
+        {
+            KeyController.SetActive(true);
+        }
     }
     private void Update()
     {
@@ -64,9 +70,7 @@ public class PlayerLife : Life
 
         Timer -= Time.deltaTime;
         TimerGame.text = Mathf.RoundToInt(Timer).ToString();
-        BananasCont.text = Mathf.RoundToInt(bananas).ToString();
-        if (key > 0) KeyCont.text = Mathf.RoundToInt(key).ToString() + "/" + totalKey;
-        else KeyCont.text = "";
+        BananasCont.text = Mathf.RoundToInt(bananas).ToString("D7");
         if (Timer <= 0)
         {
             base.TakeDamage(1);
@@ -91,6 +95,14 @@ public class PlayerLife : Life
             {
                 shieldImage.color = Color.red;
             }
+        }
+        if (pointsShield < 2)
+        {
+            MonkeyFacePosition.sprite = MonkeyFace2;
+        }
+        else
+        {
+            MonkeyFacePosition.sprite = MonkeyFace1;
         }
     }
 
@@ -258,7 +270,7 @@ public class PlayerLife : Life
 
             case "Key":
                 key++;
-                KeyController.SetActive(true);
+                KeyImage.color = Color.white;
                 Destroy(other.gameObject);
                 break;
 
@@ -299,6 +311,7 @@ public class PlayerLife : Life
                 if (key >= 1 && Input.GetKey(KeyCode.E) && !door.isTouchDoor)
                 {
                     key--;
+                    if(key <= 0) KeyController.SetActive(false);
                     door.isTouchDoor = true;
                 }
                 break;
