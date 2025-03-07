@@ -2566,6 +2566,8 @@ MonoBehaviour:
   wallSlideSpeed: 2
   timeToDefaultLayer: 1.25
   timeToClimbableLayer: 1
+  slideForce: 0.5
+  slideDuration: 0.1
   hand: {fileID: 6337765142923031335}
   animator: {fileID: 1821385234455965538}
   isGrounded: 0

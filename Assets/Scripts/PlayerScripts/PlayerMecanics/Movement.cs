@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Movement : MonoBehaviour
 {
@@ -34,6 +35,11 @@ public class Movement : MonoBehaviour
     [SerializeField] private float timeToDefaultLayer = 0.5f;
     [SerializeField] private float timeToClimbableLayer = 1f;
     private bool isWallClimbing;
+
+    [Header("Sliding on Enemy")]
+    [SerializeField] private float slideForce = 5f;
+    [SerializeField] private float slideDuration = 0.5f;
+    private bool isSliding;
 
     private Combat combatScript;
     private Grab grabScript;
@@ -72,7 +78,7 @@ public class Movement : MonoBehaviour
         HandleWallMovement();
         CheckEnemyBelow();
         ApplyPlatformMovement();
-        ApplyGravity();
+        ApplyGravity(); 
     }
 
     private void CheckGroundState()
@@ -259,6 +265,7 @@ public class Movement : MonoBehaviour
                     sapo sapoScript = hit.collider.gameObject.GetComponent<sapo>();
                     if (sapoScript.damage) { PlayerLife playerlife = GetComponent<PlayerLife>(); playerlife.TakeDamage(1); }
                     if (sapoScript.isInflating == true) velocity.y = bounceForce;
+                    else StartCoroutine(SlideOffEnemy());
                 }
                 if (hit.collider.gameObject.CompareTag("Enemy"))
                 {
@@ -281,6 +288,27 @@ public class Movement : MonoBehaviour
                 }
             }
         }
+    }
+
+    private IEnumerator SlideOffEnemy()
+    {
+        isSliding = true;
+
+        Vector3 slideDirection = transform.right;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < slideDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / slideDuration;
+
+            controller.Move(slideDirection * slideForce * Time.deltaTime);
+
+            yield return null;
+        }
+
+        isSliding = false;
     }
 
     public void DesativateGrabandCombat()
