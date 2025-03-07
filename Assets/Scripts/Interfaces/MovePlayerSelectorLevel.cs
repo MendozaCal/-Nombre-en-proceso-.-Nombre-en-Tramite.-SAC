@@ -8,6 +8,7 @@ public class MovePlayerSelectorLevel : MonoBehaviour
     public Transform[] targetPoints;
     public float moveSpeed = 5f;
     private bool isMoving = false;
+    private bool isStay = false;
 
     public Material unlockedMaterial;
     public Material lockedMaterial;
@@ -28,7 +29,13 @@ public class MovePlayerSelectorLevel : MonoBehaviour
     void Update()
     {
         HandleMovementInput();
-        HandleLevelSelection();
+        CheckIfOnTargetPoint();
+
+        if (isStay)
+        {
+            HandleLevelSelection();
+        }
+
         if (!iskey) HandleUnlockLevelInput();
     }
 
@@ -91,6 +98,12 @@ public class MovePlayerSelectorLevel : MonoBehaviour
         }
     }
 
+    private void CheckIfOnTargetPoint()
+    {
+        Vector3 currentPos = transform.position;
+        isStay = targetPoints.Any(point => Vector3.Distance(point.position, currentPos) < 0.01f);
+    }
+
     private void TryMove(Vector3 direction)
     {
         Vector3 currentPos = transform.position;
@@ -123,6 +136,7 @@ public class MovePlayerSelectorLevel : MonoBehaviour
 
         transform.position = targetPos;
         isMoving = false;
+        CheckIfOnTargetPoint();
     }
 
     private void SelectLevel()
