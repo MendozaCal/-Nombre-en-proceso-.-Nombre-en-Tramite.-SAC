@@ -7,9 +7,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private float moveSpeedBase = 4f;
     [SerializeField] private float moveSpeedMax = 8f;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float accelerationTime = 2f;
-    [SerializeField] private float decelerationTime = 2f;
-    private float currentAccelerationTime = 0f;
+    //[SerializeField] private float accelerationTime = 2f;
+    //[SerializeField] private float decelerationTime = 2f;
+    //private float currentAccelerationTime = 0f;
     [SerializeField] private float jumpForce = 12f;
     [SerializeField] private float gravity = -30f;
     [SerializeField] private float turnSmoothTime = 0.1f;
@@ -168,18 +168,20 @@ public class Movement : MonoBehaviour
     }
     private void HandleRun()
     {
-        if (isGrounded) 
-        {
-            //if (isGrounded) { moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase; }
+        if (isGrounded) { moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase; }
 
-            bool isRunning = Input.GetKey(KeyCode.LeftShift);
-            //Debug.Log("shift");
-            currentAccelerationTime = isRunning ? Mathf.Min(currentAccelerationTime + Time.deltaTime / accelerationTime, 1f)
-                                      : Mathf.Max(currentAccelerationTime - Time.deltaTime / decelerationTime, 0f);
+        //if (isGrounded) 
+        //{
+        //    //if (isGrounded) { moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase; }
 
-            moveSpeed = Mathf.Lerp(moveSpeedBase, moveSpeedMax, currentAccelerationTime);
+        //    bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        //    //Debug.Log("shift");
+        //    currentAccelerationTime = isRunning ? Mathf.Min(currentAccelerationTime + Time.deltaTime / accelerationTime, 1f)
+        //                              : Mathf.Max(currentAccelerationTime - Time.deltaTime / decelerationTime, 0f);
 
-        }
+        //    moveSpeed = Mathf.Lerp(moveSpeedBase, moveSpeedMax, currentAccelerationTime);
+
+        //}
     }
     public void ResetSpeed() { moveSpeed = moveSpeedBase; }
 
