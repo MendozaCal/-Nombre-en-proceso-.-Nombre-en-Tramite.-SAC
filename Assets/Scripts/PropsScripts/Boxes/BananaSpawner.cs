@@ -5,12 +5,15 @@ using UnityEngine;
 public class BananaSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject objectPrefab; 
-    [SerializeField] private int numberOfObjects = 5; 
+    [SerializeField] private int numberOfObjects; 
     [SerializeField] private float spawnRadius = 1f; 
     [SerializeField] private GameObject targetObject; 
 
     private bool hasSpawned = false;
-
+    private void Start()
+    {
+        numberOfObjects = Random.Range(0, 5);
+    }
     private void Update()
     {
        
