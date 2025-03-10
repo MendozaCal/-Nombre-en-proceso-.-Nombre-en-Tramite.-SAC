@@ -51,7 +51,18 @@ public class FallingPlatform : MonoBehaviour
         }
     }
 
-    private void Fall()
+    public void ActivateAnimation()
+    {
+        animator.enabled = true;
+        Invoke(nameof(Fall), fallDelay);
+    }
+
+    public void DesactivateAnimation()
+    {
+        animator.enabled = false;
+    }
+
+    public void Fall()
     {
         Debug.Log($"La plataforma {gameObject.name} está cayendo.");
         rb.isKinematic = false;
@@ -61,7 +72,7 @@ public class FallingPlatform : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
-    private void ResetPlatform()
+    public void ResetPlatform()
     {
         Debug.Log($"Restableciendo la plataforma: {gameObject.name}.");
         animator.enabled = false;
