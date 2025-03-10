@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class sapo : MonoBehaviour
 {
+    [SerializeField] bool NotRandom;
     [SerializeField] public float inflationDuration = 2f;
     [SerializeField] public float deflationDuration = 2f;
     [SerializeField] public float inflatedScale = 1.25f;
@@ -27,8 +28,11 @@ public class sapo : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        inflationDuration = Random.Range(0.5f, 2f);
-        deflationDuration = Random.Range(0.5f, 2f);
+        if (!NotRandom)
+        {
+            inflationDuration = Random.Range(0.5f, 2f);
+            deflationDuration = Random.Range(0.5f, 2f);
+        }
     }
     private void Awake()
     {
