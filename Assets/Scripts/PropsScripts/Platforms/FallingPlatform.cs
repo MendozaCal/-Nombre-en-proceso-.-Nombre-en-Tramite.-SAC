@@ -58,6 +58,7 @@ public class FallingPlatform : MonoBehaviour
         platformCollider.enabled = false;
         Invoke(nameof(DisableMesh), 2f);
         Invoke(nameof(ResetPlatform), resetDelay);
+        gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
     private void ResetPlatform()
@@ -68,7 +69,8 @@ public class FallingPlatform : MonoBehaviour
         rb.isKinematic = true;
         transform.position = originalPosition; 
         meshRenderer.enabled = true; 
-        platformCollider.enabled = true; 
+        platformCollider.enabled = true;
+        gameObject.layer = LayerMask.NameToLayer("Floor");
     }
 
     private void DisableMesh()

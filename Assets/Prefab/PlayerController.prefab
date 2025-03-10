@@ -172,7 +172,7 @@ MonoBehaviour:
   positionSmoothTime: 0.1
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 65536
+    m_Bits: 67584
   minDistance: 0.5
 --- !u!114 &836320711293160441
 MonoBehaviour:
@@ -2540,8 +2540,6 @@ MonoBehaviour:
   moveSpeedBase: 10
   moveSpeedMax: 20
   moveSpeed: 0
-  accelerationTime: 2
-  decelerationTime: 2
   jumpForce: 3
   gravity: -30
   turnSmoothTime: 0.1
