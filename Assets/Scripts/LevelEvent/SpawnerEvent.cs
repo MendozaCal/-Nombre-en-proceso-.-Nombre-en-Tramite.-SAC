@@ -5,8 +5,10 @@ using UnityEngine;
 public class SpawnerEvent : MonoBehaviour
 {
     [SerializeField] private List<GameObject> spawnPrefabs;
+    [SerializeField] private GameObject player;
     [SerializeField] private float spawnInterval = 1f;
     [SerializeField] private Vector3 spawnAreaSize = new Vector3(10f, 0f, 10f);
+    [SerializeField] private bool launchForceControlated;
     [SerializeField] private float launchForce;
     [SerializeField] private float timeSinceLastSpawn;
     [SerializeField] private float destroyPropsTime = 5f;
@@ -25,7 +27,17 @@ public class SpawnerEvent : MonoBehaviour
             SpawnObject();
             timeSinceLastSpawn = 0f;
         }
-        //if (ifEvent) 
+        if (ifEvent)
+        {
+            Vector3 direction = player.transform.position - transform.position;
+            direction.y = 0; 
+            direction.z = 0; 
+
+            if (direction.x != 0) 
+            {
+                transform.rotation = Quaternion.LookRotation(direction);
+            }
+        }
     }
 
     void SpawnObject()
@@ -46,7 +58,7 @@ public class SpawnerEvent : MonoBehaviour
         Rigidbody rb = spawnedObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            launchForce = Random.Range(75f, 100f);
+            if (!launchForceControlated) launchForce = Random.Range(0f, 10f);
 
             rb.AddForce(transform.forward * launchForce, ForceMode.Impulse); 
         }
