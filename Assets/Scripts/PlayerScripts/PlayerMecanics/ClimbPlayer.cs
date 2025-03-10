@@ -313,6 +313,15 @@ public class WallClimbing : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ExitClimb"))
+        {
+            StopClimbing();
+            return;
+        }
+    }
+
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
