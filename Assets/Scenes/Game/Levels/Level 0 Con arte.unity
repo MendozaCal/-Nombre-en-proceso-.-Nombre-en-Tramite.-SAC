@@ -6520,10 +6520,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 5
+  slideForce: 10
   controller: {fileID: 0}
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
   lastPosition: {x: 0, y: 0, z: 0}
 --- !u!33 &894197625
 MeshFilter:
@@ -8322,8 +8321,8 @@ Transform:
   m_GameObject: {fileID: 1187257228}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000014320959, y: 4.3692827e-10, z: -0.0030508377, w: 0.99999535}
-  m_LocalPosition: {x: -14.3, y: 27.009, z: -0.733}
-  m_LocalScale: {x: 0.4573079, y: 0.6136682, z: 1.3648715}
+  m_LocalPosition: {x: -13.9998, y: 27.009, z: -0.733}
+  m_LocalScale: {x: 0.4728564, y: 0.6136682, z: 1.3648715}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1806664679}
@@ -8740,10 +8739,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 30
+  slideForce: 20
   controller: {fileID: 0}
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
   lastPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &1193315952
 PrefabInstance:
@@ -14678,7 +14676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 509771225566958864, guid: 208f58211e7672743acb6c5acef6f976, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 431.5
+      value: 429.6
       objectReference: {fileID: 0}
     - target: {fileID: 509771225566958864, guid: 208f58211e7672743acb6c5acef6f976, type: 3}
       propertyPath: m_LocalPosition.y

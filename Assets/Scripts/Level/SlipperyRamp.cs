@@ -1,25 +1,38 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SlipperyRamp : MonoBehaviour
 {
-    public float slideForce = 5f;
+    public float slideForce = 10f;
 
     public CharacterController controller;
     public Vector3 slopeDirection;
-    public bool isSliding = false;
     public Vector3 lastPosition;
+    private Movement movement;
 
     private void Start()
     {
         controller = FindAnyObjectByType<CharacterController>();
+        movement = FindAnyObjectByType<Movement>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (controller != null)
         {
-            isSliding = true;
-            lastPosition = controller.transform.position;
+            if (movement != null)
+            {
+                movement.isOnRamp = true;
+                lastPosition = controller.transform.position;
+
+                RaycastHit hit;
+                if (Physics.Raycast(other.transform.position, Vector3.down, out hit, 2f))
+                {
+                    slopeDirection = Vector3.ProjectOnPlane(Vector3.down, hit.normal).normalized;
+
+                    RotatePlayerTowardsSlope(slopeDirection);
+                }
+            }
         }
     }
 
@@ -30,7 +43,7 @@ public class SlipperyRamp : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isSliding && controller != null)
+        if (movement.isOnRamp && controller != null)
         {
             RaycastHit hit;
             if (Physics.Raycast(controller.transform.position, Vector3.down, out hit, 2f))
@@ -51,8 +64,17 @@ public class SlipperyRamp : MonoBehaviour
         }
     }
 
+    private void RotatePlayerTowardsSlope(Vector3 slopeDir)
+    {
+        if (movement != null)
+        {
+            float targetAngle = Mathf.Atan2(slopeDir.x, slopeDir.z) * Mathf.Rad2Deg;
+            movement.transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+        }
+    }
+
     public void ResetSlidingState()
     {
-        isSliding = false;
+        movement.isOnRamp = false;
     }
 }

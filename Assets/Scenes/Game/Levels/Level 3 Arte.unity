@@ -309,10 +309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 25
+  slideForce: 10
   controller: {fileID: 0}
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
   lastPosition: {x: 0, y: 0, z: 0}
 --- !u!64 &31358823
 MeshCollider:
@@ -2435,10 +2434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 25
+  slideForce: 10
   controller: {fileID: 0}
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
   lastPosition: {x: 0, y: 0, z: 0}
 --- !u!64 &380912019
 MeshCollider:
@@ -4623,10 +4621,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 25
+  slideForce: 10
   controller: {fileID: 0}
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
   lastPosition: {x: 0, y: 0, z: 0}
 --- !u!64 &906841014
 MeshCollider:
@@ -4709,8 +4706,8 @@ Transform:
   m_GameObject: {fileID: 906841012}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -75.3, y: 1.9704, z: -37.94317}
-  m_LocalScale: {x: 10, y: 26.19419, z: 117.643776}
+  m_LocalPosition: {x: -75.3, y: 1.9704, z: -38.3817}
+  m_LocalScale: {x: 14.466355, y: 26.19419, z: 117.643776}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

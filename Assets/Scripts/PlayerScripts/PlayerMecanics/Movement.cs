@@ -41,6 +41,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private float slideDuration = 0.5f;
     private bool isSliding;
 
+    [Header("Sliding on Ramp")]
+    public bool isOnRamp;
+
     private Combat combatScript;
     private Grab grabScript;
     [SerializeField] private GameObject hand;
@@ -144,28 +147,37 @@ public class Movement : MonoBehaviour
 
     private void HandleMovement()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
-        if (direction.magnitude >= 0.1f)
+        if (isOnRamp)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            Vector3 lateralMovement = transform.right * horizontal * moveSpeed * Time.deltaTime;
 
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
-            controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
-
-            animator.SetFloat("Velocity", moveDir.magnitude);
+            controller.Move(lateralMovement);
         }
         else
         {
-            animator.SetFloat("Velocity", 0f);
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+            if (direction.magnitude >= 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+
+                animator.SetFloat("Velocity", moveDir.magnitude);
+            }
+            else
+            {
+                animator.SetFloat("Velocity", 0f);
+            }
         }
     }
+
     private void HandleRun()
     {
         if (isGrounded) { moveSpeed = Input.GetKey(KeyCode.LeftShift) ? moveSpeedMax : moveSpeedBase; }

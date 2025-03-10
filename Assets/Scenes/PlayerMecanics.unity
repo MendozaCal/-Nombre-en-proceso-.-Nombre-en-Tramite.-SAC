@@ -6751,11 +6751,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 5
-  controller: {fileID: 0}
+  lateralMovementSpeed: 3
+  speedSlipp: 3.5
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
-  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!33 &872303516
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -7396,11 +7394,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 25
-  controller: {fileID: 0}
+  lateralMovementSpeed: 3
+  speedSlipp: 3.5
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
-  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!64 &990866723
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7634,11 +7630,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 25
-  controller: {fileID: 0}
+  lateralMovementSpeed: 3
+  speedSlipp: 3.5
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
-  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!64 &1074730082
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8352,11 +8346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 5
-  controller: {fileID: 0}
+  lateralMovementSpeed: 3
+  speedSlipp: 3.5
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
-  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!33 &1149147931
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -15175,11 +15167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 30
-  controller: {fileID: 0}
+  lateralMovementSpeed: 3
+  speedSlipp: 4
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
-  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!64 &1801943418
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15589,8 +15579,8 @@ Transform:
   m_GameObject: {fileID: 1801943416}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000014321023, y: 8.272286e-15, z: 0.000000057763238, w: 1}
-  m_LocalPosition: {x: 23.375498, y: 17.457989, z: -3.1305866}
-  m_LocalScale: {x: 1, y: 1, z: 1.0992299}
+  m_LocalPosition: {x: 26.3188, y: 17.457989, z: -3.1305866}
+  m_LocalScale: {x: 0.9835, y: 1, z: 1.0992299}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -15839,11 +15829,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 30
-  controller: {fileID: 0}
+  lateralMovementSpeed: 3
+  speedSlipp: 3.5
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
-  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!64 &1839078377
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18274,11 +18262,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e84cc1c86cd4949be01f9f2e5cd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideForce: 25
-  controller: {fileID: 0}
+  lateralMovementSpeed: 3
+  speedSlipp: 3.5
   slopeDirection: {x: 0, y: 0, z: 0}
-  isSliding: 0
-  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!64 &2038064803
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21865,6 +21851,10 @@ PrefabInstance:
     - target: {fileID: 760888376162489080, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 43.900024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050506361374264011, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: slideForce
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1767650308425510442, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_Name
