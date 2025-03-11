@@ -281,7 +281,19 @@ public class Movement : MonoBehaviour
                     if (sapoScript.isInflating == true) velocity.y = bounceForce;
                     else StartCoroutine(SlideOffEnemy());
                 }
-                if (hit.collider.gameObject.CompareTag("Enemy"))
+                else if (hit.collider.gameObject.CompareTag("Turtle"))
+                {
+                    PlayerLife playerlife = GetComponent<PlayerLife>();
+                    playerlife.TakeDamage(1);
+                    velocity.y = bounceForce * 0.7f;
+                    Vector3 pushDirection = transform.position - hit.collider.transform.position;
+                    pushDirection.y = 0; 
+                    pushDirection.Normalize();
+
+                    velocity.y *= 0.5f; 
+                    ApplyPush(pushDirection, 10f); 
+                }
+                else if (hit.collider.gameObject.CompareTag("Enemy"))
                 {
                     BodyDestroy bodyDestroy = hit.collider.gameObject.GetComponent<BodyDestroy>();
                     if (bodyDestroy != null)
@@ -290,7 +302,7 @@ public class Movement : MonoBehaviour
                         bodyDestroy.DamageInHead();
                     }
                 }
-                if (hit.collider.gameObject.CompareTag("Gorilla"))
+                else if (hit.collider.gameObject.CompareTag("Gorilla"))
                 {
                     BossMovement bossMovement = hit.collider.gameObject.GetComponent<BossMovement>();
                     GorillaLife gorillaLife = hit.collider.GetComponent<GorillaLife>();
@@ -302,6 +314,29 @@ public class Movement : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ApplyPush(Vector3 direction, float force)
+    {
+        velocity.x = direction.x * force;
+        velocity.z = direction.z * force;
+        velocity.y = Mathf.Sqrt(2f * -gravity);
+
+        StartCoroutine(ResetHorizontalVelocity());
+    }
+
+    public void ResetMovement()
+    {
+        velocity.x = 0;
+        velocity.z = 0;
+    }
+
+    private IEnumerator ResetHorizontalVelocity()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        velocity.x = 0;
+        velocity.z = 0;
     }
 
     private IEnumerator SlideOffEnemy()

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerLife : Life
 {
     [SerializeField] private float initialLife = 3f;
-    [SerializeField] private float pointsShield = 3f;
+    [SerializeField] public float pointsShield = 3f;
     [SerializeField] private float Timer = 500;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
@@ -145,21 +145,38 @@ public class PlayerLife : Life
 
         if (spawnPoint != null && pointsLife > 0)
         {
-            CharacterController controller = GetComponent<CharacterController>();
-            controller.enabled = false;
-            transform.position = spawnPoint.position;
-            controller.enabled = true;
-            SlipperyRamp ramp = FindAnyObjectByType<SlipperyRamp>();
-            WallClimbing climb = FindAnyObjectByType<WallClimbing>();
-            if (ramp != null) ramp.ResetSlidingState();
-            if (climb != null) climb.StopClimbing();
-            Debug.Log("Respawn");
+            StartCoroutine(DelayedRespawn()); 
         }
         else if (pointsLife <= 0)
         {
             FreezePlayer();
         }
     }
+
+    private IEnumerator DelayedRespawn()
+    {
+        yield return new WaitForSeconds(0.1f); 
+
+        CharacterController controller = GetComponent<CharacterController>();
+        controller.enabled = false;
+
+        transform.position = spawnPoint.position;
+        controller.enabled = true;
+
+        SlipperyRamp ramp = FindAnyObjectByType<SlipperyRamp>();
+        WallClimbing climb = FindAnyObjectByType<WallClimbing>();
+        if (ramp != null) ramp.ResetSlidingState();
+        if (climb != null) climb.StopClimbing();
+
+        Movement movement = GetComponent<Movement>();
+        if (movement != null)
+        {
+            movement.ResetMovement();
+        }
+
+        Debug.Log("Respawn");
+    }
+
     public override void Heal(float amount)
     {
         pointsShield += amount;
