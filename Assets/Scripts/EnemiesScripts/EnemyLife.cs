@@ -6,6 +6,7 @@ public class EnemyLife : Life
     [SerializeField] private float maxLife = 1f;
     [SerializeField] int damageGrab = 2;
     public new ParticleSystem particleSystem;
+    public bool isDead;
     [SerializeField] GameObject Body;
 
     private void Start()
@@ -31,6 +32,7 @@ public class EnemyLife : Life
     }
     protected override void Die()
     {
+        isDead = true;
         StartCoroutine(particles());
     }
     IEnumerator particles()

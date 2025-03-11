@@ -36,14 +36,14 @@ public class Sting : MonoBehaviour
         if (other.gameObject.CompareTag("Stick") || other.gameObject.CompareTag("Honda"))
         {
             Vector3 returnDirection = (initialPosition - transform.position).normalized;
-            rb.velocity = returnDirection * projectileSpeed;
+            rb.velocity = returnDirection * (projectileSpeed * 2);
             int myLayer = gameObject.layer;
             Physics.IgnoreLayerCollision(myLayer, ignoredLayer, false);
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy")) Destroy(gameObject);
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Floor")) Destroy(gameObject);
         
     }
 }
