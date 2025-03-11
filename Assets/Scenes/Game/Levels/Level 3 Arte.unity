@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 0a83e0004139e79428512f595763adbe
+  m_OcclusionCullingData: {fileID: 36300000, guid: 5401210d802a6cd4885fd2b169647423, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -2542,7 +2542,7 @@ GameObject:
   m_TagString: Agua
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 111
   m_IsActive: 1
 --- !u!64 &411755045
 MeshCollider:

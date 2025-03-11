@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 00cebf37b751aef4796a604b2fbe674b
+  m_OcclusionCullingData: {fileID: 36300000, guid: 551cad4e98680894fb79770d5882c904, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -3586,6 +3586,10 @@ PrefabInstance:
     - target: {fileID: 8716666822576948849, guid: b1b547498705aa44799b995e5707f424, type: 3}
       propertyPath: m_Name
       value: Agua
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716666822576948849, guid: b1b547498705aa44799b995e5707f424, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 111
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
