@@ -10,6 +10,9 @@ public class MovePatrol : MonoBehaviour
     public int currentWaypoint = 0;
     public bool isCave;
     protected float inicialSpeed;
+
+    [Header("----References----")]
+    public EnemyLife enemyLife;
     private void Start()
     {
         inicialSpeed = maxSpeed;
@@ -17,6 +20,7 @@ public class MovePatrol : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (enemyLife.isDead) return;
         MoveToWaypoint();    
         calculateDistance();
     }

@@ -31,7 +31,7 @@ public class WaspShoot : MonoBehaviour
     }
     void Update()
     {
-        if(enemyLife.isDead) { avistaPatrol.enabled = false; return; }
+        if(enemyLife.isDead) return; 
         if (player == null) player = GameObject.FindWithTag("Player");
         if (Wasp != null && detector.PlayerStay)
         {
