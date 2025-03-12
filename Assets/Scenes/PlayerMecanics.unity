@@ -1873,34 +1873,6 @@ Transform:
   - {fileID: 4244656831880056440}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &290898813 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6221058459370193291, guid: e351614925c34fa4ca3c4ff3ae24e3a7, type: 3}
-  m_PrefabInstance: {fileID: 1080289955}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &290898814
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 290898813}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.73
-  m_Height: 2.52
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &298605971
 GameObject:
   m_ObjectHideFlags: 0
@@ -7759,10 +7731,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1172369251523775836, guid: e351614925c34fa4ca3c4ff3ae24e3a7, type: 3}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4707400220366107528, guid: e351614925c34fa4ca3c4ff3ae24e3a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.521778
@@ -7810,10 +7778,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6221058459370193291, guid: e351614925c34fa4ca3c4ff3ae24e3a7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 290898814}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e351614925c34fa4ca3c4ff3ae24e3a7, type: 3}
 --- !u!1 &1085393580
 GameObject:
@@ -17887,6 +17852,8 @@ MonoBehaviour:
   particleSystem: {fileID: 0}
   isDead: 0
   Body: {fileID: 0}
+  isWasp: 0
+  isTurtle: 0
 --- !u!114 &1999157684
 MonoBehaviour:
   m_ObjectHideFlags: 0

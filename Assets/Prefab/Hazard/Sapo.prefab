@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1172369251523775836}
   - component: {fileID: 4119545413819267471}
   - component: {fileID: 5739424275398362526}
+  - component: {fileID: 4996717475628420695}
   m_Layer: 17
   m_Name: Sapo
   m_TagString: Sapo
@@ -106,7 +107,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0.18, z: 0}
 --- !u!114 &4119545413819267471
 MonoBehaviour:
@@ -120,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a295de2c3fbe850469ca69dab9664ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NotRandom: 0
   inflationDuration: 1
   deflationDuration: 1
   inflatedScale: 2
@@ -156,6 +158,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!136 &4996717475628420695
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6221058459370193291}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.73
+  m_Height: 2.52
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1001 &3640589943980140762
 PrefabInstance:
   m_ObjectHideFlags: 0
