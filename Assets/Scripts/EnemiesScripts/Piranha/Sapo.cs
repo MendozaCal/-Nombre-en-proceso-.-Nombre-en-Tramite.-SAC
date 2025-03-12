@@ -51,40 +51,34 @@ public class sapo : MonoBehaviour
         {
             originalColliderSize = new Vector3(capsuleCollider.radius * 2, capsuleCollider.height, capsuleCollider.radius * 2);
         }
-
-        Invoke("Iniciar", iniciodeSapo);
     }
-    private void Iniciar()
+
+    private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(Inflation());
+        if(other.CompareTag("Player")) StartCoroutine(Inflation());
     }
 
     private IEnumerator Inflation()
     {
-        while (true)
+        animator.SetBool("Inflando", true);
+        isInflating = true;
+
+        if (audioSource != null && !audioSource.isPlaying)
         {
-            animator.SetBool("Inflando", true);
-
-            if (audioSource != null && !audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-            yield return new WaitForSeconds(0.25f);
-
-            isInflating = true;
-            yield return StartCoroutine(ChangeColliderSize(originalColliderSize, originalColliderSize * inflatedScale, inflationDuration));
-
-            yield return new WaitForSeconds(inflationDuration);
-
-            yield return StartCoroutine(ChangeColliderSize(originalColliderSize * inflatedScale, originalColliderSize, deflationDuration));
-
-            isInflating = false;
-            animator.SetBool("Inflando", false);
-
-            yield return new WaitForSeconds(deflationDuration);
-
-            yield return new WaitForSeconds(2f); 
+            audioSource.Play();
         }
+        yield return new WaitForSeconds(0.25f);
+
+        yield return StartCoroutine(ChangeColliderSize(originalColliderSize, originalColliderSize * inflatedScale, inflationDuration));
+
+        yield return new WaitForSeconds(inflationDuration);
+
+        yield return StartCoroutine(ChangeColliderSize(originalColliderSize * inflatedScale, originalColliderSize, deflationDuration));
+
+        isInflating = false;
+        animator.SetBool("Inflando", false);
+
+        yield return new WaitForSeconds(deflationDuration);
     }
 
     private IEnumerator ChangeColliderSize(Vector3 startSize, Vector3 endSize, float duration)
