@@ -8,7 +8,6 @@ public class MovePatrol : MonoBehaviour
     public Transform[] waypoints;
     public float maxSpeed = 10;
     public int currentWaypoint = 0;
-    public bool isCave;
     protected float inicialSpeed;
 
     [Header("----References----")]

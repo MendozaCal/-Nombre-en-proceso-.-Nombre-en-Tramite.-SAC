@@ -36,7 +36,7 @@ public class Sting : MonoBehaviour
         if (other.gameObject.CompareTag("Stick") || other.gameObject.CompareTag("Honda"))
         {
             Vector3 returnDirection = (initialPosition - transform.position).normalized;
-            rb.velocity = returnDirection * (projectileSpeed * 2);
+            rb.velocity = returnDirection * (projectileSpeed * 3);
             int myLayer = gameObject.layer;
             Physics.IgnoreLayerCollision(myLayer, ignoredLayer, false);
         }

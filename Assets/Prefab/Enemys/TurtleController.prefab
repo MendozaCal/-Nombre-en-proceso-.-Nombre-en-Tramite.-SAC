@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2696105153345243746
 Transform:
   m_ObjectHideFlags: 0
@@ -309,7 +309,7 @@ Transform:
   m_GameObject: {fileID: 2882865059909624641}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.98, y: 0, z: 0}
+  m_LocalPosition: {x: 7.17, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5427,6 +5427,7 @@ MonoBehaviour:
   maxLife: 2
   damageGrab: 2
   particleSystem: {fileID: 3321441562184087810}
+  isDead: 0
   Body: {fileID: 7600094558247756364}
 --- !u!1 &7600094558247756364
 GameObject:
@@ -5566,7 +5567,7 @@ Transform:
   m_GameObject: {fileID: 8555430463249765935}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: -0.09, z: 0.88105774}
+  m_LocalPosition: {x: -19.49, y: -0.09, z: 0.88105774}
   m_LocalScale: {x: 1, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

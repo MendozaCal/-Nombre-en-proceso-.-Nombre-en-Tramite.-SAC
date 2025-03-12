@@ -8,7 +8,8 @@ public class EnemyLife : Life
     public new ParticleSystem particleSystem;
     public bool isDead;
     [SerializeField] GameObject Body;
-
+    [SerializeField] bool isWasp;
+    [SerializeField] bool isTurtle;
     private void Start()
     {
         pointsLife = maxLife;
@@ -38,6 +39,16 @@ public class EnemyLife : Life
     IEnumerator particles()
     {
         particleSystem.Play();
+        if(isWasp)
+        {
+            WaspMove waspMove = GetComponent<WaspMove>();
+            waspMove.enabled = false;
+        }
+        if (isTurtle)
+        {
+            MovePatrol movePatrol = GetComponent<MovePatrol>();
+            movePatrol.enabled = false;
+        }
         Body.SetActive(false);
         SphereCollider sphereCollider = GetComponent<SphereCollider>();
         sphereCollider.enabled = false;
