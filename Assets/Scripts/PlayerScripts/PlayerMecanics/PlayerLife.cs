@@ -194,9 +194,36 @@ public class PlayerLife : Life
         {
             multiplesProcesados = multiplesActuales;
             base.Heal(1);
-            healthText.text = Mathf.RoundToInt(pointsLife).ToString();
+            StartCoroutine(TextAumnetandReduce());
             pointsShield = 3;
         }
+    }
+    private IEnumerator TextAumnetandReduce()
+    {
+        float originalFontSize = healthText.fontSize; 
+        float duration = 0.5f;
+        float targetFontSize = 80f; 
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            healthText.fontSize = (int)Mathf.Lerp(originalFontSize, targetFontSize, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        healthText.fontSize = (int)targetFontSize; 
+        healthText.text = Mathf.RoundToInt(pointsLife).ToString();
+
+        elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            healthText.fontSize = (int)Mathf.Lerp(targetFontSize, 30f, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        healthText.fontSize = 30; 
     }
 
     private IEnumerator InvulnerabilityPeriodShield()
@@ -274,13 +301,13 @@ public class PlayerLife : Life
 
             case "Banana":
                 Heal(1);
-                bananas += 10;
+                bananas += 1;
                 Destroy(other.gameObject);
                 UpdateLifeAndPoints();
                 break;
             case "Bananas":
                 Heal(1);
-                bananas += 70;
+                bananas += 40;
                 Destroy(other.gameObject);
                 UpdateLifeAndPoints();
                 break;
@@ -293,7 +320,7 @@ public class PlayerLife : Life
 
             case "MonkeyColectable":
                 Heal(1);
-                bananas += 20;
+                bananas += 10;
                 monkeys++;
                 Destroy(other.gameObject);
                 UpdateLifeAndPoints();
