@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.74, y: 0.155, z: 3.37}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4999999, y: 1.4999999, z: 1.4999999}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3823345246133473073}
   m_Father: {fileID: 0}
@@ -131,6 +131,8 @@ MonoBehaviour:
   isInflating: 0
   fuerzaDeEmpuje: 20
   animator: {fileID: 8922731243838746102}
+  playerDetected: 0
+  timeSinceLastDetection: 0
 --- !u!54 &5739424275398362526
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -178,9 +180,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.73
-  m_Height: 2.52
+  m_Height: 2.2812755
   m_Direction: 1
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Center: {x: 0, y: 0.18064004, z: 0}
 --- !u!1001 &3640589943980140762
 PrefabInstance:
   m_ObjectHideFlags: 0

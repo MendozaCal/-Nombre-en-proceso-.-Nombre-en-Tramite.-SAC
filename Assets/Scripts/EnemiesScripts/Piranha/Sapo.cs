@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class sapo : MonoBehaviour
@@ -24,6 +23,10 @@ public class sapo : MonoBehaviour
     private AudioSource audioSource;
 
     private Collider sapoCollider;
+        
+    [SerializeField] private bool playerDetected = false;
+    [SerializeField] public float timeSinceLastDetection = 0f;
+    private float timeToDeflate = 2f; 
 
     private void Start()
     {
@@ -34,6 +37,7 @@ public class sapo : MonoBehaviour
             deflationDuration = Random.Range(0.5f, 2f);
         }
     }
+
     private void Awake()
     {
         sapoCollider = GetComponent<Collider>();
@@ -53,9 +57,41 @@ public class sapo : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (playerDetected)
+        {
+            timeSinceLastDetection = 0f;
+        }
+        else
+        {
+            timeSinceLastDetection += Time.deltaTime;
+
+            if (timeSinceLastDetection >= timeToDeflate && isInflating)
+            {
+                StartCoroutine(Deflate());
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player")) StartCoroutine(Inflation());
+        if (other.CompareTag("Player"))
+        {
+            playerDetected = true;
+            if (!isInflating)
+            {
+                StartCoroutine(Inflation());
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerDetected = false;
+        }
     }
 
     private IEnumerator Inflation()
@@ -71,14 +107,18 @@ public class sapo : MonoBehaviour
 
         yield return StartCoroutine(ChangeColliderSize(originalColliderSize, originalColliderSize * inflatedScale, inflationDuration));
 
-        yield return new WaitForSeconds(inflationDuration);
+        while (playerDetected)
+        {
+            yield return null; 
+        }
+    }
 
+    private IEnumerator Deflate()
+    {
         yield return StartCoroutine(ChangeColliderSize(originalColliderSize * inflatedScale, originalColliderSize, deflationDuration));
 
         isInflating = false;
         animator.SetBool("Inflando", false);
-
-        yield return new WaitForSeconds(deflationDuration);
     }
 
     private IEnumerator ChangeColliderSize(Vector3 startSize, Vector3 endSize, float duration)
@@ -94,7 +134,7 @@ public class sapo : MonoBehaviour
             }
             else if (sapoCollider is SphereCollider sphereCollider)
             {
-                sphereCollider.radius = currentSize.x / 2f; 
+                sphereCollider.radius = currentSize.x / 2f;
             }
             else if (sapoCollider is CapsuleCollider capsuleCollider)
             {
