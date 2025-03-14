@@ -76,7 +76,7 @@ public class Movement : MonoBehaviour
         CheckGroundState();
         CheckWallState();
         HandleMovement();
-        HandleRun();
+        //HandleRun();
         HandleJump();
         HandleWallMovement();
         CheckEnemyBelow();
