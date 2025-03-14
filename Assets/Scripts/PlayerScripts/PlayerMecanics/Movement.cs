@@ -280,6 +280,7 @@ public class Movement : MonoBehaviour
                     if (sapoScript.damage) { PlayerLife playerlife = GetComponent<PlayerLife>(); playerlife.TakeDamage(1); }
                     if (sapoScript.isInflating == true) velocity.y = bounceForce;
                     else StartCoroutine(SlideOffEnemy());
+                    sapoScript.timeSinceLastDetection = 0f;
                 }
                 else if (hit.collider.gameObject.CompareTag("Turtle"))
                 {
