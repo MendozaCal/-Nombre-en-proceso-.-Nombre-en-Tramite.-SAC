@@ -9,6 +9,7 @@ public class MovePatrol : MonoBehaviour
     public float maxSpeed = 10;
     public int currentWaypoint = 0;
     protected float inicialSpeed;
+    private bool movingForward = true; // Controla la dirección del movimiento
 
     [Header("----References----")]
     public EnemyLife enemyLife;
@@ -33,11 +34,23 @@ public class MovePatrol : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < 1)
         {
-            currentWaypoint++;
-
-            if (currentWaypoint >= waypoints.Length)
+            if (movingForward)
             {
-                currentWaypoint = 0;
+                currentWaypoint++;
+                if (currentWaypoint >= waypoints.Length)
+                {
+                    currentWaypoint = waypoints.Length - 2; // Retrocede al penúltimo punto
+                    movingForward = false;
+                }
+            }
+            else
+            {
+                currentWaypoint--;
+                if (currentWaypoint < 0)
+                {
+                    currentWaypoint = 1; // Avanza al segundo punto
+                    movingForward = true;
+                }
             }
         }
     }

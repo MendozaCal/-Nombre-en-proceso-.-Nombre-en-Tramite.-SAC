@@ -12,7 +12,7 @@ public class BananaSpawner : MonoBehaviour
     private bool hasSpawned = false;
     private void Start()
     {
-        numberOfObjects = Random.Range(0, 5);
+        numberOfObjects = Random.Range(5, 10);
     }
     private void Update()
     {
