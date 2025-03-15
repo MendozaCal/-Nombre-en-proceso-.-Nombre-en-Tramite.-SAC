@@ -77,6 +77,7 @@ public class PlayerLife : Life
         }
         DetectEnemies();
         UpdateShieldColor();
+        ShortCuts();
     }
 
     private void UpdateShieldColor()
@@ -175,6 +176,19 @@ public class PlayerLife : Life
         }
 
         Debug.Log("Respawn");
+    }
+
+    public void ShortCuts()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
+        {
+            base.Heal(1);
+            healthText.text = Mathf.RoundToInt(pointsLife).ToString();
+        }
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(DelayedRespawn()); 
+        }
     }
 
     public override void Heal(float amount)
