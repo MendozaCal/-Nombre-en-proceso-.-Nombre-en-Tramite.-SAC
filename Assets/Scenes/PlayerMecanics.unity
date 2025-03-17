@@ -21827,10 +21827,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 760888376162489080, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 43.900024
-      objectReference: {fileID: 0}
+    - target: {fileID: 1766932356414578029, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
+      propertyPath: sceneLight
+      value: 
+      objectReference: {fileID: 2112772630}
     - target: {fileID: 1767650308425510442, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_Name
       value: PlayerController
@@ -21839,17 +21839,13 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 489657739}
-    - target: {fileID: 9010688782132356460, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 43.900024
-      objectReference: {fileID: 0}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.8415413
       objectReference: {fileID: 0}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.97232795
+      value: 1.61
       objectReference: {fileID: 0}
     - target: {fileID: 9197469461304188809, guid: 56394c21c921a034780ba1c8f2e9e5b9, type: 3}
       propertyPath: m_LocalPosition.z

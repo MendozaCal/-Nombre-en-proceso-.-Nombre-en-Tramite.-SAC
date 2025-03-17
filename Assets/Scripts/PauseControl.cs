@@ -13,6 +13,11 @@ public class PauseControl : MonoBehaviour
     [SerializeField] AudioMixer audioMixer;
     private bool onPause;
 
+    [SerializeField] GameObject PanelPause;
+    [SerializeField] GameObject PanelSettings;
+    [SerializeField] GameObject PanelGamePlay;
+    [SerializeField] GameObject PanelAudio;
+    [SerializeField] GameObject PanelScreen;
     private void Start()
     {
         string sceneName = SceneManager.GetActiveScene().name;
@@ -39,6 +44,11 @@ public class PauseControl : MonoBehaviour
         {
             if (!onPause) PauseGame();
             else ResumeGame();
+            PanelPause.SetActive(true);
+            PanelSettings.SetActive(false);
+            PanelGamePlay.SetActive(false);
+            PanelAudio.SetActive(false);
+            PanelScreen.SetActive(false);
         }
     }
 
@@ -74,12 +84,46 @@ public class PauseControl : MonoBehaviour
 
     public void ExitMenu()
     {
-
         ResumeGame();
         Fade fade = FindObjectOfType<Fade>();
         fade.StartFadeIn("MainMenu");
     }
-
+    public void OpenSetting()
+    {
+        PanelSettings.SetActive(true);
+        PanelPause.SetActive(false);
+    }public void CloseSetting()
+    {
+        PanelPause.SetActive(true);
+        PanelSettings.SetActive(false);
+    }
+    public void OpenGamePlay()
+    {
+        PanelGamePlay.SetActive(true);
+        PanelSettings.SetActive(false);
+    }public void CloseGamePlay()
+    {
+        PanelSettings.SetActive(true);
+        PanelGamePlay.SetActive(false);
+    }
+    public void OpenAudio()
+    {
+        PanelAudio.SetActive(true);
+        PanelSettings.SetActive(false);
+    }public void CloseAudio()
+    {
+        PanelSettings.SetActive(true);
+        PanelAudio.SetActive(false);
+    }
+    public void OpenScreen()
+    {
+        PanelScreen.SetActive(true);
+        PanelSettings.SetActive(false);
+    }public void CloseScreen()
+    {
+        PanelSettings.SetActive(true);
+        PanelScreen.SetActive(false);
+    }
     public void MuteSounds()
     {
         audioMixer.SetFloat("MasterVolume", -80f); 

@@ -1,14 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform targetPlayer;
     [SerializeField] private Vector3 offset = new Vector3(0, 2, -5);
-    [SerializeField] private float sensitivity = 5f;
+    [SerializeField] private float maxsensitivity = 5f;
+    private float sensitivity; // Sensibilidad actual
     [SerializeField] private float maxVerticalAngle = 60f;
     [SerializeField] private float positionSmoothTime = 0.1f;
-    [SerializeField] private LayerMask collisionLayers; 
+    [SerializeField] private LayerMask collisionLayers;
     [SerializeField] private float minDistance = 0.5f;
+
+    [Header("UI Elements")]
+    [SerializeField] private Slider sensitivitySlider;
 
     private float rotationX;
     private float rotationY;
@@ -20,19 +25,30 @@ public class CameraFollow : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
         Vector3 angles = transform.eulerAngles;
         rotationY = angles.y;
         rotationX = angles.x;
         targetPosition = transform.position;
         targetRotation = transform.rotation;
+
+        sensitivity = maxsensitivity / 2;
+
+        if (sensitivitySlider != null)
+        {
+            sensitivitySlider.minValue = 1f;
+            sensitivitySlider.maxValue = maxsensitivity;
+            sensitivitySlider.value = sensitivity;
+            sensitivitySlider.onValueChanged.AddListener(UpdateSensitivity);
+        }
     }
 
     private void LateUpdate()
     {
         if (targetPlayer == null) return;
 
-        rotationY += Input.GetAxis("Mouse X") * sensitivity;
-        rotationX -= Input.GetAxis("Mouse Y") * sensitivity;
+        rotationY += Input.GetAxis("Mouse X") * sensitivity ;
+        rotationX -= Input.GetAxis("Mouse Y") * sensitivity ;
         rotationX = Mathf.Clamp(rotationX, -maxVerticalAngle, maxVerticalAngle);
         targetRotation = Quaternion.Euler(rotationX, rotationY, 0f);
 
@@ -60,5 +76,10 @@ public class CameraFollow : MonoBehaviour
         );
 
         transform.rotation = targetRotation;
+    }
+
+    public void UpdateSensitivity(float newSensitivity)
+    {
+        sensitivity = newSensitivity;
     }
 }
