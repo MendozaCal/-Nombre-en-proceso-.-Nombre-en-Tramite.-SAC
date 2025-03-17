@@ -34,6 +34,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float wallSlideSpeed = 2f;
     [SerializeField] private float timeToDefaultLayer = 0.5f;
     [SerializeField] private float timeToClimbableLayer = 1f;
+    private float timeSinceLeftGround = 0f;
+    private const float WALL_SLIDE_DELAY = 0.5f;
     private bool isWallClimbing;
 
     [Header("Sliding on Enemy")]
@@ -222,7 +224,12 @@ public class Movement : MonoBehaviour
     {
         if (isTouchingWall && !isGrounded)
         {
-            velocity.y = -wallSlideSpeed;
+            timeSinceLeftGround += Time.deltaTime;
+
+            if (timeSinceLeftGround >= WALL_SLIDE_DELAY)
+            {
+                velocity.y = -wallSlideSpeed;
+            }
 
             if (Input.GetButtonDown("Jump"))
             {
@@ -234,16 +241,13 @@ public class Movement : MonoBehaviour
                 velocity.y = Mathf.Sqrt(wallJumpForce * -2f * gravity);
 
                 StartCoroutine(RestoreHorizontalVelocity());
+
                 StartCoroutine(RestoreWallLayer());
             }
-            else
-            {
-                velocity.y = -wallSlideSpeed;
-            }
-
         }
         else
         {
+            timeSinceLeftGround = 0f;
             isWallClimbing = false;
         }
     }
