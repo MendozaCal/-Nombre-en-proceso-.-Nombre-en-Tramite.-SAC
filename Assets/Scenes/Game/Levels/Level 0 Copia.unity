@@ -1166,6 +1166,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco de madera (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 30279188960445075, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 613829754944226348, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.x
       value: 187.46
@@ -1205,6 +1213,10 @@ PrefabInstance:
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 968666265490966457, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4709,7 +4721,7 @@ Transform:
   m_GameObject: {fileID: 431666749}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 197.55, y: 26.08, z: 30}
+  m_LocalPosition: {x: 196.39, y: 26.08, z: 30}
   m_LocalScale: {x: 500, y: 1250, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5470,7 +5482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 214.96
+      value: 214.58
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9347,7 +9359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 214.96
+      value: 214.58
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10968,7 +10980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 207.46
+      value: 205.65
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13848,6 +13860,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco de madera (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 30279188960445075, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 613829754944226348, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.x
       value: 187.46
@@ -13887,6 +13907,10 @@ PrefabInstance:
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 968666265490966457, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19605,7 +19629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 207.46
+      value: 205.65
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.y
@@ -20049,7 +20073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 214.96
+      value: 214.58
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23430,7 +23454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 207.46
+      value: 205.65
       objectReference: {fileID: 0}
     - target: {fileID: 801713780674484265, guid: 19720d7c904e5144887e1b78ec9be763, type: 3}
       propertyPath: m_LocalPosition.y
