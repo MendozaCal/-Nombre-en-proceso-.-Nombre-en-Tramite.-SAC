@@ -33,7 +33,7 @@ public class StickCombat : ICombatBehavior
 
         if (stickCollider != null)
         {
-            stickCollider.excludeLayers = LayerMask.GetMask("Enemy", "Prop");
+            stickCollider.excludeLayers = LayerMask.GetMask("Enemy", "Prop", "Proyectil");
         }
     }
 }
