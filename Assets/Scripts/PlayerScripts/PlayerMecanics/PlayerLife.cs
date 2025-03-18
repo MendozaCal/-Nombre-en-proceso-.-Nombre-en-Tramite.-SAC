@@ -197,6 +197,7 @@ public class PlayerLife : Life
         if (pointsShield >= 3)
         {
             pointsShield = 3;
+            bananas += 20;
         }
         healthBar.UpdateHealthBar(pointsShield);
         healthText.text = Mathf.RoundToInt(pointsLife).ToString();
@@ -314,14 +315,17 @@ public class PlayerLife : Life
                 break;
 
             case "Banana":
-                Heal(1);
                 bananas += 1;
                 Destroy(other.gameObject);
                 UpdateLifeAndPoints();
                 break;
             case "Bananas":
+                bananas += 30;
+                Destroy(other.gameObject);
+                UpdateLifeAndPoints();
+                break;
+            case "Mini":
                 Heal(1);
-                bananas += 40;
                 Destroy(other.gameObject);
                 UpdateLifeAndPoints();
                 break;
