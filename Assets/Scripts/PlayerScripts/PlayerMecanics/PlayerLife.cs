@@ -111,7 +111,7 @@ public class PlayerLife : Life
 
     public override void TakeDamage(float damage)
     {
-        base.TakeDamage(damage);
+        //base.TakeDamage(damage);
 
         if (pointsLife <= 0 || Time.timeScale == 0)
         {
