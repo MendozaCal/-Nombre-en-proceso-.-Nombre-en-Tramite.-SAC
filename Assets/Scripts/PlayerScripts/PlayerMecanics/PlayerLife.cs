@@ -31,9 +31,11 @@ public class PlayerLife : Life
     [SerializeField] private LayerMask enemyLayer;
     private bool reduceShield;
     private int multiplesProcesados = 0;
+    private Grab grab;
 
     private void Start()
     {
+        grab = GetComponent<Grab>();
         PlayerPrefs.SetInt("LastLevelBananas", 0);
         PlayerPrefs.SetInt("LastLevelMonkeys", 0);
         PlayerPrefs.Save();
@@ -109,6 +111,8 @@ public class PlayerLife : Life
 
     public override void TakeDamage(float damage)
     {
+        base.TakeDamage(damage);
+
         if (pointsLife <= 0 || Time.timeScale == 0)
         {
             return;
@@ -129,6 +133,12 @@ public class PlayerLife : Life
                 StartCoroutine(InvulnerabilityPeriodShield());
             }
             healthBar.UpdateHealthBar(pointsShield);
+        }
+
+
+        if (grab!= null && grab.IsHoldingObject)
+        {
+            grab.DropObject();
         }
     }
 
