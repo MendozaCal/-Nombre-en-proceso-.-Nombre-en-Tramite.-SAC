@@ -170,14 +170,18 @@ public class PlayerLife : Life
 
         CharacterController controller = GetComponent<CharacterController>();
         controller.enabled = false;
-
-        transform.position = spawnPoint.position;
-        controller.enabled = true;
+        FreezePlayer();
+        Fade fade = FindObjectOfType<Fade>();
+        fade.StartFadeInRespawn(spawnPoint, gameObject.transform);
 
         SlipperyRamp ramp = FindAnyObjectByType<SlipperyRamp>();
         WallClimbing climb = FindAnyObjectByType<WallClimbing>();
         if (ramp != null) ramp.ResetSlidingState();
         if (climb != null) climb.StopClimbing();
+
+        yield return new WaitForSeconds(1f);
+
+        controller.enabled = true;
 
         Movement movement = GetComponent<Movement>();
         if (movement != null)

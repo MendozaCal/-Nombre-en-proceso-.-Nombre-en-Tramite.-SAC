@@ -31,9 +31,32 @@ public class Fade : MonoBehaviour
             SceneManager.LoadScene("GameOver");
     }
 
+    public IEnumerator Fading(Transform targert, Transform player)
+    {
+        isFading = true;
+
+        while (canvasGroup.alpha < 1)
+        {
+            canvasGroup.alpha += Time.deltaTime * speed;
+            yield return null;
+        }
+            player.transform.position = targert.position;
+        while (canvasGroup.alpha > 0)
+        {
+            canvasGroup.alpha -= Time.deltaTime * speed;
+            yield return null;
+        }
+        isFading = false;
+    }
+
     public void StartFadeIn(string sceneName)
     {
         if (!isFading)
             StartCoroutine(Fading(sceneName));
+    }
+    public void StartFadeInRespawn(Transform targert, Transform player)
+    {
+        if (!isFading)
+            StartCoroutine(Fading(targert, player));
     }
 }
