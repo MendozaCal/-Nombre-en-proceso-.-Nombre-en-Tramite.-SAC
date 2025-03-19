@@ -1,12 +1,15 @@
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeedBase = 4f;
+    [SerializeField] public float moveSpeedBase = 4f;
     [SerializeField] private float moveSpeedMax = 8f;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] public float moveSpeed;
+    public bool stun;
     //[SerializeField] private float accelerationTime = 2f;
     //[SerializeField] private float decelerationTime = 2f;
     //private float currentAccelerationTime = 0f;
@@ -149,6 +152,7 @@ public class Movement : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (stun) return;
         if (isOnRamp)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");

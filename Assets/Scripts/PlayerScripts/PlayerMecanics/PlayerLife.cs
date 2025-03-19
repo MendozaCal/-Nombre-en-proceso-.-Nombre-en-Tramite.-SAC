@@ -31,7 +31,10 @@ public class PlayerLife : Life
     [SerializeField] private LayerMask enemyLayer;
     private bool reduceShield;
     private int multiplesProcesados = 0;
+        
+    [Header("References")]
     private Grab grab;
+    [SerializeField] private Animator animator;
 
     private void Start()
     {
@@ -112,7 +115,6 @@ public class PlayerLife : Life
     public override void TakeDamage(float damage)
     {
         //base.TakeDamage(damage);
-
         if (pointsLife <= 0 || Time.timeScale == 0)
         {
             return;
@@ -258,7 +260,13 @@ public class PlayerLife : Life
     private IEnumerator InvulnerabilityPeriodShield()
     {
         reduceShield = true;
-        yield return new WaitForSeconds(1f);
+        animator.SetBool("Stun", true);
+        Movement controller = GetComponent<Movement>();
+        controller.stun = true;
+        yield return new WaitForSeconds(0.5f);
+        animator.SetBool("Stun", false); 
+        yield return new WaitForSeconds(0.5f);
+        controller.stun = false;
         reduceShield = false;
     }
 
