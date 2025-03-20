@@ -41,6 +41,9 @@ public class Movement : MonoBehaviour
     private const float WALL_SLIDE_DELAY = 0.5f;
     private bool isWallClimbing;
 
+    public bool isInClimbing;
+    public Quaternion rotationWall;
+
     [Header("Sliding on Enemy")]
     [SerializeField] private float slideForce = 5f;
     [SerializeField] private float slideDuration = 0.5f;
@@ -476,5 +479,21 @@ public class Movement : MonoBehaviour
         }
 
         transform.position = centerPoint.position;
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("PortalWall"))
+        {
+            isInClimbing = true;
+            rotationWall = other.transform.rotation;
+        }
+       
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("PortalWall"))
+        {
+            isInClimbing = false;
+        }
     }
 }
