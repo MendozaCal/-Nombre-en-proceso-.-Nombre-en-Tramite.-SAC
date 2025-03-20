@@ -15,7 +15,7 @@ public class BananaSpawner : MonoBehaviour
 
     private void Start()
     {
-        numberOfBananas = Random.Range(5, 10);
+        numberOfBananas = Random.Range(3, 5);
         numberOfShield = Random.Range(0, 3);
         props = targetObject.AddComponent<PropsLife>();
     }
