@@ -1,9 +1,12 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PropsLife : Life
 {
     [SerializeField] private float maxLife = 10f;
     [SerializeField] bool isNecesary;
+    [SerializeField] public bool isDestroy;
     [SerializeField] bool isWoodWall;
 
     private void Start()
@@ -32,11 +35,11 @@ public class PropsLife : Life
 
         if (other.gameObject.CompareTag("Stick"))
         {
-            TakeDamage(1); 
+            StartCoroutine(TimeToDestroy(1));
         }
         else if (other.gameObject.CompareTag("Honda"))
         {
-            TakeDamage(2); 
+            StartCoroutine(TimeToDestroy(2));
         }
         if (isWoodWall && other.gameObject.CompareTag("Player"))
         {
@@ -49,5 +52,16 @@ public class PropsLife : Life
         Debug.Log($"{gameObject.name} fue destruido.");
         
             Destroy(gameObject);        
+    }
+
+    IEnumerator TimeToDestroy(int damage)
+    {
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.enabled = false;
+        MeshCollider meshCollider = GetComponent<MeshCollider>();
+        meshCollider.enabled = false;
+        isDestroy = true;
+        yield return new WaitForSeconds(1);
+        TakeDamage(damage);
     }
 }
