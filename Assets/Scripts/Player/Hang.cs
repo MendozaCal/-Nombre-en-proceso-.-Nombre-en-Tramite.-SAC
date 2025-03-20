@@ -6,7 +6,6 @@ public class Hang : MonoBehaviour
     private GameObject ignoredLiana;
     private bool isStuck = false;
     private bool canDetect = false;
-    private CharacterController characterController;
     private Movement movementScripts;
     [SerializeField] private float jumpForce = 5f;
     private bool canJump = false;
@@ -16,7 +15,6 @@ public class Hang : MonoBehaviour
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
         movementScripts = GetComponent<Movement>();
     }
 
@@ -25,6 +23,11 @@ public class Hang : MonoBehaviour
         if (isStuck)
         {
             if (target == null)
+            {
+                ReleaseFromLiana();
+                return;
+            }
+            if (movementScripts.stun)
             {
                 ReleaseFromLiana();
                 return;
@@ -65,7 +68,6 @@ public class Hang : MonoBehaviour
             if (canDetect)
             {
                 if (target == null) return;
-                characterController.enabled = false;
                 movementScripts.enabled = false;
 
                 float middleY = (lianaMovementBox.bounds.min.y + lianaMovementBox.bounds.max.y) / 2f;
@@ -94,7 +96,6 @@ public class Hang : MonoBehaviour
         ignoredLiana = target;
         ignoreTimer = ignoreDuration;
         target = null;
-        characterController.enabled = true;
         movementScripts.enabled = true;
         isStuck = false;
         movementScripts.AtivateGrabandCombat();
