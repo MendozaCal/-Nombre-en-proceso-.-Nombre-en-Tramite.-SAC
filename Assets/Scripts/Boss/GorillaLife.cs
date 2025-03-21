@@ -1,11 +1,13 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GorillaLife : Life
 {
     [SerializeField] private float maxLife = 3f;
     [SerializeField] private PlayerLife playerLife;
     [SerializeField] private GameObject[] imageGorilaLife;
-
+    [SerializeField] private TextMeshProUGUI textMeshProUGUI;
     private void Start()
     {
         pointsLife = maxLife;

@@ -5,7 +5,6 @@ public class Barrel : Life
     [SerializeField] private float maxLife = 1f;
     [SerializeField] private GameObject sticks;
     [SerializeField] public string barrelType;
-
     private void Start()
     {
         pointsLife = maxLife;
