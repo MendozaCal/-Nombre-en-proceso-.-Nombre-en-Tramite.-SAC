@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class DestroyIfTouchPlayer : MonoBehaviour
 {
-    [SerializeField] float gravedadExtra = -20f; 
-
+    [SerializeField] float gravedadExtra = -20f;
+    [SerializeField] bool isFirstEvent;
     Rigidbody rb;
 
     void Start()
@@ -24,6 +24,10 @@ public class DestroyIfTouchPlayer : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (collision.gameObject.CompareTag("Floor") && isFirstEvent)
+        {
+            gameObject.layer = LayerMask.NameToLayer("Floor");
+            gameObject.tag = "Floor";
+        }
     }
-
 }
