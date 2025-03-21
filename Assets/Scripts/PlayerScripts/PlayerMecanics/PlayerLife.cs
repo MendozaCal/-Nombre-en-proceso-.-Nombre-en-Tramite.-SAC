@@ -176,10 +176,18 @@ public class PlayerLife : Life
         Fade fade = FindObjectOfType<Fade>();
         fade.StartFadeInRespawn(spawnPoint, gameObject.transform);
 
-        SlipperyRamp ramp = FindAnyObjectByType<SlipperyRamp>();
-        WallClimbing climb = FindAnyObjectByType<WallClimbing>();
-        if (ramp != null) ramp.ResetSlidingState();
-        if (climb != null) climb.StopClimbing();
+        SlipperyRamp[] allRamps = FindObjectsOfType<SlipperyRamp>();
+        WallClimbing[] allClimbs = FindObjectsOfType<WallClimbing>();
+
+        foreach (SlipperyRamp ramp in allRamps)
+        {
+            ramp.ResetSlidingState();
+        }
+
+        foreach (WallClimbing climb in allClimbs)
+        {
+            climb.StopClimbing();
+        }
 
         yield return new WaitForSeconds(1f);
 
