@@ -275,6 +275,7 @@ public class PlayerLife : Life
         animator.SetBool("Stun", false); 
         yield return new WaitForSeconds(0.5f);
         controller.stun = false;
+        yield return new WaitForSeconds(1f);
         reduceShield = false;
     }
 
@@ -540,12 +541,11 @@ public class PlayerLife : Life
                     }
                 }
             }
+            PlayerPrefs.SetInt("LastLevelBananas", bananas);
+            PlayerPrefs.SetInt("LastLevelMonkeys", monkeys);
+            PlayerPrefs.SetInt("LastLevelLives", (int)pointsLife);
+            PlayerPrefs.Save();
         }
-
-        PlayerPrefs.SetInt("LastLevelBananas", bananas);
-        PlayerPrefs.SetInt("LastLevelMonkeys", monkeys);
-        PlayerPrefs.SetInt("LastLevelLives", (int)pointsLife);
-        PlayerPrefs.Save();
         Fade fade = FindObjectOfType<Fade>();
         fade.StartFadeIn("Victory");
     }

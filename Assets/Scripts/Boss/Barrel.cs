@@ -5,10 +5,21 @@ public class Barrel : Life
     [SerializeField] private float maxLife = 1f;
     [SerializeField] private GameObject sticks;
     [SerializeField] public string barrelType;
+
+    private GameObject boss;
+    private Vector3 bossPosition;
+    [SerializeField] private float yOffset = 1.5f;
+
     private void Start()
     {
         pointsLife = maxLife;
         Destroy(gameObject, 10f);
+
+        boss = GameObject.FindGameObjectWithTag("Gorilla");
+        if (boss == null)
+        {
+            Debug.LogWarning("No se encontró al jefe en la escena.");
+        }
     }
 
     public override void TakeDamage(float damage)
@@ -20,15 +31,20 @@ public class Barrel : Life
     {
         if (other.gameObject.CompareTag("Stick"))
         {
-            if(barrelType == "Normal")
+            if (barrelType == "Normal")
             {
-                Vector3 hitDirection = transform.position - other.transform.position;
+                if (boss != null)
+                {
+                    bossPosition = boss.transform.position + Vector3.up * yOffset;
+                }
+
+                Vector3 directionToBoss = (bossPosition - transform.position).normalized;
+
                 Rigidbody rb = GetComponent<Rigidbody>();
                 if (rb != null)
                 {
                     rb.useGravity = false;
-                    Vector3 horizontalDirection = Vector3.ProjectOnPlane(hitDirection, Vector3.up).normalized;
-                    rb.velocity = new Vector3(horizontalDirection.x * 20f, 0f, horizontalDirection.z * 20f);
+                    rb.velocity = directionToBoss * 20f;
                     int enemyLayer = LayerMask.NameToLayer("Enemy");
                     rb.excludeLayers = enemyLayer;
                 }
@@ -46,7 +62,7 @@ public class Barrel : Life
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Terrain"))
+        if (collision.gameObject.CompareTag("Terrain"))
         {
             InstatiatePrefabs();
         }
