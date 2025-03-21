@@ -1296,5 +1296,5 @@ MonoBehaviour:
   pauseDuration: 0.5
   fishModel: {fileID: 7567662302409433207}
   fishTurnSpeed: 200
-  initialRotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
-  finalRotation: {x: -0.0002469187, y: -0.7071067, z: -0.0002469187, w: 0.7071067}
+  initialModelRotation: {x: 0, y: 90, z: 0}
+  finalModelRotation: {x: 359, y: 270, z: 0}
