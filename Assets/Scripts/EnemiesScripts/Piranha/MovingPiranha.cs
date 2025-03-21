@@ -8,7 +8,7 @@ public class MovingPiranha : MonoBehaviour
     [SerializeField] private float fishTurnSpeed = 180f;
 
     private float currentRotation = 0f; 
-    private int rotationDirection = 1; 
+    [SerializeField] private int rotationDirection = 1; 
     private bool isPaused = false;
     private float pauseTimer = 0f; 
     private bool isTurningFish = false;

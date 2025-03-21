@@ -1165,11 +1165,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe7b574e2843664d89dab91f1d10d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPlayer: {fileID: 4785429583969675501}
+  targetPlayer: {fileID: 5356174307607862439}
   offset: {x: 0, y: 0, z: -12}
+  climbingOffset: {x: 0, y: 1, z: -12}
   maxsensitivity: 10
   maxVerticalAngle: 60
   positionSmoothTime: 0.1
+  rotationSmoothTime: 3
   collisionLayers:
     serializedVersion: 2
     m_Bits: 67584
@@ -6572,6 +6574,7 @@ MonoBehaviour:
   moveSpeedBase: 15
   moveSpeedMax: 20
   moveSpeed: 0
+  stun: 0
   jumpForce: 3
   gravity: -30
   turnSmoothTime: 0.1
@@ -6596,6 +6599,8 @@ MonoBehaviour:
   wallSlideSpeed: 2
   timeToDefaultLayer: 1.25
   timeToClimbableLayer: 1
+  isInClimbing: 0
+  rotationWall: {x: 0, y: 0, z: 0, w: 0}
   slideForce: 0.5
   slideDuration: 0.1
   isOnRamp: 0
@@ -6676,6 +6681,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 32776
+  animator: {fileID: 1821385234455965538}
 --- !u!114 &8254752401578140906
 MonoBehaviour:
   m_ObjectHideFlags: 0
