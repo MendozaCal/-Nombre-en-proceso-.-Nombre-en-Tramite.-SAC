@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5240711059779762616}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Boca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,9 +44,9 @@ GameObject:
   - component: {fileID: 5424877301289857327}
   - component: {fileID: 2339548389388681048}
   - component: {fileID: 6906892058541791270}
-  m_Layer: 13
+  m_Layer: 3
   m_Name: "Pira\xF1a"
-  m_TagString: Piranha
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 373424614961527311}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 4.7904286, y: 0, z: 0}
+  m_LocalPosition: {x: 11.1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 5419757748939937037}
   - component: {fileID: 5381081066423457521}
   - component: {fileID: 4813381032765563365}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cola_Low
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7536865159833937370}
   - component: {fileID: 1737346205959380788}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Boca_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8403930936409741948}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: "Pira\xF1a_Low"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9064065517704512245}
   - component: {fileID: 461723893830386742}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pez_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1195596713318507465}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: joint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 4231113454467118846}
   - component: {fileID: 6274073062635423416}
   - component: {fileID: 320692447221221090}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pez_Low
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -667,7 +667,7 @@ GameObject:
   - component: {fileID: 360098563111781081}
   - component: {fileID: 5410456306597461964}
   - component: {fileID: 3251498548299760899}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Aletas_Low
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -750,7 +750,7 @@ GameObject:
   - component: {fileID: 3052878626675637178}
   - component: {fileID: 2069270327620293119}
   - component: {fileID: 2023093331979415417}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Boca_Low
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4072737520098909888}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mandibula
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +864,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3835771338320870370}
   - component: {fileID: 912313821607126119}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PiranhaBite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,7 +921,7 @@ GameObject:
   - component: {fileID: 6696995910962214835}
   - component: {fileID: 2211491174796485426}
   - component: {fileID: 8150942104807382999}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1024,7 +1024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2475813176280767735}
   - component: {fileID: 2409771794037173199}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cola_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,7 +1112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4512540670343791493}
   - component: {fileID: 5214815478713280514}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: "Pira\xF1a Low"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1169,7 +1169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9199594327631822463}
   - component: {fileID: 6593282323620430413}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Aletas_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1294,7 +1294,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 150
   pauseDuration: 0.5
+  inicialDelay: 1
   fishModel: {fileID: 7567662302409433207}
   fishTurnSpeed: 200
   initialModelRotation: {x: 0, y: 90, z: 0}
   finalModelRotation: {x: 359, y: 270, z: 0}
+  initialDelayTimer: 0.3

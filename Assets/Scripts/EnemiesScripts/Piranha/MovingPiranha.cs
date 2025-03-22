@@ -4,6 +4,7 @@ public class MovingPiranha : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 50f;
     [SerializeField] private float pauseDuration = 1f;
+    [SerializeField] private float inicialDelay = 1f;
     [SerializeField] private Transform fishModel;
     [SerializeField] private float fishTurnSpeed = 180f;
 
@@ -21,6 +22,9 @@ public class MovingPiranha : MonoBehaviour
     private Quaternion effectiveFinalRotation;
     private Quaternion objectInitialRotation;
 
+    [SerializeField] private float initialDelayTimer = 0f;
+    private bool initialDelayCompleted = false;
+
     void Start()
     {
         objectInitialRotation = transform.rotation;
@@ -36,6 +40,16 @@ public class MovingPiranha : MonoBehaviour
 
     void Update()
     {
+        if (!initialDelayCompleted)
+        {
+            initialDelayTimer += Time.deltaTime;
+            if (initialDelayTimer >= inicialDelay)
+            {
+                initialDelayCompleted = true;
+            }
+            return;
+        }
+
         if (isTurningFish)
         {
             RotateFishModel();
@@ -89,4 +103,5 @@ public class MovingPiranha : MonoBehaviour
             isTurningFish = false;
         }
     }
+
 }
